@@ -80,7 +80,6 @@ class ScheduleTableItem
     required this.surveyStatus,
   });
 
-  // TODO Check whether factory is ruining it
   factory ScheduleTableItem.fromJson(Map<String, dynamic> json)
   {
     return ScheduleTableItem
@@ -99,13 +98,6 @@ class ScheduleTableItem
       surveyStatus: json['SurveyStatus'],
     );
   }
-
-  // TODO Delete after testing
-  @override
-  String toString()
-  {
-    return '$id, $subjectName';
-  }
 }
 
 Future<List> fetchSchedule(String studentId, String dateFrom, String dateTo, String token) async
@@ -122,7 +114,7 @@ Future<List> fetchSchedule(String studentId, String dateFrom, String dateTo, Str
   if (response.statusCode == 200)
   {
     List schedule = [];
-    for (var lesson in jsonDecode(response.body))
+    for (Map<String, dynamic> lesson in jsonDecode(response.body))
     {
       schedule.add(ScheduleTableItem.fromJson(lesson));
     }
