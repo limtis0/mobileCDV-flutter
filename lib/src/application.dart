@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
           title: const Text('Welcome to Flutter'),
         ),
         body: const Center(
-          child: Text('Hello World'),
+          child: Text('Hello'),
         ),
       ),
     );
