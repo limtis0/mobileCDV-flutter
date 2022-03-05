@@ -15,6 +15,16 @@ class MainApp extends StatelessWidget {
         body: const Center(
           child: Text('Hello'),
         ),
+        persistentFooterButtons: [
+          ElevatedButton(
+            onPressed: (){
+
+            },
+            child: const Text(
+              "Hello"
+            ),
+          )
+        ],
       ),
     );
   }
