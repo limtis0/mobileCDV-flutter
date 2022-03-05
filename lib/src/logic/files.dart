@@ -3,9 +3,12 @@ import 'package:path_provider/path_provider.dart';
 
 Future<String> get _localPath async
 {
-   final directory = await getApplicationDocumentsDirectory();
+   Directory directory = await getApplicationDocumentsDirectory();
    return directory.path;
 }
 
-// TODO Доделать...
+// void saveImage(String fileName) async
+// {
+//    String path = await _localPath;
+// }
 
