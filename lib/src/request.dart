@@ -19,7 +19,7 @@ class LoginResponse
   factory LoginResponse.fromJson(Map<String, dynamic> json)
   {
     return LoginResponse
-      (
+    (
       result: json['result'],
       token: json['token'],
       message: json['message'],
@@ -84,6 +84,7 @@ class ScheduleTableItem
   {
     return ScheduleTableItem
     (
+      // Skipped profile
       id: json['Id'],
       status: json['Status'],
       subject: json['Subject'],
