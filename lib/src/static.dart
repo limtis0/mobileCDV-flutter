@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'logic/request.dart';
 
 // Pages
-import 'pages/timetable.dart';
+import 'widgets/timetable.dart';
 import 'pages/profile.dart';
 import 'pages/settings.dart';
 
