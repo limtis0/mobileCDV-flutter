@@ -37,6 +37,7 @@ dependencies:
   http: ^0.13.4
   flutter_neat_and_clean_calendar: ^0.3.1+14
   jwt_decode: ^0.3.1
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

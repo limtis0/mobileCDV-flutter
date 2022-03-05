@@ -20,7 +20,9 @@ class EventCalendar extends StatelessWidget {
         expandableDateFormat: 'EEEE, dd. MMMM yyyy',
         datePickerType: DatePickerType.date,
         dayOfWeekStyle: const TextStyle(
-        color: Colors.black, fontWeight: FontWeight.w800, fontSize: 11
+            color: Colors.black,
+            fontWeight: FontWeight.w800,
+            fontSize: 11
       )
     );
   }

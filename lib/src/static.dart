@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 import 'request.dart';
 
+// Pages
 import 'pages/timetable.dart';
+import 'pages/profile.dart';
+import 'pages/settings.dart';
 
+
+class Canvas extends StatelessWidget {
+  int page_id;
+
+  Canvas({Key? key, required this.page_id}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    switch (page_id){
+      case 0:
+        return Profile();
+      case 1:
+        return EventCalendar();
+      case 2:
+        return Settings();
+      default:
+        return Text("404");
+    }
+  }
+}
 
 class Controls extends StatefulWidget {
   const Controls({Key? key}) : super(key: key);
@@ -44,8 +67,8 @@ class _ControlsState extends State<Controls> {
             _title
         ),
       ),
-      body: const SafeArea(
-        child: EventCalendar(),
+      body: SafeArea(
+        child: Canvas(page_id: _selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
