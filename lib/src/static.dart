@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'request.dart';
+import 'logic/request.dart';
 
 // Pages
 import 'pages/timetable.dart';
