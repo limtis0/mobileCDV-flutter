@@ -1,6 +1,6 @@
+import 'dart:typed_data';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 
 class UserToken
 {
@@ -38,7 +38,8 @@ UserToken decodeToken(String token)
   return UserToken.fromJson(payload['data']);
 }
 
-Image decodeImage(String imageBase64)
+// TODO Convert Uint8List to savable image
+Uint8List decodeImage(String imageBase64)
 {
-  return Image.memory(base64Decode(imageBase64));
+  return base64Decode(imageBase64);
 }
