@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<String> get _localPath async
 {
@@ -19,3 +20,18 @@ void saveImage(Uint8List imageBytes, String fileName) async
 /* TODO Choose the library with Image data type that suits front-end
    and make getImageFromFile() function;
  */
+
+void setPrefs() async
+{
+   final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+   bool? wasOpenedBefore = prefs.getBool('wasOpenedBefore');
+   if (wasOpenedBefore == true)
+   {
+      // Do stuff
+      return;
+   }
+
+   // Default values:
+   prefs.setBool('wasOpenedBefore', true);
+}
