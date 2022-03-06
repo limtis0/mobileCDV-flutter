@@ -27,8 +27,7 @@ void initLocalization([String locale = "pl"]) async
       localeId = 2;
       break;
   }
-
-  final input = File('$path/file.csv').openRead();
+  final input = File('$path/assets/locale.csv').openRead();
   fields = await input.transform(utf8.decoder).transform(const CsvToListConverter()).toList();
 }
 
