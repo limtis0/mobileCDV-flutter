@@ -2,8 +2,10 @@ import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
+
 List? fields;
 int? localeId;
+String? calendarLocalization;
 
 Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
@@ -16,12 +18,19 @@ Future<void> initLocalization([String locale = "pl"]) async
 
   switch(locale){
     case "en":
+      calendarLocalization = "en_US";
       localeId = 1;
       break;
     case "pl":
+      calendarLocalization = "pl_PL";
       localeId = 2;
       break;
+    case "ru":
+      calendarLocalization = "ru_RU";
+      localeId = 3;
+      break;
     default:
+      calendarLocalization = "pl_PL";
       localeId = 2;
       break;
   }
@@ -39,8 +48,6 @@ String getTextFromKey([String key = "noKey"])
           return fields?[i][localeId];
         }
       }
-    }else{
-      print("length = null");
     }
   }
   return "Translation missing for $key";

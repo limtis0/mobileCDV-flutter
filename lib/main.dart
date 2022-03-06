@@ -8,8 +8,8 @@ void main() {
   startApp();
 }
 
-Future<void> startApp() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await initLocalization("en");
-  initializeDateFormatting().then((_) => runApp(const MainApp()));
+Future<void> startApp() async {
+  WidgetsFlutterBinding.ensureInitialized(); // fix error with async function
+  await initLocalization("pl"); // init localization
+  initializeDateFormatting().then((_) => runApp(const MainApp())); // run app
 }
