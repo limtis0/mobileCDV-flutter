@@ -2,12 +2,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:csv/csv.dart';
+import 'package:path_provider/path_provider.dart';
 
 List? fields;
 int? localeId;
 
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
+}
+
 void initLocalization([String locale = "pl"]) async
 {
+  final path = await _localPath;
+
   switch(locale){
     case "en":
       localeId = 1;
@@ -19,7 +27,8 @@ void initLocalization([String locale = "pl"]) async
       localeId = 2;
       break;
   }
-  final input = File('file.csv').openRead();
+
+  final input = File('$path/file.csv').openRead();
   fields = await input.transform(utf8.decoder).transform(const CsvToListConverter()).toList();
 }
 
