@@ -28,7 +28,7 @@ void setPrefsOnOpening() async
    bool? wasOpenedBefore = prefs.getBool('wasOpenedBefore');
    if (wasOpenedBefore == true)
    {
-      // Do stuff
+      prefs.setString('localization', 'pl');
       return;
    }
 

@@ -38,9 +38,9 @@ class Canvas extends StatelessWidget {
       case 1:
         return EventCalendar();
       case 2:
-        return Settings();
+        return const Settings();
       default:
-        return Text("404");
+        return const Text("404");
     }
   }
 }
@@ -90,34 +90,10 @@ class _ControlsState extends State<Controls> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: getBottomTabs(_bottomTabs),
-      ),
-    );
-  }
-}
-/*
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(
-                  Icons.person
-              ),
-              label: "Profile"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                  Icons.schedule
-              ),
-              label: "Timetable"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                  Icons.settings
-              ),
-              label: "Settings"
-          ),
-        ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
- */
+    );
+  }
+}

@@ -6,7 +6,26 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Profile");
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Center(
+          child: Column(
+            children: [
+              Text(
+                "Email: izakharov@edu.cdv.pl"
+              ),
+              Text(
+                  "Numer albumu: 27770"
+              ),
+              Text(
+                  "Role: Student"
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
