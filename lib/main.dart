@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
+import 'package:mobile_cdv/src/logic/notifications.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,9 @@ Future<void> startApp() async {
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   setPrefsOnOpening();
+
+  NotificationService().init(); // init notification service
+
   await initLocalization(prefs.getString('localization').toString()); // init localization
   print(prefs.getString('localization').toString());
   initializeDateFormatting().then((_) => runApp(const MainApp())); // run app
