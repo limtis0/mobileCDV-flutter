@@ -2,20 +2,29 @@ import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
+import '../../widgets/event_calendar.dart';
 
 List? fields;
 int? localeId;
 String? calendarLocalization;
 
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
-  return directory.path;
+String? getLocaleType(){
+  switch(localeId){
+    case 1:
+      return "en";
+      break;
+    case 2:
+      return "pl";
+      break;
+    case 3:
+      return "ru";
+      break;
+  }
+  return "pl";
 }
 
 Future<void> initLocalization([String locale = "pl"]) async
 {
-  final path = await _localPath;
-
   switch(locale){
     case "en":
       calendarLocalization = "en_US";
@@ -28,10 +37,6 @@ Future<void> initLocalization([String locale = "pl"]) async
     case "ru":
       calendarLocalization = "ru_RU";
       localeId = 3;
-      break;
-    default:
-      calendarLocalization = "pl_PL";
-      localeId = 2;
       break;
   }
 

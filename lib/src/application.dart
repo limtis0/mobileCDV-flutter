@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'widgets/restart_widget.dart';
 import 'static.dart';
 
 class MainApp extends StatelessWidget {
@@ -10,9 +8,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RestartWidget(
-        child: Controls(),
-      )
+      home: Controls()
     );
   }
 }

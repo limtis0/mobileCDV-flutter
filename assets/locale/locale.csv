@@ -1,3 +1,5 @@
-Key,EN,PL
-noKey,No key provided,No key provided
-Main.Account,Profile,Konto(change)
+Key,EN,PL,RU
+noKey,No key provided,No key provided,No key provided
+Main.Account,Profile,Profil,Профиль
+Main.Schedule,Schedule,Rozkład,Расписание
+Settings.locale,Language,Jenzyk,Язык

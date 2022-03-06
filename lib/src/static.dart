@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
-import 'logic/request.dart';
+
+import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 
 // Pages
-import 'widgets/timetable.dart';
 import 'pages/profile.dart';
 import 'pages/settings.dart';
 
 import 'widgets/event_calendar.dart';
+
+class BottomTabs {
+  String title;
+  IconData icon;
+
+  BottomTabs(this.title, this.icon);
+}
+
+List<BottomTabs> _bottomTabs = [
+  BottomTabs(getTextFromKey("Main.Account"), Icons.person),
+  BottomTabs(getTextFromKey("Main.Schedule"), Icons.schedule),
+  BottomTabs(getTextFromKey("Main.Settings"), Icons.settings)
+];
+List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
+
+  return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
+}
 
 class Canvas extends StatelessWidget {
   int page_id;
@@ -45,13 +62,13 @@ class _ControlsState extends State<Controls> {
       _selectedIndex = index;
       switch (_selectedIndex) {
         case 0:
-          _title = "Profile";
+          _title = getTextFromKey("Main.Account");
           break;
         case 1:
-          _title = "Timetable";
+          _title = getTextFromKey("Main.Schedule");
           break;
         case 2:
-          _title = "Settings";
+          _title = getTextFromKey("Main.Settings");
           break;
         default:
           _title = "Mobile CDV";
@@ -71,6 +88,13 @@ class _ControlsState extends State<Controls> {
       body: SafeArea(
         child: Canvas(page_id: _selectedIndex),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: getBottomTabs(_bottomTabs),
+      ),
+    );
+  }
+}
+/*
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -96,6 +120,4 @@ class _ControlsState extends State<Controls> {
         selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
-    );
-  }
-}
+ */
