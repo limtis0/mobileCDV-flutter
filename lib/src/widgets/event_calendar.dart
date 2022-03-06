@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import 'package:mobile_cdv/src/lib/lozalization/localization_manager.dart';
+import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import '../widgets/restart_widget.dart';
 
 class EventCalendar extends StatefulWidget {
