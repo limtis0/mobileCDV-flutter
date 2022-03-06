@@ -21,7 +21,7 @@ void saveImage(Uint8List imageBytes, String fileName) async
    and make getImageFromFile() function;
  */
 
-void setPrefs() async
+void setPrefsOnOpening() async
 {
    final SharedPreferences prefs = await SharedPreferences.getInstance();
 

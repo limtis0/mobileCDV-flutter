@@ -37,6 +37,7 @@ dependencies:
 
   # Frontend
   table_calendar: ^3.0.4
+  flutter_local_notifications: ^9.4.0
 
 
 dev_dependencies:
