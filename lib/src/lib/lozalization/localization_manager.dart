@@ -11,6 +11,6 @@ void initLocalization([String locale = "pl"])
 
 String getTextFromKey([String key = "noKey"])
 {
-  
+
   return "S";
 }
