@@ -6,6 +6,7 @@ import 'widgets/timetable.dart';
 import 'pages/profile.dart';
 import 'pages/settings.dart';
 
+import 'widgets/event_calendar.dart';
 
 class Canvas extends StatelessWidget {
   int page_id;
