@@ -1,7 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:csv/csv.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
 List? fields;
@@ -12,7 +10,7 @@ Future<String> get _localPath async {
   return directory.path;
 }
 
-void initLocalization([String locale = "pl"]) async
+Future<void> initLocalization([String locale = "pl"]) async
 {
   final path = await _localPath;
 
@@ -27,18 +25,23 @@ void initLocalization([String locale = "pl"]) async
       localeId = 2;
       break;
   }
-  final input = File('$path/assets/locale.csv').openRead();
-  fields = await input.transform(utf8.decoder).transform(const CsvToListConverter()).toList();
+
+  String input = await rootBundle.loadString('assets/locale/locale.csv');
+  fields = const CsvToListConverter().convert(input);
 }
 
-String? getTextFromKey([String key = "noKey"])
+String getTextFromKey([String key = "noKey"])
 {
   if(localeId != null) {
-    for (int i = 0; i != fields?.length; i++) {
-      if (fields?[i][0] == key) {
-        return fields?[i][localeId];
+    if(fields?.length != null) {
+      for (int i = 0; i != fields?.length; i++) {
+        if (fields?[i][0] == key) {
+          return fields?[i][localeId];
+        }
       }
+    }else{
+      print("length = null");
     }
   }
-  return "Translation missing, key: $key";
+  return "Translation missing for $key";
 }
