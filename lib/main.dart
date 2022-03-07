@@ -19,6 +19,5 @@ Future<void> startApp() async {
   NotificationService().init(); // init notification service
 
   await initLocalization(prefs.getString('localization').toString()); // init localization
-  print(prefs.getString('localization').toString());
   initializeDateFormatting().then((_) => runApp(const MainApp())); // run app
 }

@@ -1,8 +1,6 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:path_provider/path_provider.dart';
-
-import '../../widgets/event_calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 List? fields;
 int? localeId;
@@ -25,18 +23,23 @@ String? getLocaleType(){
 
 Future<void> initLocalization([String locale = "pl"]) async
 {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
   switch(locale){
     case "en":
       calendarLocalization = "en_US";
       localeId = 1;
+      prefs.setString('localization', 'en');
       break;
     case "pl":
       calendarLocalization = "pl_PL";
       localeId = 2;
+      prefs.setString('localization', 'pl');
       break;
     case "ru":
       calendarLocalization = "ru_RU";
       localeId = 3;
+      prefs.setString('localization', 'ru');
       break;
   }
 
