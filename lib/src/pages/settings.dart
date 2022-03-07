@@ -1,5 +1,4 @@
-import 'dart:ffi';
-import 'dart:io';
+import 'dart:io' show exit;
 
 import 'package:flutter/material.dart';
 
