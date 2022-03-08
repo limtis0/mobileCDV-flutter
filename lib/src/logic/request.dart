@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'globals.dart' as globals;
 
 // LOGIN
 class LoginResponse
@@ -114,12 +115,12 @@ Future<List> fetchSchedule(String studentId, String dateFrom, String dateTo, Str
 
   if (response.statusCode == 200)
   {
-    List schedule = [];
+    globals.schedule.clear();
     for (Map<String, dynamic> lesson in jsonDecode(response.body))
     {
-      schedule.add(ScheduleTableItem.fromJson(lesson));
+      globals.schedule.add(ScheduleTableItem.fromJson(lesson));
     }
-    return schedule;
+    return globals.schedule;
   }
   else
   {

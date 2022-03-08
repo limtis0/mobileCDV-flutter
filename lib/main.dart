@@ -9,12 +9,13 @@ import 'src/application.dart';
 
 void main() => startApp();
 
-Future<void> startApp() async {
-  //TODO check this
+Future<void> startApp() async
+{
+  // TODO check this
   WidgetsFlutterBinding.ensureInitialized(); // fix error with async function
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  setPrefsOnOpening();
+  initPrefs();
 
   NotificationService().init(); // init notification service
 

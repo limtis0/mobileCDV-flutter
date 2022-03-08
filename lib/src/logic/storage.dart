@@ -17,22 +17,33 @@ void saveImage(Uint8List imageBytes, String fileName) async
    file.writeAsBytes(imageBytes);
 }
 
+void removeFile(String fileName) async
+{
+   final String filePath = await _localPath;
+   final file = File('$filePath/$fileName');
+   file.delete();
+}
+
 /* TODO Choose the library with Image data type that suits front-end
    and make getImageFromFile() function;
  */
 
-void setPrefsOnOpening() async
+void initPrefs() async
 {
    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
    bool? wasOpenedBefore = prefs.getBool('wasOpenedBefore');
    if (wasOpenedBefore == true)
    {
-
       return;
    }
 
+   // On first app opening
    // Default values:
-   prefs.setString('localization', 'en');
    prefs.setBool('wasOpenedBefore', true);
+   prefs.setBool('isUserLoggedIn', false);
+   prefs.setString('localization', 'en');
+
+   // Actions:
+
 }
