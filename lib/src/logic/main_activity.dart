@@ -25,14 +25,14 @@ void activitySignIn(String email, String password)
   prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 
   // Sets schedule from the start of current month up to the start of next month
-  fetchSchedule(token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+  fetchSchedule(token.userType, token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
 }
 
 void activitySignOut() async
 {
   final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
 
-  prefs.setBool('isUserLoggedIn', false);
+  await prefs.setBool('isUserLoggedIn', false);
 
   await prefs.remove('savedEmail');
   await prefs.remove('savedPassword');
