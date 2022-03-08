@@ -1,3 +1,6 @@
 library mobile_cdv.globals;
 
-List schedule = [];
+import 'structures/schedule.dart';
+
+// GLOBALS
+Schedule schedule = Schedule();

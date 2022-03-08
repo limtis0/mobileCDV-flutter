@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'globals.dart' as globals;
+import 'structures/schedule.dart';
+import 'package:http/http.dart' as http;
 
 // LOGIN
 class LoginResponse
@@ -51,57 +52,6 @@ Future<LoginResponse> fetchLogin(String login, String password) async
 }
 
 // SCHEDULE
-class ScheduleTableItem
-{
-  final int id;
-  final String status;
-  final String subject;
-  final String subjectName;
-  final String groupNumber;
-  final String startDate;
-  final String endDate;
-  final String form;
-  final String teacher;
-  final String room;
-  final String meetLink;
-  final String surveyStatus;
-
-  const ScheduleTableItem({
-    required this.id,
-    required this.status,
-    required this.subject,
-    required this.subjectName,
-    required this.groupNumber,
-    required this.startDate,
-    required this.endDate,
-    required this.form,
-    required this.teacher,
-    required this.room,
-    required this.meetLink,
-    required this.surveyStatus,
-  });
-
-  factory ScheduleTableItem.fromJson(Map<String, dynamic> json)
-  {
-    return ScheduleTableItem
-    (
-      // Skipped profile
-      id: json['Id'],
-      status: json['Status'],
-      subject: json['Subject'],
-      subjectName: json['ThemaGroup'],
-      groupNumber: json['GroupNr'],
-      startDate: json['Start'],
-      endDate: json['End'],
-      form: json['Form'],
-      teacher: json['Teacher'],
-      room: json['Room'],
-      meetLink: json['HangoutLink'],
-      surveyStatus: json['SurveyStatus'],
-    );
-  }
-}
-
 Future<List> fetchSchedule(String studentId, String dateFrom, String dateTo, String token) async
 {
   String url = 'https://api.cdv.pl/mobilnecdv-api/schedule/student/$studentId/1/$dateFrom/$dateTo';
@@ -118,9 +68,9 @@ Future<List> fetchSchedule(String studentId, String dateFrom, String dateTo, Str
     globals.schedule.clear();
     for (Map<String, dynamic> lesson in jsonDecode(response.body))
     {
-      globals.schedule.add(ScheduleTableItem.fromJson(lesson));
+      globals.schedule.insert(ScheduleTableItem.fromJson(lesson));
     }
-    return globals.schedule;
+    return globals.schedule.list();
   }
   else
   {
