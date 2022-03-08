@@ -24,7 +24,7 @@ void activityLogin(String email, String password)
   prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 
   // Sets schedule from the start of current month up to the start of next month
-  fetchSchedule(token.userId.toString(), getDateWithAddedMonths(0), getDateWithAddedMonths(1), loginResponse.token);
+  fetchSchedule(token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
 }
 
 void activityLogout() async

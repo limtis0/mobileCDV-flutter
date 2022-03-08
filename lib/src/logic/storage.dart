@@ -40,9 +40,10 @@ Future<void> initPrefs() async
 
    // On first app opening
    // Default values:
-   prefs.setBool('isUserLoggedIn', false);
-   prefs.setString('localization', 'en');
-   prefs.setBool('wasOpenedBefore', true);
+   await prefs.setBool('isUserLoggedIn', false);
+   await prefs.setString('localization', 'en');
+   await prefs.setBool('wasOpenedBefore', true);
+
 
    // Actions:
 
