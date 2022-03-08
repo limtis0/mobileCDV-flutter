@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/pages/login_page.dart';
 import 'package:mobile_cdv/src/static.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {

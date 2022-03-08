@@ -1,12 +1,18 @@
-Key,EN,PL,RU
-noKey,No key provided,No key provided,No key provided
-Main.Account,Profile,Profil,Профиль
-Main.Schedule,Schedule,Rozkład,Расписание
-Main.Settings,Settings,Ustawienie,Настройки
-Settings.locale,Language,Język,Язык
-Settings.AlertDialog,Restart required,Nuzon perezapusk (kavo blyat),Нужен перезапуск
-Setting.AlertDialog.Restart,Restart,Perezapusk,Перезапуск
-Login.Page.Email,Email,Email,Email
-Login.Page.Password,Password,Haslo,Пароль
-Login.Page.Hint.password,Enter password,Zapish haslo,Напиши пароль
-Login.Page.Hint.login,Enter email,Zapish email,Напиши email
+Key,EN,PL,RU,TR
+noKey,No key provided,No key provided,No key provided,No key provided
+Main.Account,Profile,Profil,Профиль,???
+Main.Schedule,Schedule,Rozkład,Расписание,???
+Main.Settings,Settings,Ustawienie,Настройки,???
+Settings.locale,Language,Język,Язык,???
+Settings.AlertDialog,Restart required,???,Нужен перезапуск,???
+Setting.AlertDialog.Restart,Restart,???,Перезапуск,???
+Login.Page.Email,Email,Email,Email,???
+Login.Page.Password,Password,???,Пароль,???
+Login.Page.Hint.password,Enter password,???,Напиши пароль,???
+Login.Page.Hint.login,Enter email,???,Напиши email,???
+Settings.AlertDialog.q,Restart now?,???,Перезапустить сейчас?,???
+Profile.signOut,Sign out,???,Выйти из аккаунта,???
+Login.Page.btn,Sign in,???,Войти,???
+Settings.locale.choose,Choose language,???,Выбрать язык,???
+Settings.c.lang,Language,???,Язык,???
+Settings.theme,Theme,???,Тема,???

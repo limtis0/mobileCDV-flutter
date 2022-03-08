@@ -39,7 +39,22 @@ class Settings extends StatefulWidget {
 class _SettingState extends State<Settings> {
 
   final String _currentLocale = getTextFromKey("Settings.locale");
+  String dropdownValue = getTextFromKey("Settings.locale.choose");
+  bool themeSwitch = false;
 
+  void switchTheme(bool value){
+
+  }
+
+  void changeLocale(String loc){
+    initLocalization(loc);
+    showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return const LocaleDialog();
+        }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,47 +69,56 @@ class _SettingState extends State<Settings> {
                   Text(
                     getTextFromKey("Settings.c.lang")
                   ),
-                  DropdownButton(
-                      items: <String>["English", "Polski", "Русский"].map<DropdownMenuItem<String>>((String value) {
+                  Padding(
+                    padding: const EdgeInsets.only(left: 150),
+                    child: DropdownButton<String>(
+                      items: <String>[getTextFromKey("Settings.locale.choose"), "English", "Polski", "Русский", "Türkçe"].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
                         );
                       }).toList(),
-                    onChanged: (String? newValue) {
+                      value: dropdownValue,
+                      onChanged: (String? newValue) {
+                        dropdownValue = newValue!;
                         switch(newValue){
                           case "English":
-                            initLocalization("en");
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext dialogContext) {
-                                  return const LocaleDialog();
-                                }
-                            );
+                            changeLocale("en");
                             break;
                           case "Polski":
-                            initLocalization("pl");
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext dialogContext) {
-                                  return const LocaleDialog();
-                                }
-                            );
+                            changeLocale("pl");
                             break;
                           case "Русский":
-                            initLocalization("ru");
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext dialogContext) {
-                                  return const LocaleDialog();
-                                }
-                            );
+                            changeLocale("ru");
+                            break;
+                          case "Türkçe":
+                            changeLocale("tr");
                             break;
                           default:
                             initLocalization("en");
                             break;
                         }
-                    },
+                      },
+                    ),
+                  )
+                ],
+              ),
+              const Divider(
+                thickness: 1.5,
+              ),
+              Row(
+                children: [
+                  Text(
+                    getTextFromKey("Settings.theme")
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 50),
+                    child: Switch(
+                      value: themeSwitch,
+                      onChanged: (value){
+                        print(themeSwitch);
+                      },
+                    ),
                   )
                 ],
               ),

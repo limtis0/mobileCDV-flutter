@@ -17,6 +17,9 @@ String? getLocaleType(){
     case 3:
       return "ru";
       break;
+    case 4:
+      return "tr";
+      break;
   }
   return "pl";
 }
@@ -40,6 +43,11 @@ Future<void> initLocalization([String locale = "pl"]) async
       calendarLocalization = "ru_RU";
       localeId = 3;
       prefs.setString('localization', 'ru');
+      break;
+    case "tr":
+      calendarLocalization = "tr_TR";
+      localeId = 4;
+      prefs.setString('localization', 'tr');
       break;
   }
 

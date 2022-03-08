@@ -28,7 +28,7 @@ void removeFile(String fileName) async
    and make getImageFromFile() function;
  */
 
-void initPrefs() async
+Future<void> initPrefs() async
 {
    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -40,9 +40,9 @@ void initPrefs() async
 
    // On first app opening
    // Default values:
-   prefs.setBool('wasOpenedBefore', true);
    prefs.setBool('isUserLoggedIn', false);
    prefs.setString('localization', 'en');
+   prefs.setBool('wasOpenedBefore', true);
 
    // Actions:
 

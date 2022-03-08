@@ -15,10 +15,10 @@ Future<void> startApp() async
   WidgetsFlutterBinding.ensureInitialized(); // fix error with async function
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  initPrefs();
+  await initPrefs();
 
   NotificationService().init(); // init notification service
-
+  print(prefs.getString('localization').toString());
   await initLocalization(prefs.getString('localization').toString()); // init localization
   initializeDateFormatting().then((_) => runApp(const MainApp())); // run app
 }

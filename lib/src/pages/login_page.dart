@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,8 +22,9 @@ class _LoginPageState extends State<LoginPage>{
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              Text(
-                "Logo"
+              SvgPicture.asset(
+                './assets/images/logo_t.svg',
+                semanticsLabel: "CDV Logo",
               ),
               const Text(
                 "MobileCDV"

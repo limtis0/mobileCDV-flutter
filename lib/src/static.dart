@@ -109,6 +109,20 @@ class _ControlsState extends State<Controls> {
         selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
+      //TODO незабыть убать
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          //Сюда ставиш функцию которую надо вызывать
+          print("Debug button pressed");
+          //rest of the code
+
+
+        },
+        child: Text(
+          "Debug"
+        ),
+      ),
+      //TODO для вовы
     );
   }
 }

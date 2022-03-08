@@ -5,6 +5,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/locale/locale.csv
+    - assets/images/logo_t.svg
 
 publish_to: 'none'
 
@@ -31,6 +32,7 @@ dependencies:
   # Frontend
   table_calendar: ^3.0.4
   flutter_local_notifications: ^9.4.0
+  flutter_svg: ^1.0.3
 
 
 dev_dependencies:
