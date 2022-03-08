@@ -52,7 +52,7 @@ Future<LoginResponse> fetchLogin(String login, String password) async
 }
 
 // SCHEDULE
-Future<List> fetchSchedule(String userType, String userId, String dateFrom, String dateTo, String token) async
+Future<void> fetchSchedule(String userType, String userId, String dateFrom, String dateTo, String token) async
 {
   String url = 'https://api.cdv.pl/mobilnecdv-api/schedule/$userType/$userId/1/$dateFrom/$dateTo';
   final response = await http.get(
@@ -70,7 +70,6 @@ Future<List> fetchSchedule(String userType, String userId, String dateFrom, Stri
     {
       globals.schedule.insert(ScheduleTableItem.fromJson(lesson));
     }
-    return globals.schedule.list();
   }
   else
   {
