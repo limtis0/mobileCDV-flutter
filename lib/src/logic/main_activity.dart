@@ -30,7 +30,7 @@ void activitySignIn(String email, String password)
 
 void activitySignOut() async
 {
-  final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setBool('isUserLoggedIn', false);
 
