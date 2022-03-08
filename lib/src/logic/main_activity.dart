@@ -5,7 +5,7 @@ import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void activitySignIn(String email, String password)
+void activitySignIn(String email, String password) async
 {
   LoginResponse loginResponse = fetchLogin(email, password) as LoginResponse;
 
@@ -25,7 +25,12 @@ void activitySignIn(String email, String password)
   prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 
   // Sets schedule from the start of current month up to the start of next month
-  fetchSchedule(token.userType, token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+  try {
+    prefs.setBool('isUserLoggedIn', true);
+    await fetchSchedule(token.userType, token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+  }catch(e) {
+    rethrow;
+  }
 }
 
 void activitySignOut() async
