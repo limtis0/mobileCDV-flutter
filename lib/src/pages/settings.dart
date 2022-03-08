@@ -15,7 +15,7 @@ class LocaleDialog extends StatelessWidget {
         getTextFromKey("Settings.AlertDialog")
       ),
       content: Text(
-        getTextFromKey("Settings.AlertDialog")
+        getTextFromKey("Settings.AlertDialog.q")
       ),
       actions: [
         ElevatedButton(
@@ -38,7 +38,8 @@ class Settings extends StatefulWidget {
 
 class _SettingState extends State<Settings> {
 
-  String _currentLocale = getTextFromKey("Settings.locale");
+  final String _currentLocale = getTextFromKey("Settings.locale");
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,69 +49,55 @@ class _SettingState extends State<Settings> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Text(
-                _currentLocale
-              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ButtonBar(
-                    children: [
-                      ElevatedButton(
-                        onPressed: (){
-                          setState(() {
-                            _currentLocale = "Language";
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext dialogContext) {
-                                return const LocaleDialog();
-                              }
-                            );
-                          });
-                          initLocalization("en");
-                        },
-                        child: const Text(
-                            "English"
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: (){
-                          setState(() {
-                            _currentLocale = "Język";
+                  Text(
+                    getTextFromKey("Settings.c.lang")
+                  ),
+                  DropdownButton(
+                      items: <String>["English", "Polski", "Русский"].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    onChanged: (String? newValue) {
+                        switch(newValue){
+                          case "English":
+                            initLocalization("en");
                             showDialog(
                                 context: context,
                                 builder: (BuildContext dialogContext) {
                                   return const LocaleDialog();
                                 }
                             );
-                          });
-                          initLocalization("pl");
-                        },
-                        child: const Text(
-                            "Polski"
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: (){
-                          setState(() {
-                            _currentLocale = "Язык";
+                            break;
+                          case "Polski":
+                            initLocalization("pl");
                             showDialog(
                                 context: context,
                                 builder: (BuildContext dialogContext) {
                                   return const LocaleDialog();
                                 }
                             );
-                          });
-                          initLocalization("ru");
-                        },
-                        child: const Text(
-                            "Русский"
-                        ),
-                      ),
-                    ],
+                            break;
+                          case "Русский":
+                            initLocalization("ru");
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return const LocaleDialog();
+                                }
+                            );
+                            break;
+                          default:
+                            initLocalization("en");
+                            break;
+                        }
+                    },
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),

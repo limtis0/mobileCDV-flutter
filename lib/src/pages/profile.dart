@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
+import 'package:mobile_cdv/src/pages/login_page.dart';
+import 'package:mobile_cdv/src/static.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -21,6 +24,14 @@ class Profile extends StatelessWidget {
               Text(
                   "Role: Student"
               ),
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginCanvas()));
+                },
+                child: Text(
+                  getTextFromKey("Profile.signOut")
+                ),
+              )
             ],
           ),
         ),

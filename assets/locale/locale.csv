@@ -2,4 +2,11 @@ Key,EN,PL,RU
 noKey,No key provided,No key provided,No key provided
 Main.Account,Profile,Profil,Профиль
 Main.Schedule,Schedule,Rozkład,Расписание
-Settings.locale,Language,Jenzyk,Язык
+Main.Settings,Settings,Ustawienie,Настройки
+Settings.locale,Language,Język,Язык
+Settings.AlertDialog,Restart required,Nuzon perezapusk (kavo blyat),Нужен перезапуск
+Setting.AlertDialog.Restart,Restart,Perezapusk,Перезапуск
+Login.Page.Email,Email,Email,Email
+Login.Page.Password,Password,Haslo,Пароль
+Login.Page.Hint.password,Enter password,Zapish haslo,Напиши пароль
+Login.Page.Hint.login,Enter email,Zapish email,Напиши email

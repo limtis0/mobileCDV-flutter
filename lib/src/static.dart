@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
+import 'package:mobile_cdv/src/pages/login_page.dart';
 
 // Pages
 import 'pages/profile.dart';
@@ -23,6 +24,20 @@ List<BottomTabs> _bottomTabs = [
 List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
 
   return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
+}
+
+class LoginCanvas extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("MobileCDV"),
+        automaticallyImplyLeading: false,
+      ),
+      body: LoginPage(),
+    );
+  }
 }
 
 class Canvas extends StatelessWidget {
