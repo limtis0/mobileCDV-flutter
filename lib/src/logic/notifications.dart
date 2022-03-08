@@ -22,8 +22,7 @@ class NotificationService
     tz.initializeTimeZones();
 
     // Android settings
-    // TODO Test whether icon shows correctly, change icon
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('notifications_icon');
 
     // iOS settings
     const IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings(
@@ -61,7 +60,7 @@ class NotificationService
             'Main Channel',
             importance: Importance.max,
             priority: Priority.max,
-            icon: 'app_icon' // TODO Test whether icon shows correctly, change icon
+            icon: 'notifications_icon',
           ),
           iOS: IOSNotificationDetails(
             sound: 'default.wav',

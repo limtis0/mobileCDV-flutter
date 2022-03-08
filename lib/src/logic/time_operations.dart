@@ -24,6 +24,7 @@ DateTime getScheduledDate(String lessonDate)
 int getSecondsUntilScheduledDate(String lessonDate)
 {
   DateTime lessonTime = getScheduledDate(lessonDate);
+  // TODO Check if toUtc in needed. Maybe it is done automatically
   int difference = lessonTime.difference(DateTime.now().toUtc()).inSeconds;
   return difference;
 }

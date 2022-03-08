@@ -5,7 +5,7 @@ import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void activityLogin(String email, String password)
+void activitySignIn(String email, String password)
 {
   LoginResponse loginResponse = fetchLogin(email, password) as LoginResponse;
 
@@ -28,7 +28,7 @@ void activityLogin(String email, String password)
   fetchSchedule(token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
 }
 
-void activityLogout() async
+void activitySignOut() async
 {
   final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
 
