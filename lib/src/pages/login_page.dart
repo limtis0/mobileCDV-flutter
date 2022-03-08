@@ -1,6 +1,10 @@
+import '../logic/globals.dart' as globals;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
+
+import '../logic/main_activity.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,7 +15,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>{
 
-  //final _formKey = GlobalKey<FormKey>();
+  String _login = '';
+  String _password = '';
+
+  void processLogin(String log, String pass){
+    try {
+      activitySignIn(log, pass);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +53,13 @@ class _LoginPageState extends State<LoginPage>{
                           border: OutlineInputBorder(),
                           hintText: getTextFromKey("Login.Page.Hint.login"),
                         ),
+                        onChanged: (value){
+                          _login = value;
+                        },
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Text(
                           getTextFromKey("Login.Page.Password")
                       ),
@@ -57,14 +71,16 @@ class _LoginPageState extends State<LoginPage>{
                           border: const OutlineInputBorder(),
                           hintText: getTextFromKey("Login.Page.Hint.password"),
                         ),
+                        onChanged: (value){
+                          _password = value;
+                        },
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: ElevatedButton(
                         onPressed: (){
-                          Navigator.pop(context);
-                            //TODO Change function
+
                         },
                         child: Text(
                             getTextFromKey("Login.Page.btn")
@@ -81,5 +97,3 @@ class _LoginPageState extends State<LoginPage>{
     );
   }
 }
-
-//TODO Make page

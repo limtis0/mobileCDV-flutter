@@ -40,6 +40,7 @@ Future<void> initPrefs() async
 
    // On first app opening
    // Default values:
+   await prefs.setInt('themeId', 0);
    await prefs.setBool('isUserLoggedIn', false);
    await prefs.setString('localization', 'en');
    await prefs.setBool('wasOpenedBefore', true);

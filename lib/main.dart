@@ -3,6 +3,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/notifications.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
+import 'package:mobile_cdv/src/logic/theme_manager.dart';
+import 'package:mobile_cdv/src/login_application.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/application.dart';
@@ -18,7 +21,26 @@ Future<void> startApp() async
   await initPrefs();
 
   NotificationService().init(); // init notification service
-  print(prefs.getString('localization').toString());
+
   await initLocalization(prefs.getString('localization').toString()); // init localization
-  initializeDateFormatting().then((_) => runApp(const MainApp())); // run app
+
+  if (prefs.getInt('themeId') == null) {
+    prefs.setInt('themeId', 0);
+  }
+
+  if (!prefs.getBool('isUserLoggedIn')!){
+    initializeDateFormatting().then((_) async => runApp(
+        ChangeNotifierProvider<ThemeModel>(
+          create: (BuildContext context) => ThemeModel(),
+          child: LoginApp(),
+        )
+    )); // run app
+  }else {
+    initializeDateFormatting().then((_) async => runApp(
+        ChangeNotifierProvider<ThemeModel>(
+          create: (BuildContext context) => ThemeModel(),
+          child: MainApp(),
+        )
+    )); // run app
+  }
 }

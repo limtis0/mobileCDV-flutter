@@ -3,6 +3,10 @@ import 'dart:io' show exit;
 import 'package:flutter/material.dart';
 
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
+import 'package:provider/provider.dart';
+
+import '../logic/theme_manager.dart';
+import 'package:provider/provider.dart';
 
 class LocaleDialog extends StatelessWidget {
   const LocaleDialog({Key? key}) : super(key: key);
@@ -41,11 +45,6 @@ class _SettingState extends State<Settings> {
   final String _currentLocale = getTextFromKey("Settings.locale");
   String dropdownValue = getTextFromKey("Settings.locale.choose");
   String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
-  bool themeSwitch = false;
-
-  void switchTheme(bool value){
-
-  }
 
   void changeLocale(String loc){
     initLocalization(loc);
@@ -114,35 +113,37 @@ class _SettingState extends State<Settings> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 50),
-                    child: DropdownButton<String>(
-                      items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled?", "Cheta ?"].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: dropdownValueTheme,
-                      onChanged: (String? newValue) {
-                        dropdownValueTheme = newValue!;
-                        switch(newValue){
-                          case "English":
-                            changeLocale("en");
-                            break;
-                          case "Polski":
-                            changeLocale("pl");
-                            break;
-                          case "Русский":
-                            changeLocale("ru");
-                            break;
-                          case "Türkçe":
-                            changeLocale("tr");
-                            break;
-                          default:
-                            initLocalization("en");
-                            break;
-                        }
-                      },
-                    ),
+                    child: Consumer<ThemeModel>(
+                      builder: (context, notifier, child) => DropdownButton<String>(
+                        items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled", "Purple"].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        value: dropdownValueTheme,
+                        onChanged: (String? newValue) {
+                          dropdownValueTheme = newValue!;
+                          switch(newValue){
+                            case "Light":
+                              notifier.toggleTheme(0);
+                              break;
+                            case "Dark":
+                              notifier.toggleTheme(1);
+                              break;
+                            case "Amoled":
+                              notifier.toggleTheme(2);
+                              break;
+                            case "Purple":
+                              notifier.toggleTheme(3);
+                              break;
+                            default:
+                              notifier.toggleTheme(0);
+                              break;
+                          }
+                        },
+                      ),
+                    )
                   )
                 ],
               ),

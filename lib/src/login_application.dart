@@ -4,15 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'static.dart';
 
-class MainApp extends StatelessWidget {
-  MainApp({Key? key}) : super(key: key);
+class LoginApp extends StatelessWidget {
+  LoginApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeModel>(context).currentTheme,
-      home: Controls()
+        debugShowCheckedModeBanner: false,
+        theme: Provider.of<ThemeModel>(context).currentTheme,
+        home: LoginCanvas()
     );
   }
 }

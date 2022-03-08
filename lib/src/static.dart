@@ -9,6 +9,7 @@ import 'pages/settings.dart';
 
 import 'widgets/event_calendar.dart';
 
+
 class BottomTabs {
   String title;
   IconData icon;
@@ -118,7 +119,7 @@ class _ControlsState extends State<Controls> {
 
 
         },
-        child: Text(
+        child: const Text(
           "Debug"
         ),
       ),
