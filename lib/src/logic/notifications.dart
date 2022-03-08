@@ -48,7 +48,6 @@ class NotificationService
     );
   }
 
-  // TODO Rewrite to show at given date, not in given seconds
   Future<void> showNotification(int id, String title, String body, int seconds) async
   {
     await flutterLocalNotificationsPlugin.zonedSchedule(
