@@ -40,6 +40,7 @@ class _SettingState extends State<Settings> {
 
   final String _currentLocale = getTextFromKey("Settings.locale");
   String dropdownValue = getTextFromKey("Settings.locale.choose");
+  String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
   bool themeSwitch = false;
 
   void switchTheme(bool value){
@@ -113,14 +114,40 @@ class _SettingState extends State<Settings> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 50),
-                    child: Switch(
-                      value: themeSwitch,
-                      onChanged: (value){
-                        print(themeSwitch);
+                    child: DropdownButton<String>(
+                      items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled?", "Cheta ?"].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      value: dropdownValueTheme,
+                      onChanged: (String? newValue) {
+                        dropdownValueTheme = newValue!;
+                        switch(newValue){
+                          case "English":
+                            changeLocale("en");
+                            break;
+                          case "Polski":
+                            changeLocale("pl");
+                            break;
+                          case "Русский":
+                            changeLocale("ru");
+                            break;
+                          case "Türkçe":
+                            changeLocale("tr");
+                            break;
+                          default:
+                            initLocalization("en");
+                            break;
+                        }
                       },
                     ),
                   )
                 ],
+              ),
+              const Divider(
+                thickness: 1.5,
               ),
             ],
           ),

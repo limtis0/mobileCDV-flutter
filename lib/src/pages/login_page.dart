@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,21 +18,19 @@ class _LoginPageState extends State<LoginPage>{
     return Container(
       child: Center(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              SvgPicture.asset(
-                './assets/images/logo_t.svg',
-                semanticsLabel: "CDV Logo",
-              ),
-              const Text(
-                "MobileCDV"
+              const Image(
+                image: AssetImage('./assets/images/logo-text.png'),
+                width: 170,
+                height: 170,
               ),
               Form(
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Text(
                           getTextFromKey("Login.Page.Email")
                       ),
@@ -63,7 +60,7 @@ class _LoginPageState extends State<LoginPage>{
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: ElevatedButton(
                         onPressed: (){
                           Navigator.pop(context);
