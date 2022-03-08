@@ -21,13 +21,14 @@ class _LoginPageState extends State<LoginPage>{
 
   String _error = '';
 
-  void processLogin(String log, String pass){
+  void processLogin(String log, String pass) async {
     try{
-      activitySignIn(log, pass);
-      showTimetable();
+      await activitySignIn(log, pass);
     } catch(e){
       _error = getTextFromKey("Login.Page.error");
+      return;
     }
+    showTimetable();
   }
 
   @override

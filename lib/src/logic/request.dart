@@ -43,10 +43,12 @@ Future<LoginResponse> fetchLogin(String login, String password) async
 
   if (response.statusCode == 200)
   {
+    print("LOGGED IN");
     return LoginResponse.fromJson(jsonDecode(response.body));
   }
   else
   {
+    print("errpr LOGGED IN");
     throw Exception('Failed to login.');
   }
 }

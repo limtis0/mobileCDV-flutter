@@ -25,10 +25,10 @@ Future<void> startApp() async
   await initLocalization(prefs.getString('localization').toString()); // init localization
 
   if (prefs.getInt('themeId') == null) {
-    prefs.setInt('themeId', 0);
+    await prefs.setInt('themeId', 0);
   }
 
-  if (prefs.getBool('isUserLoggedIn')!){
+  if (prefs.getBool('isUserLoggedIn')! == true){
     showTimetable();
   }else {
     showLoginScreen();
