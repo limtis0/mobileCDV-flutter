@@ -65,85 +65,81 @@ class _SettingState extends State<Settings> {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     getTextFromKey("Settings.c.lang")
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 150),
-                    child: DropdownButton<String>(
-                      items: <String>[getTextFromKey("Settings.locale.choose"), "English", "Polski", "Русский", "Türkçe"].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: dropdownValue,
-                      onChanged: (String? newValue) {
-                        dropdownValue = newValue!;
-                        switch(newValue){
-                          case "English":
-                            changeLocale("en");
-                            break;
-                          case "Polski":
-                            changeLocale("pl");
-                            break;
-                          case "Русский":
-                            changeLocale("ru");
-                            break;
-                          case "Türkçe":
-                            changeLocale("tr");
-                            break;
-                          default:
-                            initLocalization("en");
-                            break;
-                        }
-                      },
-                    ),
-                  )
+                  DropdownButton<String>(
+                    items: <String>[getTextFromKey("Settings.locale.choose"), "English", "Polski", "Русский", "Türkçe"].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    value: dropdownValue,
+                    onChanged: (String? newValue) {
+                      dropdownValue = newValue!;
+                      switch(newValue){
+                        case "English":
+                          changeLocale("en");
+                          break;
+                        case "Polski":
+                          changeLocale("pl");
+                          break;
+                        case "Русский":
+                          changeLocale("ru");
+                          break;
+                        case "Türkçe":
+                          changeLocale("tr");
+                          break;
+                        default:
+                          initLocalization("en");
+                          break;
+                      }
+                    },
+                  ),
                 ],
               ),
               const Divider(
                 thickness: 1.5,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     getTextFromKey("Settings.theme")
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 50),
-                    child: Consumer<ThemeModel>(
-                      builder: (context, notifier, child) => DropdownButton<String>(
-                        items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled", "Purple"].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        value: dropdownValueTheme,
-                        onChanged: (String? newValue) {
-                          dropdownValueTheme = newValue!;
-                          switch(newValue){
-                            case "Light":
-                              notifier.toggleTheme(0);
-                              break;
-                            case "Dark":
-                              notifier.toggleTheme(1);
-                              break;
-                            case "Amoled":
-                              notifier.toggleTheme(2);
-                              break;
-                            case "Purple":
-                              notifier.toggleTheme(3);
-                              break;
-                            default:
-                              notifier.toggleTheme(0);
-                              break;
-                          }
-                        },
-                      ),
-                    )
+                  Consumer<ThemeModel>(
+                    builder: (context, notifier, child) => DropdownButton<String>(
+                      items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled", "Purple"].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      value: dropdownValueTheme,
+                      onChanged: (String? newValue) {
+                        dropdownValueTheme = newValue!;
+                        switch(newValue){
+                          case "Light":
+                            notifier.toggleTheme(0);
+                            break;
+                          case "Dark":
+                            notifier.toggleTheme(1);
+                            break;
+                          case "Amoled":
+                            notifier.toggleTheme(2);
+                            break;
+                          case "Purple":
+                            notifier.toggleTheme(3);
+                            break;
+                          default:
+                            notifier.toggleTheme(0);
+                            break;
+                        }
+                      },
+                    ),
                   )
                 ],
               ),

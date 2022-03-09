@@ -25,8 +25,8 @@ class Profile extends StatelessWidget {
                   "Role: Student"
               ),
               ElevatedButton(
-                onPressed: (){
-                  activitySignOut();
+                onPressed: () async {
+                  await activitySignOut();
                   showLoginScreen();
                 },
                 child: Text(

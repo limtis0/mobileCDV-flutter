@@ -40,4 +40,9 @@ class Event
         lesson.meetLink,
     );
   }
+
+  @override
+  String toString() {
+    return subjectName;
+  }
 }
