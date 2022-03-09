@@ -26,10 +26,8 @@ Future<void> activitySignIn(String email, String password) async
   await prefs.setString('savedUserType', token.userType);
   await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 
-  // Sets schedule from the start of current month up to the start of next month
   try
   {
-    await prefs.setBool('isUserLoggedIn', true);
     await fetchSchedule(token.userType, token.userId.toString(),
         getMonthsFromNowFirstDayAPI(-3), getMonthsFromNowFirstDayAPI(3), loginResponse.token);
   }
