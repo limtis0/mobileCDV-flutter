@@ -42,9 +42,9 @@ class LoginCanvas extends StatelessWidget {
 }
 
 class Canvas extends StatelessWidget {
-  int page_id;
+  final int page_id;
 
-  Canvas({Key? key, required this.page_id}) : super(key: key);
+  const Canvas({Key? key, required this.page_id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +73,9 @@ class _ControlsState extends State<Controls> {
   String _title = 'Timetable';
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int? index) {
     setState(() {
-      _selectedIndex = index;
+      _selectedIndex = index!;
       switch (_selectedIndex) {
         case 0:
           _title = getTextFromKey("Main.Account");
@@ -93,6 +93,13 @@ class _ControlsState extends State<Controls> {
     });
   }
 
+  final PageController controller = PageController(initialPage: 1);
+
+  void goTo(int index){
+    controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
+    _onItemTapped(index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,13 +109,23 @@ class _ControlsState extends State<Controls> {
         ),
       ),
       body: SafeArea(
-        child: Canvas(page_id: _selectedIndex),
+        child: PageView(
+          controller: controller,
+          children: const [
+            Canvas(page_id: 0),
+            Canvas(page_id: 1),
+            Canvas(page_id: 2),
+          ],
+          onPageChanged: (index) {
+            _onItemTapped(index);
+          }
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: getBottomTabs(_bottomTabs),
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+        onTap: goTo,
       ),
       //TODO незабыть убать
       floatingActionButton: FloatingActionButton(
@@ -116,7 +133,6 @@ class _ControlsState extends State<Controls> {
           //Сюда ставиш функцию которую надо вызывать
           print("Debug button pressed");
           //rest of the code
-
 
         },
         child: const Text(
