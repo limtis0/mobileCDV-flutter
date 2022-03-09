@@ -1,4 +1,3 @@
-// branch
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
@@ -29,6 +28,15 @@ Future<void> removeFile(String fileName) async
    and make getImageFromFile() function;
  */
 
+Future<void> setDefaultPreferences() async
+{
+   final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+   await prefs.setInt('themeId', 0);
+   await prefs.setBool('isUserLoggedIn', false);
+   await prefs.setString('localization', 'en');
+}
+
 Future<void> initPrefs() async
 {
    final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -39,14 +47,7 @@ Future<void> initPrefs() async
       return;
    }
 
-   // On first app opening
-   // Default values:
-   await prefs.setInt('themeId', 0);
-   await prefs.setBool('isUserLoggedIn', false);
-   await prefs.setString('localization', 'en');
+   // On first app opening:
    await prefs.setBool('wasOpenedBefore', true);
-
-
-   // Actions:
-
+   setDefaultPreferences();
 }

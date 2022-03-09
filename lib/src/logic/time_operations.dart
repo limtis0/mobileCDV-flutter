@@ -1,4 +1,3 @@
-// branch
 import 'package:intl/intl.dart';
 
 // Returns current date formatted for API

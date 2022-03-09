@@ -1,4 +1,3 @@
-// branch
 class RequestErrorException implements Exception
 {
   String cause;

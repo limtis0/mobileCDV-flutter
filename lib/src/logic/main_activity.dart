@@ -1,10 +1,11 @@
-// branch
 import 'structures/usertoken.dart';
+import 'structures/login_response.dart';
 import 'package:mobile_cdv/src/logic/decoder.dart';
 import 'package:mobile_cdv/src/logic/request.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mobile_cdv/src/logic/structures/exceptions.dart';
 
 Future<void> activitySignIn(String email, String password) async
 {
@@ -27,9 +28,12 @@ Future<void> activitySignIn(String email, String password) async
 
   // Sets schedule from the start of current month up to the start of next month
   try {
-    prefs.setBool('isUserLoggedIn', true);
-    await fetchSchedule(token.userType, token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
-  }catch(e) {
+    await prefs.setBool('isUserLoggedIn', true);
+    await fetchSchedule(token.userType, token.userId.toString(),
+        getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+  }
+  on RequestErrorException
+  {
     rethrow;
   }
 }

@@ -1,4 +1,3 @@
-// branch
 class UserToken
 {
   // Skipped cbduID, roles and round
