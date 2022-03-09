@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/pages/login_page.dart';
+import 'package:mobile_cdv/src/widgets/utils.dart';
 
 // Pages
 import 'pages/profile.dart';
@@ -103,6 +104,7 @@ class _ControlsState extends State<Controls> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(
             _title
@@ -133,7 +135,6 @@ class _ControlsState extends State<Controls> {
           //Сюда ставиш функцию которую надо вызывать
           print("Debug button pressed");
           //rest of the code
-
         },
         child: const Text(
           "Debug"

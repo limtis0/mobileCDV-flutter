@@ -1,25 +1,39 @@
 import 'dart:collection';
 
 import 'package:mobile_cdv/src/logic/structures/event.dart';
-import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
+final kEvents = LinkedHashMap<DateTime, List<Event>>(
+  equals: isSameDay,
+  hashCode: getHashCode,
+)..addAll(eventsList);
 
-
-final kEvents = <DateTime, List<Event>>{}..addAll(setEvents());
-
+final eventsList = setEvents();
 
 Map<DateTime, List<Event>> setEvents(){
-  Map<DateTime, List<Event>> _eventData = {DateTime.now() : [Event.fromScheduleItem(globals.schedule.list()[1])]};
+  Map<DateTime, List<Event>> mapEvents = {};
 
-  //_eventData?.addAll({DateTime.now() : [Event.fromScheduleItem(globals.schedule.list()[0])]});
-  
-  for(ScheduleTableItem item in globals.schedule.list()){
-    _eventData[item.startDate] = [Event.fromScheduleItem(item)];
+  for (int i = 0; i != globals.schedule.list().length; i++) {
+    mapEvents.addAll({DateTime(globals.schedule.list()[i].startDate.year, globals.schedule.list()[i].startDate.month, globals.schedule.list()[i].startDate.day) : getEvents(globals.schedule.list()[i].startDate)});
   }
-  return _eventData;
+  
+  return mapEvents;
+}
+
+List<Event> getEvents(DateTime time){
+  List<Event> events = [];
+
+  for (int i = 0; i != globals.schedule.list().length; i++) {
+    if (DateTime(
+        globals.schedule.list()[i].startDate.year,
+        globals.schedule.list()[i].startDate.month,
+        globals.schedule.list()[i].startDate.day) == DateTime(time.year, time.month, time.day)) {
+
+      events.add(Event.fromScheduleItem(globals.schedule.list()[i]));
+    }
+  }
+  return events;
 }
 
 int getHashCode(DateTime key) {

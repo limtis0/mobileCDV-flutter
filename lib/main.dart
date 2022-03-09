@@ -22,10 +22,14 @@ Future<void> startApp() async
 
   NotificationService().init(); // init notification service
 
-  await initLocalization(prefs.getString('localization').toString()); // init localization
+  await initLocalization(prefs.getString('localization') ?? 'en'); // init localization
 
   if (prefs.getInt('themeId') == null) {
     prefs.setInt('themeId', 0);
+  }
+
+  if(prefs.getBool('isUserLoggedIn') == null){
+    await prefs.setBool('isUserLoggedIn', false);
   }
 
   if (prefs.getBool('isUserLoggedIn')!){

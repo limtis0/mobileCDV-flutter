@@ -20,9 +20,9 @@ class _LoginPageState extends State<LoginPage>{
 
   String _error = '';
 
-  void processLogin(String log, String pass){
+  void processLogin(String log, String pass) async {
     try{
-      activitySignIn(log, pass);
+      await activitySignIn(log, pass);
       showTimetable();
     } catch(e){
       _error = getTextFromKey("Login.Page.error");
@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -107,7 +108,7 @@ class _LoginPageState extends State<LoginPage>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          showTimetable();
+          processLogin("izakharov@edu.cdv.pl", "34r+KktH3VA");
         },
         child: Text(
           "Debug"
