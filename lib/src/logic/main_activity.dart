@@ -5,26 +5,31 @@ import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+<<<<<<< HEAD
 void activitySignIn(String email, String password) async
+=======
+Future<void> activitySignIn(String email, String password) async
+>>>>>>> origin/f
 {
-  LoginResponse loginResponse = fetchLogin(email, password) as LoginResponse;
+  final LoginResponse loginResponse = await fetchLogin(email, password);
 
-  final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
-  
-  prefs.setBool('isUserLoggedIn', true);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  prefs.setString('savedEmail', email);
-  prefs.setString('savedPassword', password);
-  prefs.setString('savedTokenEncoded', loginResponse.token);
+  await prefs.setBool('isUserLoggedIn', true);
+
+  await prefs.setString('savedEmail', email);
+  await prefs.setString('savedPassword', password);
+  await prefs.setString('savedTokenEncoded', loginResponse.token);
   
   UserToken token = decodeToken(loginResponse.token);
-  saveImage(decodeImage(loginResponse.photo), 'avatar.png');
+  await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
 
-  prefs.setString('savedUserName', token.userName);
-  prefs.setString('savedUserType', token.userType);
-  prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
+  await prefs.setString('savedUserName', token.userName);
+  await prefs.setString('savedUserType', token.userType);
+  await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 
   // Sets schedule from the start of current month up to the start of next month
+<<<<<<< HEAD
   try {
     prefs.setBool('isUserLoggedIn', true);
     await fetchSchedule(token.userType, token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
@@ -36,6 +41,15 @@ void activitySignIn(String email, String password) async
 void activitySignOut() async
 {
   SharedPreferences prefs = await SharedPreferences.getInstance();
+=======
+  fetchSchedule(token.userType, token.userId.toString(),
+      getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+}
+
+Future<void> activitySignOut() async
+{
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+>>>>>>> origin/f
 
   await prefs.setBool('isUserLoggedIn', false);
 
@@ -46,5 +60,5 @@ void activitySignOut() async
   await prefs.remove('savedUserType');
   await prefs.remove('savedUserAlbumNumber');
 
-  removeFile('avatar.png');
+  await removeFile('avatar.png');
 }

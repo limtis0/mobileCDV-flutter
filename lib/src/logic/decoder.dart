@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import 'structures/usertoken.dart';
-import 'dart:typed_data';
-import 'package:jwt_decode/jwt_decode.dart';
+=======
 import 'dart:convert';
+>>>>>>> origin/f
+import 'dart:typed_data';
+import 'structures/usertoken.dart';
+import 'package:jwt_decode/jwt_decode.dart';
+<<<<<<< HEAD
+import 'dart:convert';
+=======
+>>>>>>> origin/f
 
 UserToken decodeToken(String token)
 {

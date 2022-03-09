@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'globals.dart' as globals;
 import 'structures/schedule.dart';
+<<<<<<< HEAD
+=======
+import 'structures/exceptions.dart';
+>>>>>>> origin/f
 import 'package:http/http.dart' as http;
 
 // LOGIN
@@ -47,7 +51,7 @@ Future<LoginResponse> fetchLogin(String login, String password) async
   }
   else
   {
-    throw Exception('Failed to login.');
+    throw RequestErrorException('Failed to login');
   }
 }
 
@@ -73,6 +77,6 @@ Future<void> fetchSchedule(String userType, String userId, String dateFrom, Stri
   }
   else
   {
-    throw Exception('Failed to get schedule.');
+    throw RequestErrorException('Failed to get schedule');
   }
 }

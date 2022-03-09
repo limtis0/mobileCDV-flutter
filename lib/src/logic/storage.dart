@@ -10,18 +10,18 @@ Future<String> get _localPath async
 }
 
 // Gets Uint8List on input and saves it as an image (i.e. test.png)
-void saveImage(Uint8List imageBytes, String fileName) async
+Future<void> saveImage(Uint8List imageBytes, String fileName) async
 {
    final String filePath = await _localPath;
    final file = File('$filePath/$fileName');
-   file.writeAsBytes(imageBytes);
+   await file.writeAsBytes(imageBytes);
 }
 
-void removeFile(String fileName) async
+Future<void> removeFile(String fileName) async
 {
    final String filePath = await _localPath;
    final file = File('$filePath/$fileName');
-   file.delete();
+   await file.delete();
 }
 
 /* TODO Choose the library with Image data type that suits front-end
