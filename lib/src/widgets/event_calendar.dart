@@ -4,6 +4,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 import 'package:mobile_cdv/src/logic/structures/event.dart';
 
+import '../logic/time_operations.dart';
+
 class EventCalendar extends StatefulWidget {
   EventCalendar({Key? key}) : super(key: key);
 
@@ -171,7 +173,26 @@ class _EventCalendarState extends State<EventCalendar> {
                         onTap: (){
 
                         },
-                        title: Text('${value[index]}'),
+                        title: Column(
+                          children: [
+                            Text('${value[index]}'),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(value[index].room),
+                                Text(value[index].form),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(formatScheduleTime(value[index].startDate)),
+                                    const Text("-"),
+                                    Text(formatScheduleTime(value[index].endDate)),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
                       ),
                     );
                   },

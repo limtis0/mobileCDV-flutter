@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
 class Event
