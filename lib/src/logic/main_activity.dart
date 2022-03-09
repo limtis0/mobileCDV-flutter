@@ -1,37 +1,39 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mobile_cdv/src/logic/time_operations.dart';
+import 'structures/usertoken.dart';
 import 'package:mobile_cdv/src/logic/decoder.dart';
 import 'package:mobile_cdv/src/logic/request.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
+import 'package:mobile_cdv/src/logic/time_operations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void activityLogin(String email, String password)
+Future<void> activitySignIn(String email, String password) async
 {
-  LoginResponse loginResponse = fetchLogin(email, password) as LoginResponse;
+  final LoginResponse loginResponse = await fetchLogin(email, password);
 
-  final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
-  
-  prefs.setBool('isUserLoggedIn', true);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  prefs.setString('savedEmail', email);
-  prefs.setString('savedPassword', password);
-  prefs.setString('savedTokenEncoded', loginResponse.token);
+  await prefs.setBool('isUserLoggedIn', true);
+
+  await prefs.setString('savedEmail', email);
+  await prefs.setString('savedPassword', password);
+  await prefs.setString('savedTokenEncoded', loginResponse.token);
   
   UserToken token = decodeToken(loginResponse.token);
-  saveImage(decodeImage(loginResponse.photo), 'avatar.png');
+  await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
 
-  prefs.setString('savedUserName', token.userName);
-  prefs.setString('savedUserType', token.userType);
-  prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
+  await prefs.setString('savedUserName', token.userName);
+  await prefs.setString('savedUserType', token.userType);
+  await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 
   // Sets schedule from the start of current month up to the start of next month
-  fetchSchedule(token.userId.toString(), getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+  fetchSchedule(token.userType, token.userId.toString(),
+      getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
 }
 
-void activityLogout() async
+Future<void> activitySignOut() async
 {
-  final SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  prefs.setBool('isUserLoggedIn', false);
+  await prefs.setBool('isUserLoggedIn', false);
 
   await prefs.remove('savedEmail');
   await prefs.remove('savedPassword');
@@ -40,5 +42,5 @@ void activityLogout() async
   await prefs.remove('savedUserType');
   await prefs.remove('savedUserAlbumNumber');
 
-  removeFile('avatar.png');
+  await removeFile('avatar.png');
 }

@@ -22,8 +22,7 @@ class NotificationService
     tz.initializeTimeZones();
 
     // Android settings
-    // TODO Test whether icon shows correctly, change icon
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('notifications_icon');
 
     // iOS settings
     const IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings(
@@ -48,7 +47,6 @@ class NotificationService
     );
   }
 
-  // TODO Rewrite to show at given date, not in given seconds
   Future<void> showNotification(int id, String title, String body, int seconds) async
   {
     await flutterLocalNotificationsPlugin.zonedSchedule(
@@ -62,7 +60,7 @@ class NotificationService
             'Main Channel',
             importance: Importance.max,
             priority: Priority.max,
-            icon: 'app_icon' // TODO Test whether icon shows correctly, change icon
+            icon: 'notifications_icon'
           ),
           iOS: IOSNotificationDetails(
             sound: 'default.wav',

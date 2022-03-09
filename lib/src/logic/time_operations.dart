@@ -14,12 +14,17 @@ String getMonthsFromNowFirstDayAPI(int months)
   return DateFormat('yyyy-MM-dd').format(DateTime(now.year, now.month + months, 1));
 }
 
-// Returns seconds left until a lesson from schedule ()
-int getSecondsUntilScheduleDate(String lessonDate)
+DateTime getScheduledDate(String lessonDate)
 {
-  DateFormat f = DateFormat('yyyy-MM-ddTHH:mm:ss');
-  DateTime lessonTime = f.parse(lessonDate).toUtc();
-  print(lessonTime.toUtc());
-  print(DateTime.now().toUtc());
-  return lessonTime.difference(DateTime.now().toUtc()).inSeconds;
+  DateTime lessonTime = DateTime.parse(lessonDate); // Sets to UTC automatically
+  return lessonTime;
+}
+
+// Returns seconds left until a lesson from schedule (For notifications)
+int getSecondsUntilScheduledDate(String lessonDate)
+{
+  DateTime lessonTime = getScheduledDate(lessonDate);
+  // TODO Test whether toUtc() is needed, maybe it sets automatically?
+  int difference = lessonTime.difference(DateTime.now().toUtc()).inSeconds;
+  return difference;
 }
