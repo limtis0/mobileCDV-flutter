@@ -30,7 +30,7 @@ Future<void> activitySignIn(String email, String password) async
   try {
     await prefs.setBool('isUserLoggedIn', true);
     await fetchSchedule(token.userType, token.userId.toString(),
-        getMonthsFromNowFirstDayAPI(0), getMonthsFromNowFirstDayAPI(1), loginResponse.token);
+        getMonthsFromNowFirstDayAPI(-3), getMonthsFromNowFirstDayAPI(3), loginResponse.token);
   }
   on RequestErrorException
   {
