@@ -61,11 +61,7 @@ class NotificationService
             'Main Channel',
             importance: Importance.max,
             priority: Priority.max,
-<<<<<<< HEAD
             icon: 'notifications_icon',
-=======
-            icon: 'notifications_icon'
->>>>>>> origin/f
           ),
           iOS: IOSNotificationDetails(
             sound: 'default.wav',

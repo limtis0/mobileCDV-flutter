@@ -2,10 +2,7 @@
 import 'dart:convert';
 import 'globals.dart' as globals;
 import 'structures/schedule.dart';
-<<<<<<< HEAD
-=======
 import 'structures/exceptions.dart';
->>>>>>> origin/f
 import 'package:http/http.dart' as http;
 
 // LOGIN
