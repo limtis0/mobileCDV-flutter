@@ -27,3 +27,8 @@ int getSecondsUntilScheduledDate(String lessonDate)
   int difference = lessonTime.difference(DateTime.now().toUtc()).inSeconds;
   return difference;
 }
+
+String formatScheduleTime(DateTime lessonDate)
+{
+  return DateFormat('H:mm').format(lessonDate);
+}
