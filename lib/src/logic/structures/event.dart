@@ -1,3 +1,5 @@
+import 'package:mobile_cdv/src/logic/structures/schedule.dart';
+
 class Event {
   final String subject;
   final String subjectName;
@@ -21,6 +23,19 @@ class Event {
       this.meetLink,
       );
 
-  @override
-  String toString() => subjectName;
+  factory Event.fromScheduleItem(ScheduleTableItem lesson)
+  {
+    return Event
+      (
+        lesson.subject,
+        lesson.subjectName,
+        lesson.groupNumber,
+        lesson.startDate,
+        lesson.endDate,
+        lesson.form,
+        lesson.teacher,
+        lesson.room,
+        lesson.meetLink,
+    );
+  }
 }
