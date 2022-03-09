@@ -1,6 +1,4 @@
 import '../../main.dart';
-import '../logic/globals.dart' as globals;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
@@ -32,76 +30,86 @@ class _LoginPageState extends State<LoginPage>{
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Image(
-              image: AssetImage('./assets/images/logo-text.png'),
-              width: 170,
-              height: 170,
-            ),
-            Text(
-              _error,
-              style: const TextStyle(
-                color: Colors.red,
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const Image(
+                image: AssetImage('./assets/images/logo-text.png'),
+                width: 170,
+                height: 170,
               ),
-            ),
-            Form(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                        getTextFromKey("Login.Page.Email")
-                    ),
-                  ),
-                  SizedBox(
-                    width: 230,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        hintText: getTextFromKey("Login.Page.Hint.login"),
-                      ),
-                      onChanged: (value){
-                        _login = value;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                        getTextFromKey("Login.Page.Password")
-                    ),
-                  ),
-                  SizedBox(
-                    width: 230,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        hintText: getTextFromKey("Login.Page.Hint.password"),
-                      ),
-                      onChanged: (value){
-                        _password = value;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      onPressed: (){
-                        processLogin(_login, _password);
-                      },
+              Text(
+                _error,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              Form(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
                       child: Text(
-                          getTextFromKey("Login.Page.btn")
+                          getTextFromKey("Login.Page.Email")
                       ),
                     ),
-                  )
-                ],
-              ),
-            )
-          ],
+                    SizedBox(
+                      width: 230,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          hintText: getTextFromKey("Login.Page.Hint.login"),
+                        ),
+                        onChanged: (value){
+                          _login = value;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                          getTextFromKey("Login.Page.Password")
+                      ),
+                    ),
+                    SizedBox(
+                      width: 230,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          hintText: getTextFromKey("Login.Page.Hint.password"),
+                        ),
+                        onChanged: (value){
+                          _password = value;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        onPressed: (){
+                          processLogin(_login, _password);
+                        },
+                        child: Text(
+                            getTextFromKey("Login.Page.btn")
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          showTimetable();
+        },
+        child: Text(
+          "Debug"
         ),
       ),
     );
