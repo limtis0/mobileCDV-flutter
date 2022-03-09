@@ -1,6 +1,7 @@
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
-class Event {
+class Event
+{
   final String subject;
   final String subjectName;
   final String groupNumber;
@@ -11,7 +12,8 @@ class Event {
   final String room;
   final String meetLink;
 
-  const Event(
+  const Event
+      (
       this.subject,
       this.subjectName,
       this.groupNumber,
