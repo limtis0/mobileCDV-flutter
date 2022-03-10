@@ -1,19 +1,32 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 import '../logic/main_activity.dart';
 
 class Profile extends StatefulWidget {
-  Profile({Key? key}) : super(key: key);
+  const Profile({Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileStatePage();
 }
 
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({Key? key}) : super(key: key);
+
+  @override
+  State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+class ProfileLogin extends StatefulWidget {
+  const ProfileLogin({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileLogin> createState() => _ProfileState();
+}
+
 class _ProfileStatePage extends State<Profile> {
-  ImageProvider avatar = Image(image: Image.file(File('${globals.path}/avatar.png')).image).image;
+  //ImageProvider avatar = Image(image: Image.file(File('${globals.path}/avatar.png')).image).image;
 
   void processSignOut() async {
     showDialog(
@@ -32,12 +45,16 @@ class _ProfileStatePage extends State<Profile> {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             CircleAvatar(
-              radius: 70,
-              backgroundImage: avatar,
+              backgroundColor: Colors.blue,
+              radius: 72,
+              child: CircleAvatar(
+                radius: 70,
+                backgroundImage: globals.avatar,
+              ),
             ),
             const Padding(
               padding: EdgeInsets.all(10),
@@ -49,10 +66,16 @@ class _ProfileStatePage extends State<Profile> {
               ),
             ),
             Text(
-                globals.type,
+              globals.type.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
             Text(
-                '${getTextFromKey('Numer albumu')}: ${globals.album}'
+              'Numer albumu: ${globals.album}',
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
           ],
         ),
@@ -61,12 +84,6 @@ class _ProfileStatePage extends State<Profile> {
   }
 }
 
-class LoginWidget extends StatefulWidget {
-  LoginWidget({Key? key}) : super(key: key);
-
-  @override
-  State<LoginWidget> createState() => _LoginWidgetState();
-}
 class _LoginWidgetState extends State<LoginWidget> {
 
   double w = 170;
@@ -157,20 +174,13 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 }
 
-class ProfileLogin extends StatefulWidget {
-  ProfileLogin({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileLogin> createState() => _ProfileState();
-}
-
 class _ProfileState extends State<ProfileLogin> {
 
   Widget? currentScreen;
 
   final List<Widget> _screens = [
-    Profile(),
-    LoginWidget()
+    const Profile(),
+    const LoginWidget()
   ];
 
   Widget selPage(bool i){
@@ -213,20 +223,20 @@ class _ProfileState extends State<ProfileLogin> {
     });
   }
 
-  String _text = getTextFromKey('Login.Page.btn');
+  String _text = _retText();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          selPage(globals.isLoggined),
           Text(
             _error,
             style: const TextStyle(
               color: Colors.red,
             ),
           ),
+          selPage(globals.isLoggined),
           ElevatedButton(
             child: Text(
                 _text,
@@ -270,4 +280,10 @@ class LoadingIndicator extends StatelessWidget{
   }
 }
 
-//TODO Make page
+String _retText(){
+  if(globals.isLoggined){
+    return getTextFromKey("Profile.signOut");
+  }else{
+    return getTextFromKey("Login.Page.btn");
+  }
+}

@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
 import 'structures/usertoken.dart';
 import 'structures/login_response.dart';
 import 'package:mobile_cdv/src/logic/decoder.dart';
@@ -22,6 +26,7 @@ Future<void> activitySignIn(String email, String password) async
   
   UserToken token = decodeToken(loginResponse.token);
   await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
+  globals.avatar = Image(image: Image.file(File('${globals.path}/avatar.png')).image).image;
 
   await prefs.setString('savedUserName', token.userName);
   await prefs.setString('savedUserType', token.userType);
