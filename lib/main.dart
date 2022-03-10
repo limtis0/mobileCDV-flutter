@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:mobile_cdv/src/logic/main_activity.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,29 +33,17 @@ Future<void> startApp() async
     await prefs.setBool('isUserLoggedIn', false);
   }
 
-  if (prefs.getBool('isUserLoggedIn')!){
-    showTimetable();
-  }else {
-    showLoginScreen();
-  }
+  showTimetable();
 }
 
 Future<void> showTimetable() async
 {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
   initializeDateFormatting().then((_) async => runApp(
       ChangeNotifierProvider<ThemeModel>(
         create: (BuildContext context) => ThemeModel(),
         child: MainApp(),
-      )
-  )); // run app
-}
-
-Future<void> showLoginScreen() async
-{
-  initializeDateFormatting().then((_) async => runApp(
-      ChangeNotifierProvider<ThemeModel>(
-        create: (BuildContext context) => ThemeModel(),
-        child: LoginApp(),
       )
   )); // run app
 }

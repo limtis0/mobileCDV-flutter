@@ -5,12 +5,13 @@ import 'package:mobile_cdv/src/logic/structures/event.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
+/*
 final kEvents = LinkedHashMap<DateTime, List<Event>>
   (
   equals: isSameDay,
   hashCode: getHashCode,
   )..addAll(eventsList);
-
+*/
 final eventsList = setEvents();
 
 Map<DateTime, List<Event>> setEvents()

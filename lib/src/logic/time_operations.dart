@@ -18,7 +18,7 @@ String getMonthsFromNowFirstDayAPI(int months)
 // NOTIFICATIONS AND LOGIC
 DateTime getScheduledDate(String lessonDate)
 {
-  return DateTime.parse(lessonDate); // Sets to UTC automatically
+  return DateTime.parse(lessonDate).toLocal(); // Sets to UTC automatically
 }
 
 // Returns seconds left until a lesson from schedule (For notifications)

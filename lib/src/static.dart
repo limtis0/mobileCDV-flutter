@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/pages/login_page.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Pages
 import 'pages/profile.dart';
@@ -28,24 +31,16 @@ List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
   return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
 }
 
-class LoginCanvas extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("MobileCDV"),
-        automaticallyImplyLeading: false,
-      ),
-      body: LoginPage(),
-    );
-  }
-}
-
 class Canvas extends StatelessWidget {
   final int page_id;
+  bool isLogged = false;
 
-  const Canvas({Key? key, required this.page_id}) : super(key: key);
+  Canvas({Key? key, required this.page_id}) : super(key: key);
+
+  Future<bool> isUserLogged() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isUserLoggedIn')!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +48,11 @@ class Canvas extends StatelessWidget {
       case 0:
         return Profile();
       case 1:
-        return EventCalendar();
+        if(isUserLogged()) {
+          return EventCalendar();
+        }else {
+          return Profile();
+        }
       case 2:
         return const Settings();
       default:
@@ -113,7 +112,7 @@ class _ControlsState extends State<Controls> {
       body: SafeArea(
         child: PageView(
           controller: controller,
-          children: const [
+          children: [
             Canvas(page_id: 0),
             Canvas(page_id: 1),
             Canvas(page_id: 2),
@@ -129,18 +128,6 @@ class _ControlsState extends State<Controls> {
         selectedItemColor: Colors.blue,
         onTap: goTo,
       ),
-      //TODO незабыть убать
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          //Сюда ставиш функцию которую надо вызывать
-          print("Debug button pressed");
-          //rest of the code
-        },
-        child: const Text(
-          "Debug"
-        ),
-      ),
-      //TODO для вовы
     );
   }
 }

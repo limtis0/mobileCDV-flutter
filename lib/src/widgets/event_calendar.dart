@@ -1,13 +1,14 @@
+import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import 'package:mobile_cdv/src/logic/structures/event.dart';
-
+import '../logic/main_activity.dart';
 import '../logic/time_operations.dart';
 
 class EventCalendar extends StatefulWidget {
-  EventCalendar({Key? key}) : super(key: key);
+  const EventCalendar({Key? key}) : super(key: key);
 
 
   @override
@@ -20,10 +21,16 @@ class _EventCalendarState extends State<EventCalendar> {
 
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
-  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff; // Can be toggled on/off by longpressing a date
   late final ValueNotifier<List<Event>> _selectedEvents;
+
+  LinkedHashMap<DateTime, List<Event>>? kEvents;
+
+  void refreshEvents() {
+    kEvents = LinkedHashMap<DateTime, List<Event>>(
+      equals: isSameDay,
+      hashCode: getHashCode,
+    )..addAll(setEvents());
+  }
 
   @override
   void initState() {
@@ -31,6 +38,10 @@ class _EventCalendarState extends State<EventCalendar> {
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    refreshEvents();
+    setState(() {
+
+    });
   }
 
   @override
@@ -40,17 +51,8 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
-    return kEvents[day] ?? [];
-  }
-
-  List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
-    final days = daysInRange(start, end);
-
-    return [
-      for (final d in days) ..._getEventsForDay(d),
-    ];
+    refreshEvents();
+    return kEvents![day] ?? [];
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
@@ -58,31 +60,9 @@ class _EventCalendarState extends State<EventCalendar> {
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
-        _rangeStart = null; // Important to clean those
-        _rangeEnd = null;
-        _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
 
       _selectedEvents.value = _getEventsForDay(selectedDay);
-    }
-  }
-
-  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
-    setState(() {
-      _selectedDay = null;
-      _focusedDay = focusedDay;
-      _rangeStart = start;
-      _rangeEnd = end;
-      _rangeSelectionMode = RangeSelectionMode.toggledOn;
-    });
-
-    // `start` or `end` could be null
-    if (start != null && end != null) {
-      _selectedEvents.value = _getEventsForRange(start, end);
-    } else if (start != null) {
-      _selectedEvents.value = _getEventsForDay(start);
-    } else if (end != null) {
-      _selectedEvents.value = _getEventsForDay(end);
     }
   }
 
@@ -91,24 +71,28 @@ class _EventCalendarState extends State<EventCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return RefreshIndicator(
+      onRefresh: () async {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
+        setState(() {});
+      },
+      child: Column(
         children: [
           TableCalendar(
             firstDay: kFirstDay,
             lastDay: kLastDay,
             focusedDay: _focusedDay,
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            rangeStartDay: _rangeStart,
-            rangeEndDay: _rangeEnd,
             calendarFormat: _calendarFormat,
-            rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: _getEventsForDay,
+            eventLoader: (day) {
+              return _getEventsForDay(day);
+            },
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: const CalendarStyle(
               outsideDaysVisible: false,
             ),
             onDaySelected: _onDaySelected,
-            onRangeSelected: _onRangeSelected,
             onFormatChanged: (format) {
               if (_calendarFormat != format) {
                 setState(() {
@@ -166,33 +150,33 @@ class _EventCalendarState extends State<EventCalendar> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12)
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(12)
                       ),
                       child: ListTile(
-                        onTap: (){
+                          onTap: (){
 
-                        },
-                        title: Column(
-                          children: [
-                            Text('${value[index]}'),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(value[index].room),
-                                Text(value[index].form),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(formatScheduleTime(value[index].startDate)),
-                                    const Text("-"),
-                                    Text(formatScheduleTime(value[index].endDate)),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        )
+                          },
+                          title: Column(
+                            children: [
+                              Text('${value[index]}'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(value[index].room),
+                                  Text(value[index].form),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(formatScheduleTime(value[index].startDate)),
+                                      const Text("-"),
+                                      Text(formatScheduleTime(value[index].endDate)),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          )
                       ),
                     );
                   },
@@ -201,6 +185,7 @@ class _EventCalendarState extends State<EventCalendar> {
             ),
           )
         ],
+      )
     );
   }
 }
