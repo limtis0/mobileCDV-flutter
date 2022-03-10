@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 
+// API
 // Returns current date formatted for API
 String getCurrentDateAPI()
 {
@@ -14,21 +15,30 @@ String getMonthsFromNowFirstDayAPI(int months)
   return DateFormat('yyyy-MM-dd').format(DateTime(now.year, now.month + months, 1));
 }
 
+// NOTIFICATIONS AND LOGIC
 DateTime getScheduledDate(String lessonDate)
 {
-  DateTime lessonTime = DateTime.parse(lessonDate); // Sets to UTC automatically
-  return lessonTime;
+  return DateTime.parse(lessonDate); // Sets to UTC automatically
 }
 
 // Returns seconds left until a lesson from schedule (For notifications)
 int getSecondsUntilScheduledDate(String lessonDate)
 {
   DateTime lessonTime = getScheduledDate(lessonDate);
-  int difference = lessonTime.difference(DateTime.now().toUtc()).inSeconds;
-  return difference;
+  return lessonTime.difference(DateTime.now().toUtc()).inSeconds;
+}
+
+// EVENTS
+extension DateOnlyCompare on DateTime
+{
+  bool isSameDate(DateTime other)
+  {
+    return day == other.day && month == other.month && year == other.year;
+  }
 }
 
 String formatScheduleTime(DateTime lessonDate)
 {
   return DateFormat('H:mm').format(lessonDate);
 }
+
