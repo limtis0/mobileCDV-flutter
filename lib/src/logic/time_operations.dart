@@ -34,3 +34,12 @@ String formatScheduleTime(DateTime lessonDate)
   return DateFormat('H:mm').format(lessonDate);
 }
 
+extension DateTransform on DateTime
+{
+  DateTime toDateOnly()
+  {
+    return DateTime(year, month, day);
+  }
+}
+
+
