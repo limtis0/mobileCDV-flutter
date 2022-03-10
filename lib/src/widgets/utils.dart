@@ -4,7 +4,6 @@ import 'package:mobile_cdv/src/logic/structures/event.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
-import '../logic/time_operations.dart';
 
 final kEvents = LinkedHashMap<DateTime, List<Event>>
   (
@@ -37,7 +36,7 @@ List<Event> getEvents(DateTime time)
 
   for (int i = 0; i < schedule.length; i++)
   {
-    if (schedule[i].startDate.isSameDate(time))
+    if (isSameDay(schedule[i].startDate, time))
     {
       events.add(Event.fromScheduleItem(schedule[i]));
     }
