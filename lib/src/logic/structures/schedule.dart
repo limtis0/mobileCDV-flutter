@@ -93,4 +93,15 @@ class Schedule
   {
     return _scheduleList;
   }
+
+  @override
+  String toString()
+  {
+    String s = '';
+    for (ScheduleTableItem element in _scheduleList)
+    {
+      s += '${element.subjectName} - ${element.startDate.toString()}:${element.endDate.toString()}\n';
+    }
+    return s;
+  }
 }
