@@ -33,6 +33,28 @@ List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
   return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
 }
 
+class reqLoginPage extends StatelessWidget{
+  const reqLoginPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            getTextFromKey("noSchedule.page"),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 35,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class Canvas extends StatelessWidget {
   final int page_id;
   bool isLogged = false;
@@ -43,13 +65,13 @@ class Canvas extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (page_id){
       case 0:
-        if(globals.isLoggined) {
-          return Profile();
-        }else {
-          return ProfileLogin();
-        }
+        return ProfileLogin();
       case 1:
-        return EventCalendar();
+        if(globals.isLoggined) {
+          return const EventCalendar();
+        }else {
+          return const reqLoginPage();
+        }
       case 2:
         return const Settings();
       default:

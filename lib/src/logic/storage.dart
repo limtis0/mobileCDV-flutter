@@ -9,6 +9,10 @@ Future<String> get _localPath async
    return directory.path;
 }
 
+Future<String> getLocalPath() async{
+   return await _localPath;
+}
+
 // Gets Uint8List on input and saves it as an image (i.e. test.png)
 Future<void> saveImage(Uint8List imageBytes, String fileName) async
 {

@@ -4,12 +4,12 @@ Main.Account,Profile,Profil,Профиль,Profil
 Main.Schedule,Schedule,Rozkład,Расписание,Takvim
 Main.Settings,Settings,Ustawienie,Настройки,Ayarlar
 Settings.locale,Language,Język,Язык,Dil
-Settings.AlertDialog,Restart required,???,Нужен перезапуск,Yeniden Başlatma Gerekli
+Settings.AlertDialog,Restart required,???,Требуется перезапуск,Yeniden Başlatma Gerekli
 Setting.AlertDialog.Restart,Restart,???,Перезапуск,Yeniden Başlat
-Login.Page.Email,Email,Email,Email,E-Posta
+Login.Page.Email,E-mail,E-mail,E-mail,E-Posta
 Login.Page.Password,Password,???,Пароль,Parola
-Login.Page.Hint.password,Enter password,???,Напиши пароль,Parolayı girin
-Login.Page.Hint.login,Enter email,???,Напиши email,E-Posta
+Login.Page.Hint.password,Enter password,???,Введите пароль,Parolayı girin
+Login.Page.Hint.login,Enter e-mail,???,Введите e-mail,E-Posta
 Settings.AlertDialog.q,Restart now?,???,Перезапустить сейчас?,Yeniden Başlatılsın mı?
 Profile.signOut,Sign out,???,Выйти из аккаунта,Cıkış Yap
 Login.Page.btn,Sign in,???,Войти,Giriş Yap
@@ -17,3 +17,5 @@ Settings.locale.choose,Choose language,???,Выбрать язык,Dil Seç
 Settings.c.lang,Language,???,Язык,Dil
 Settings.theme,Theme,???,Тема,Tema
 Settings.theme.choose,Select theme,???,Выбрать тему,Tema Seç
+Login.Page.error,Bad login or password,???,Неправильный логин или пароль,???
+noSchedule.page,Log into your account to see Schedule,???,Войдите в аккаунт чтобы увидеть расписание,???

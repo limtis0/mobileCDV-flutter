@@ -6,6 +6,7 @@ import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile_cdv/src/logic/structures/exceptions.dart';
+import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
 Future<void> activitySignIn(String email, String password) async
 {
@@ -25,6 +26,10 @@ Future<void> activitySignIn(String email, String password) async
   await prefs.setString('savedUserName', token.userName);
   await prefs.setString('savedUserType', token.userType);
   await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
+
+  globals.name = token.userName;
+  globals.type = token.userType;
+  globals.album = token.userAlbumNumer;
 
   try
   {

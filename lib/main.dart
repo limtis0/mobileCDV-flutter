@@ -11,6 +11,7 @@ import 'package:mobile_cdv/src/logic/theme_manager.dart';
 import 'package:mobile_cdv/src/login_application.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 import 'src/application.dart';
+import 'package:mobile_cdv/src/logic/storage.dart' as store;
 
 void main() => startApp();
 
@@ -38,13 +39,21 @@ Future<void> startApp() async
     globals.isLoggined = false;
   }
 
+  globals.path = await getLocalPath();
+
   showTimetable();
 }
 
 Future<void> showTimetable() async
 {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
+  try{
+    await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
+  }catch(e){
+    globals.isLoggined == false;
+  }
+
+
   initializeDateFormatting().then((_) async => runApp(
       ChangeNotifierProvider<ThemeModel>(
         create: (BuildContext context) => ThemeModel(),
