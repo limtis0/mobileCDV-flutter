@@ -1,10 +1,9 @@
 import 'dart:collection';
-
-import 'package:mobile_cdv/src/logic/structures/event.dart';
-import 'package:mobile_cdv/src/logic/structures/schedule.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 import '../logic/time_operations.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:mobile_cdv/src/logic/structures/event.dart';
+import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
 final kEvents = LinkedHashMap<DateTime, List<Event>>
   (
@@ -17,18 +16,20 @@ final eventsList = setEvents();
 Map<DateTime, List<Event>> setEvents()
 {
   Map<DateTime, List<Event>> mapEvents = {};
-
   List<ScheduleTableItem> schedule = globals.schedule.list();
 
   for (int i = 0; i < schedule.length; i++)
   {
+    // Calendar events are stored by days, so this is the only reliable option
+    DateTime scheduledDate = schedule[i].startDate.toDateOnly();
+
     // Null safety
-    if (mapEvents[schedule[i].startDate.toDateOnly()] == null)
+    if (mapEvents[scheduledDate] == null)
     {
-      mapEvents[schedule[i].startDate.toDateOnly()] = [];
+      mapEvents[scheduledDate] = [];
     }
 
-    mapEvents[schedule[i].startDate.toDateOnly()]!.add(Event.fromScheduleItem(schedule[i]));
+    mapEvents[scheduledDate]!.add(Event.fromScheduleItem(schedule[i]));
   }
   return mapEvents;
 }
