@@ -4,3 +4,5 @@ import 'structures/schedule.dart';
 
 // GLOBALS
 Schedule schedule = Schedule();
+
+bool isLoggined = false;

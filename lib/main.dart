@@ -9,7 +9,7 @@ import 'package:mobile_cdv/src/logic/notifications.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/theme_manager.dart';
 import 'package:mobile_cdv/src/login_application.dart';
-
+import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 import 'src/application.dart';
 
 void main() => startApp();
@@ -31,6 +31,11 @@ Future<void> startApp() async
 
   if(prefs.getBool('isUserLoggedIn') == null){
     await prefs.setBool('isUserLoggedIn', false);
+  }
+  if(prefs.getBool('isUserLoggedIn')!){
+    globals.isLoggined = true;
+  }else {
+    globals.isLoggined = false;
   }
 
   showTimetable();

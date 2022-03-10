@@ -7,6 +7,8 @@ import 'package:mobile_cdv/src/pages/login_page.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+
 // Pages
 import 'pages/profile.dart';
 import 'pages/settings.dart';
@@ -37,22 +39,17 @@ class Canvas extends StatelessWidget {
 
   Canvas({Key? key, required this.page_id}) : super(key: key);
 
-  Future<bool> isUserLogged() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isUserLoggedIn')!;
-  }
-
   @override
   Widget build(BuildContext context) {
     switch (page_id){
       case 0:
-        return Profile();
-      case 1:
-        if(isUserLogged()) {
-          return EventCalendar();
-        }else {
+        if(globals.isLoggined) {
           return Profile();
+        }else {
+          return ProfileLogin();
         }
+      case 1:
+        return EventCalendar();
       case 2:
         return const Settings();
       default:
