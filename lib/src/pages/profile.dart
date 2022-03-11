@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/widgets/utils.dart';
 import '../logic/main_activity.dart';
 
 class Profile extends StatefulWidget {
@@ -64,18 +65,21 @@ class _ProfileStatePage extends State<Profile> {
               style: const TextStyle(
                 fontSize: 30,
               ),
+              textAlign: TextAlign.center,
             ),
             Text(
-              globals.type.toUpperCase(),
+              globals.type.capitalize(),
               style: const TextStyle(
                 fontSize: 18,
               ),
+              textAlign: TextAlign.center,
             ),
             Text(
               'Numer albumu: ${globals.album}',
               style: const TextStyle(
                 fontSize: 18,
               ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

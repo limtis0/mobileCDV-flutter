@@ -5,6 +5,12 @@ import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
 final eventsList = setEvents();
 
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  }
+}
+
 Map<DateTime, List<Event>> setEvents()
 {
   Map<DateTime, List<Event>> mapEvents = {};

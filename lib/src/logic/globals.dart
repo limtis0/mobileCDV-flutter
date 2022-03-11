@@ -20,3 +20,5 @@ String email = "";
 String pass = "";
 
 ImageProvider avatar = Image(image: Image.file(File('$path/avatar.png')).image).image;
+
+int theme = 0;

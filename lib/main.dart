@@ -27,7 +27,7 @@ Future<void> startApp() async
   await initLocalization(prefs.getString('localization') ?? 'en'); // init localization
 
   if (prefs.getInt('themeId') == null) {
-    prefs.setInt('themeId', 0);
+    await prefs.setInt('themeId', 0);
   }
 
   if(prefs.getBool('isUserLoggedIn') == null){
@@ -40,9 +40,11 @@ Future<void> startApp() async
   }
 
   globals.path = await getLocalPath();
+  globals.theme = prefs.getInt('themeId')!;
 
   showTimetable();
 }
+
 
 Future<void> showTimetable() async
 {

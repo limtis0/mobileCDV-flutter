@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -66,6 +67,14 @@ class _EventCalendarState extends State<EventCalendar> {
     }
   }
 
+  Color setColor(String type){
+    switch(type){
+      case "W":
+        return Colors.teal;
+      default:
+        return Colors.blue;
+    }
+  }
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;
 
@@ -88,9 +97,30 @@ class _EventCalendarState extends State<EventCalendar> {
             eventLoader: (day) {
               return _getEventsForDay(day);
             },
+            calendarBuilders: CalendarBuilders(
+              singleMarkerBuilder: (context, day, _){
+                return Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).colorScheme.primary,
+                  ), //Change color
+                  width: 5.0,
+                  height: 5.0,
+                  margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                );
+              },
+            ),
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: const CalendarStyle(
               outsideDaysVisible: false,
+              todayDecoration: BoxDecoration(
+                color: Colors.blue,
+                shape: BoxShape.circle
+              ),
+              selectedDecoration: BoxDecoration(
+                color: Colors.lightBlueAccent,
+                shape: BoxShape.circle,
+              ),
             ),
             onDaySelected: _onDaySelected,
             onFormatChanged: (format) {
@@ -103,12 +133,16 @@ class _EventCalendarState extends State<EventCalendar> {
             onPageChanged: (focusedDay) {
               _focusedDay = focusedDay;
             },
+            daysOfWeekStyle: const DaysOfWeekStyle(
+              weekdayStyle: TextStyle(color: Colors.white),
+              weekendStyle: TextStyle(color: Colors.red),
+            ),
             headerStyle: const HeaderStyle(
                 titleTextStyle: TextStyle(
                   color: Colors.blue,
                   fontSize: 20,
                 ),
-                formatButtonVisible: false
+                formatButtonVisible: false,
             ),
           ),
           IconButton(
@@ -150,8 +184,13 @@ class _EventCalendarState extends State<EventCalendar> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(12)
+                        border: Border(
+                          left: BorderSide(
+                            color: setColor(value[index].form),
+                            width: 5,
+                          ),
+                        ),
+                        color: Colors.grey[200],
                       ),
                       child: ListTile(
                           onTap: (){
@@ -159,12 +198,9 @@ class _EventCalendarState extends State<EventCalendar> {
                           },
                           title: Column(
                             children: [
-                              Text('${value[index]}'),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(value[index].room),
-                                  Text(value[index].form),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -172,8 +208,21 @@ class _EventCalendarState extends State<EventCalendar> {
                                       const Text("-"),
                                       Text(formatScheduleTime(value[index].endDate)),
                                     ],
-                                  )
+                                  ),
+                                  Text(
+                                    value[index].room,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 110),
+                                child: Text(
+                                  '${value[index]}',
+                                  textAlign: TextAlign.left,
+                                ),
                               )
                             ],
                           )
