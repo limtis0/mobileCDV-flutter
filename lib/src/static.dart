@@ -33,8 +33,8 @@ List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
   return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
 }
 
-class reqLoginPage extends StatelessWidget{
-  const reqLoginPage({Key? key}) : super(key: key);
+class ReqLoginPage extends StatelessWidget{
+  const ReqLoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,21 +56,21 @@ class reqLoginPage extends StatelessWidget{
 }
 
 class Canvas extends StatelessWidget {
-  final int page_id;
+  final int pageId;
   bool isLogged = false;
 
-  Canvas({Key? key, required this.page_id}) : super(key: key);
+  Canvas({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    switch (page_id){
+    switch (pageId){
       case 0:
-        return ProfileLogin();
+        return const ProfileLogin();
       case 1:
         if(globals.isLoggined) {
           return const EventCalendar();
         }else {
-          return const reqLoginPage();
+          return const ReqLoginPage();
         }
       case 2:
         return const Settings();
@@ -90,7 +90,7 @@ class Controls extends StatefulWidget {
 class _ControlsState extends State<Controls> {
   int _selectedIndex = 1;
   String _title = 'Timetable';
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   void _onItemTapped(int? index) {
     setState(() {
@@ -132,9 +132,9 @@ class _ControlsState extends State<Controls> {
         child: PageView(
           controller: controller,
           children: [
-            Canvas(page_id: 0),
-            Canvas(page_id: 1),
-            Canvas(page_id: 2),
+            Canvas(pageId: 0),
+            Canvas(pageId: 1),
+            Canvas(pageId: 2),
           ],
           onPageChanged: (index) {
             _onItemTapped(index);
