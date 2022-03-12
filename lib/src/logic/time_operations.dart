@@ -15,6 +15,13 @@ String getMonthsFromNowFirstDayAPI(int months)
   return DateFormat('yyyy-MM-dd').format(DateTime(now.year, now.month + months, 1));
 }
 
+// Returns last day of currentMonth + months
+String getMonthsFromNowLastDayAPI(int months)
+{
+  final DateTime now = DateTime.now();
+  return DateFormat('yyyy-MM-dd').format(DateTime(now.year, now.month + months + 1, -1));
+}
+
 // NOTIFICATIONS AND LOGIC
 DateTime getScheduledDate(String lessonDate)
 {
