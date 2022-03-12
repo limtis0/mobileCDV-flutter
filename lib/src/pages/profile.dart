@@ -148,6 +148,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   SizedBox(
                     width: 230,
                     child: TextField(
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         hintText: getTextFromKey("Login.Page.Hint.password"),

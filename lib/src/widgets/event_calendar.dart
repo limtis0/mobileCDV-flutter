@@ -1,14 +1,11 @@
 import 'dart:collection';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:mobile_cdv/src/logic/structures/event.dart';
-import '../application.dart';
 import '../logic/main_activity.dart';
 import '../logic/time_operations.dart';
 
@@ -47,7 +44,7 @@ class _EventCalendarState extends State<EventCalendar> {
   List<DateTime>? _eventDays;
   LinkedHashMap<DateTime, List<Event>>? kEvents;
 
-  void refreshEvents() {
+  void refreshEvents(){
     kEvents = LinkedHashMap<DateTime, List<Event>>(
       equals: isSameDay,
       hashCode: getHashCode,
@@ -121,6 +118,12 @@ class _EventCalendarState extends State<EventCalendar> {
     }
   }
 
+  Color markerColor(Object? obj)
+  {
+    obj as Event;
+    return setColor(obj.form)!;
+  }
+
   Color? setColor(String type){
     switch(type){
       case "W":
@@ -134,7 +137,7 @@ class _EventCalendarState extends State<EventCalendar> {
       case "C":
         return Colors.orange;
         //TODO Сделать цвета
-      case "W":
+      /*case "W":
         return Colors.teal;
       case "W":
         return Colors.teal;
@@ -143,7 +146,7 @@ class _EventCalendarState extends State<EventCalendar> {
       case "W":
         return Colors.teal;
       case "W":
-        return Colors.teal;
+        return Colors.teal;*/
         //TODO Сделать цвета
       default:
         return Colors.grey;
@@ -213,11 +216,11 @@ class _EventCalendarState extends State<EventCalendar> {
               return _getEventsForDay(day);
             },
             calendarBuilders: CalendarBuilders(
-              singleMarkerBuilder: (context, day, _){
+              singleMarkerBuilder: (context, day, event){
                 return Container(
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: markerColor(event),//
                   ), //Change color
                   width: 5.0,
                   height: 5.0,
@@ -305,31 +308,29 @@ class _EventCalendarState extends State<EventCalendar> {
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Column(
                       children: [
-                        Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 12),
-                                  child: Text(
-                                    "${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}",
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      //fontWeight: FontWeight.bold
-                                    ),
-                                  ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12),
+                              child: Text(
+                                "${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  //fontWeight: FontWeight.bold
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 12),
-                                  child: Text(
-                                    _weekdays[_eventDays![index].weekday-1],
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                )
-                              ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 12),
+                              child: Text(
+                                _weekdays[_eventDays![index].weekday-1],
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                             )
+                          ],
                         ),
                         const Divider(
                           thickness: 1.5,
