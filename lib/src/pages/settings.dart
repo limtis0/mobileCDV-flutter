@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../logic/theme_manager.dart';
 import 'package:provider/provider.dart';
+import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
 class LocaleDialog extends StatelessWidget {
   const LocaleDialog({Key? key}) : super(key: key);
@@ -49,6 +51,7 @@ class _SettingState extends State<Settings> {
   void changeLocale(String loc){
     initLocalization(loc);
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext dialogContext) {
           return const LocaleDialog();
@@ -119,22 +122,33 @@ class _SettingState extends State<Settings> {
                         );
                       }).toList(),
                       value: dropdownValueTheme,
-                      onChanged: (String? newValue) {
+                      onChanged: (String? newValue) async {
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
                         dropdownValueTheme = newValue!;
                         switch(newValue){
                           case "Light":
+                            globals.theme = 0;
+                            await prefs.setInt('themeId', 0);
                             notifier.toggleTheme(0);
                             break;
                           case "Dark":
+                            globals.theme = 1;
+                            await prefs.setInt('themeId', 1);
                             notifier.toggleTheme(1);
                             break;
                           case "Amoled":
+                            globals.theme = 2;
+                            await prefs.setInt('themeId', 2);
                             notifier.toggleTheme(2);
                             break;
                           case "Purple":
+                            globals.theme = 3;
+                            await prefs.setInt('themeId', 3);
                             notifier.toggleTheme(3);
                             break;
                           default:
+                            globals.theme = 0;
+                            await prefs.setInt('themeId', 0);
                             notifier.toggleTheme(0);
                             break;
                         }

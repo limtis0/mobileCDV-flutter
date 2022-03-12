@@ -31,6 +31,7 @@ class _ProfileStatePage extends State<Profile> {
 
   void processSignOut() async {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext dialogContext){
           return const LoadingIndicator();

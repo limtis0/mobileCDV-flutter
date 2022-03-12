@@ -23,6 +23,7 @@ class _EventCalendarState extends State<EventCalendar> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   late final ValueNotifier<List<Event>> _selectedEvents;
+  late final ValueNotifier<List<Event>> _getEventsDays;
 
   LinkedHashMap<DateTime, List<Event>>? kEvents;
 
@@ -39,6 +40,7 @@ class _EventCalendarState extends State<EventCalendar> {
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    _getEventsDays = ValueNotifier(_getEventsForDay(_selectedDay!));
     refreshEvents();
     setState(() {
 
@@ -89,6 +91,7 @@ class _EventCalendarState extends State<EventCalendar> {
       child: Column(
         children: [
           TableCalendar(
+            locale: calendarLocalization,
             firstDay: kFirstDay,
             lastDay: kLastDay,
             focusedDay: _focusedDay,
@@ -172,6 +175,37 @@ class _EventCalendarState extends State<EventCalendar> {
             height: 8,
           ),
           Expanded(
+            child: ValueListenableBuilder <List<DateTime>>(
+              valueListenable: _selectedEvents,
+              builder: (context, value, _) {
+                return ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return ValueListenableBuilder <List<Event>>(
+                      valueListenable: _getEventsDays,
+                      builder: (context, eventsValue, _) {
+                        return ListView.builder(
+                          itemCount: eventsValue.length,
+                          itemBuilder: (context, eventIndex){
+                            return Text("asd");
+                          },
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          )
+        ],
+      )
+    );
+  }
+}
+
+/*
+
+          Expanded(
             child: ValueListenableBuilder <List<Event>>(
               valueListenable: _selectedEvents,
               builder: (context, value, _) {
@@ -233,8 +267,4 @@ class _EventCalendarState extends State<EventCalendar> {
               },
             ),
           )
-        ],
-      )
-    );
-  }
-}
+ */

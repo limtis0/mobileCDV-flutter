@@ -14,6 +14,10 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 ThemeData amoledTheme = ThemeData.dark().copyWith(
     primaryColor: const Color(0xFF000000),
     appBarTheme: const AppBarTheme(color: Color(0xFF000000)),
+    canvasColor: const Color(0xFF000000),
+    backgroundColor: const Color(0xFF000000),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(selectedItemColor: Color(0xFFFFFFFF), selectedLabelStyle: TextStyle(color: Color(0xFFFFFFFF))),
+    scaffoldBackgroundColor: const Color(0xFF000000),
 );
 
 ThemeData purpleTheme = ThemeData.dark().copyWith(
@@ -22,37 +26,27 @@ ThemeData purpleTheme = ThemeData.dark().copyWith(
 );
 
 
+ThemeData setTheme() {
+  switch(globals.theme) {
+    case 0:
+      return lightTheme;
+    case 1:
+      return darkTheme;
+    case 2:
+      return amoledTheme;
+    case 3:
+      return purpleTheme;
+    default:
+      return lightTheme;
+  }
+}
+
 // Не редачить
 enum ThemeType { Light, Dark, Amoled, Purple }
 
 class ThemeModel extends ChangeNotifier {
-  ThemeData currentTheme = lightTheme;
+  ThemeData currentTheme = setTheme();
   ThemeType _themeType = ThemeType.Light;
-
-  ThemeData setTheme() {
-    switch(globals.theme){
-      case 0:
-        currentTheme = lightTheme;
-        _themeType = ThemeType.Light;
-        return lightTheme;
-      case 1:
-        currentTheme = darkTheme;
-        _themeType = ThemeType.Dark;
-        return darkTheme;
-      case 2:
-        currentTheme = amoledTheme;
-        _themeType = ThemeType.Dark;
-        return amoledTheme;
-      case 3:
-        currentTheme = purpleTheme;
-        _themeType = ThemeType.Dark;
-        return purpleTheme;
-      default:
-        currentTheme = lightTheme;
-        _themeType = ThemeType.Light;
-        return lightTheme;
-    }
-  }
 
   toggleTheme(int id) {
     switch(id){
