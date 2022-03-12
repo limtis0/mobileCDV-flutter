@@ -30,7 +30,7 @@ Future<void> activitySignIn(String email, String password) async
   try
   {
     await fetchSchedule(token.userType, token.userId.toString(),
-        getMonthsFromNowFirstDayAPI(0), getMonthsFromNowLastDayAPI(1), loginResponse.token);
+        getMonthsFromNowFirstDayAPI(-2), getMonthsFromNowLastDayAPI(6), loginResponse.token);
   }
   on RequestErrorException
   {
@@ -38,9 +38,19 @@ Future<void> activitySignIn(String email, String password) async
   }
 }
 
+void removeGlobals(){
+  globals.name = '';
+  globals.pass = '';
+  globals.album = '';
+  globals.type = '';
+  globals.isLoggined = false;
+  globals.path = '';
+}
 Future<void> activitySignOut() async
 {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  removeGlobals();
 
   await prefs.setBool('isUserLoggedIn', false);
 

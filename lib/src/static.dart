@@ -89,8 +89,7 @@ class Controls extends StatefulWidget {
 
 class _ControlsState extends State<Controls> {
   int _selectedIndex = 1;
-  String _title = 'Timetable';
-  // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  String _title = getTextFromKey("Main.Schedule");
 
   void _onItemTapped(int? index) {
     setState(() {

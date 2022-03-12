@@ -285,6 +285,7 @@ class LoadingIndicator extends StatelessWidget{
   }
 }
 
+
 String _retText(){
   if(globals.isLoggined){
     return getTextFromKey("Profile.signOut");
