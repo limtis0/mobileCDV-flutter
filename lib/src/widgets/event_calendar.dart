@@ -107,7 +107,7 @@ class _EventCalendarState extends State<EventCalendar> {
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
-        _selectedDay = selectedDay;
+        //_selectedDay = selectedDay;
         _focusedDay = focusedDay;
         if(checkDay(selectedDay)){
           listScrollController.scrollToIndex(getIndex(selectedDay), preferPosition: AutoScrollPosition.begin);
@@ -137,9 +137,9 @@ class _EventCalendarState extends State<EventCalendar> {
       case "C":
         return Colors.orange;
         //TODO Сделать цвета
+      case "EGSAM":
+        return Colors.purple;
       /*case "W":
-        return Colors.teal;
-      case "W":
         return Colors.teal;
       case "W":
         return Colors.teal;
@@ -236,7 +236,7 @@ class _EventCalendarState extends State<EventCalendar> {
                 shape: BoxShape.circle
               ),
               selectedDecoration: BoxDecoration(
-                color: Colors.lightBlueAccent,
+                color: Colors.blue,
                 shape: BoxShape.circle,
               ),
             ),
@@ -266,7 +266,7 @@ class _EventCalendarState extends State<EventCalendar> {
             ),
             headerStyle: const HeaderStyle(
                 titleTextStyle: TextStyle(
-                  color: Colors.blue,
+                  //color: Theme.of(context).colorScheme.primary,
                   fontSize: 20,
                 ),
                 formatButtonVisible: false,
@@ -427,129 +427,3 @@ class _EventCalendarState extends State<EventCalendar> {
     );
   }
 }
-
-/*
-Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Column(
-                    children: [
-                      Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 12),
-                                child: Text(
-                                  "${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}",
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    //fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 12),
-                                child: Text(
-                                  _weekdays[_eventDays![index].weekday-1],
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                      ),
-                      const Divider(
-                        thickness: 1.5,
-                      ),
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: _getEventsForDay(_eventDays![index]).length,
-                        itemBuilder: (context, evIndex) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  color: setColor(_getEventsForDay(_eventDays![index])[evIndex].form)!,
-                                  width: 5,
-                                ),
-                              ),
-                              color: Colors.grey[200],
-                            ),
-                            child: ListTile(
-                                onTap: (){
-
-                                },
-                                title: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(bottom: 4),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].startDate),
-                                                style: TextStyle(
-                                                    color: Colors.grey[700]
-                                                ),
-                                              ),
-                                              Text(
-                                                  " - ",
-                                                style: TextStyle(
-                                                    color: Colors.grey[700]
-                                                ),
-                                              ),
-                                              Text(
-                                                formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].endDate),
-                                                style: TextStyle(
-                                                  color: Colors.grey[700]
-                                                ),
-                                              ),
-                                              Text(
-                                                _getEventsForDay(_eventDays![index])[evIndex].form,
-                                                textAlign: TextAlign.right,
-                                                style: TextStyle(
-                                                    color: Colors.grey[700]
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Text(
-                                          _getEventsForDay(_eventDays![index])[evIndex].room,
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                              color: Colors.grey[700]
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 110),
-                                      child: Text(
-                                        '${_getEventsForDay(_eventDays![index])[evIndex]}',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: Colors.grey[700]
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                            ),
-                          );
-                        },
-                      )
-                    ],
-                  ),
-                );
- */
