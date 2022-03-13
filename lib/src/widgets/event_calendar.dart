@@ -152,15 +152,6 @@ class _EventCalendarState extends State<EventCalendar> {
         return Colors.grey;
     }
   }
-  final double _height = 100.0;
-
-  void _animateToIndex(int index) {
-    listScrollController.animateTo(
-      index * _height,
-      duration: const Duration(seconds: 2),
-      curve: Curves.fastOutSlowIn,
-    );
-  }
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;
 
@@ -205,6 +196,15 @@ class _EventCalendarState extends State<EventCalendar> {
           TableCalendar(
             onCalendarCreated: (controller){
               _eventDays = _getDateTimes();
+              //TODO refactor???
+              for(int i = 0; i != _eventDays?.length; i++){
+                if(!checkDay(DateTime.now())){
+                  if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0){
+                    listScrollController.scrollToIndex(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)), preferPosition: AutoScrollPosition.begin);
+                    break;
+                  }
+                }
+              }
             },
             locale: calendarLocalization,
             firstDay: kFirstDay,
