@@ -254,7 +254,7 @@ class _EventCalendarState extends State<EventCalendar> {
               setState(() {
                 refreshEvents();
                 _eventDays = _getDateTimes();
-                if(_calendarFormat == CalendarFormat.month) {
+                if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
                   listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
                 }
               });
