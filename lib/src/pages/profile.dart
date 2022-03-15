@@ -49,7 +49,7 @@ class _ProfileStatePage extends State<Profile> {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundColor: Theme.of(context).hintColor,
+              backgroundColor: Theme.of(context).disabledColor,
               radius: 72,
               child: CircleAvatar(
                 radius: 70,
@@ -244,7 +244,7 @@ class _ProfileState extends State<ProfileLogin> {
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
-                Theme.of(context).hintColor
+                Theme.of(context).disabledColor
               )
             ),
             child: Text(

@@ -112,7 +112,7 @@ class _SettingState extends State<Settings> {
                   ),
                   Consumer<ThemeModel>(
                     builder: (context, notifier, child) => DropdownButton<String>(
-                      items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled", "Purple"].map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled", "Pink"].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -138,7 +138,7 @@ class _SettingState extends State<Settings> {
                             await prefs.setInt('themeId', 2);
                             notifier.toggleTheme(2);
                             break;
-                          case "Purple":
+                          case "Pink":
                             globals.theme = 3;
                             await prefs.setInt('themeId', 3);
                             notifier.toggleTheme(3);

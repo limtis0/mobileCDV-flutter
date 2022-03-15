@@ -6,10 +6,11 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   primaryColor: Colors.grey[700]!,
   backgroundColor: Colors.grey[200]!,
   bottomAppBarColor: Colors.blue,
-  hintColor: Colors.blue,
+  disabledColor: Colors.blue,
   cardColor: Colors.white,
   highlightColor: Colors.black,
   focusColor: Colors.lightBlueAccent,
+  hintColor: Colors.black,
 );
 
 // Не редачить, только если очень хочеться
@@ -33,15 +34,16 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   canvasColor: const Color(0xFF000000),                       // цвет ботом бара (панель внизу)
   backgroundColor: const Color(0xFF333333),                   // цвет бэк граунда в ивентах
   scaffoldBackgroundColor: const Color(0xFF000000),           // цвет бэк граунда в окнах
-  hintColor: const Color(0xFF333333),                         // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
+  disabledColor: const Color(0xFF333333),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
   bottomAppBarColor: const Color(0xFFFFFFFF),                 // цвет текста в ботом баре (панель снизу)
   cardColor: const Color(0xFF333333),                         // цвет бэкграунда в поп апе
   highlightColor: const Color(0xFFFFFFFF),                    // цвет дней недели
   focusColor: const Color(0xFF333333),                        // цвет круга в календаре (сегодняшний день)
+  hintColor: Colors.white,                                    // цвет текста в форме логина
 );
 
 //TODO сделать?
-ThemeData purpleTheme = ThemeData.dark().copyWith(
+ThemeData pinkTheme = ThemeData.dark().copyWith(
   primaryColor: const Color(0xaacc66cc),
   appBarTheme: const AppBarTheme(color: Color(0xaacc66cc)),
 );
@@ -56,7 +58,7 @@ ThemeData setTheme() {
     case 2:
       return amoledTheme;
     case 3:
-      return purpleTheme;
+      return pinkTheme;
     default:
       return lightTheme;
   }
@@ -84,7 +86,7 @@ class ThemeModel extends ChangeNotifier {
         _themeType = ThemeType.Dark;
         return notifyListeners();
       case 3:
-        currentTheme = purpleTheme;
+        currentTheme = pinkTheme;
         _themeType = ThemeType.Dark;
         return notifyListeners();
       default:
