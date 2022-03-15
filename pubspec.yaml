@@ -5,7 +5,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/locale/locale.csv
-    - assets/images/logo_t.png
     - assets/images/logo-text.png
 
 publish_to: 'none'
