@@ -1,4 +1,4 @@
-Key,EN,PL,RU,TR
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",EN,PL,RU,TR
 noKey,No key provided,No key provided,No key provided,No key provided
 Main.Account,Profile,Profil,Профиль,Profil
 Main.Schedule,Schedule,Rozkład,Расписание,Takvim
@@ -14,28 +14,34 @@ Settings.AlertDialog.q,Restart now?,???,Перезапустить сейчас?
 Profile.signOut,Sign out,???,Выйти из аккаунта,Cıkış Yap
 Login.Page.btn,Sign in,???,Войти,Giriş Yap
 Settings.locale.choose,Choose language,???,Выбрать язык,Dil Seç
-Settings.c.lang,Language,???,Язык,Dil
+Settings.c.lang,Language,???,Язык,Dil 
 Settings.theme,Theme,???,Тема,Tema
 Settings.theme.choose,Select theme,???,Выбрать тему,Tema Seç
-Login.Page.error,Bad login or password,???,Неправильный логин или пароль,???
-noSchedule.page,Log into your account to see Schedule,???,Войдите в аккаунт чтобы увидеть расписание,???
-Calendar.monday,Monday,???,Понедельник,???
-Calendar.tuesday,Tuesday,???,Вторник,???
-Calendar.wednesday,Wednesday,???,Среда,???
-Calendar.thursday,Thursday,???,Четверг,???
-Calendar.friday,Friday,???,Пятница,???
-Calendar.saturday,Saturday,???,Суббота,???
-Calendar.sunday,Sunday,???,Воскресенье,???
-Calendar.january,January,???,Январь,???
-Calendar.february,February,???,Февраль,???
-Calendar.march,March,???,Март,???
-Calendar.april,April,???,Апрель,???
-Calendar.may,May,???,Май,???
-Calendar.june,June,???,Июнь,???
-Calendar.july,July,???,Июль,???
-Calendar.august,August,???,Август,???
-Calendar.september,September,???,Сентябрь,???
-Calendar.october,October,???,Октябрь,???
-Calendar.november,November,???,Ноябрь,???
-Calendar.december,December,???,Декабрь,???
-Profile.Loading,Loading...,???,Загрузка,???
+Login.Page.error,Bad login or password,???,Неправильный логин или пароль,Hatalı şifre veya kullanıcı adı
+noSchedule.page,Log into your account to see Schedule,???,Войдите в аккаунт чтобы увидеть расписание,Planı görmek için lutfen giriş yapın
+Calendar.monday,Monday,???,Понедельник,Pazartesi
+Calendar.tuesday,Tuesday,???,Вторник,Salı
+Calendar.wednesday,Wednesday,???,Среда,Çarsamba
+Calendar.thursday,Thursday,???,Четверг,Perşembe 
+Calendar.friday,Friday,???,Пятница,Cuma
+Calendar.saturday,Saturday,???,Суббота,Cumartesi
+Calendar.sunday,Sunday,???,Воскресенье,Pazartesi
+Calendar.january,January,???,Январь,Ocak
+Calendar.february,February,???,Февраль,Şubat
+Calendar.march,March,???,Март,Mart
+Calendar.april,April,???,Апрель,Nisan
+Calendar.may,May,???,Май,Mayis
+Calendar.june,June,???,Июнь,Haziran
+Calendar.july,July,???,Июль,Temmuz
+Calendar.august,August,???,Август,Ağustos
+Calendar.september,September,???,Сентябрь,Eylül 
+Calendar.october,October,???,Октябрь,Ekim 
+Calendar.november,November,???,Ноябрь,Kasım 
+Calendar.december,December,???,Декабрь,Aralık 
+Profile.Loading,Loading...,???,Загрузка,Yükleniyor
+Schedule.subject,Subject,???,Тема,???
+Schedule.date,Date,???,Время,???
+Schedule.room,Room,???,Кабинет,???
+Schedule.group,Group,???,Группа,???
+Schedule.teacher,Teacher,???,Учитель,???
+Schedule.joinMeeting,Join meeting,???,Присоединиться,???
