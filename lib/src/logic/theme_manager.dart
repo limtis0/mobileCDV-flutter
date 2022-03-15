@@ -17,7 +17,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 ThemeData darkTheme = ThemeData.dark().copyWith(
   primaryColor: const Color(0xFFFFFFFF),
   backgroundColor: const Color(0xFF333333),
-  appBarTheme: const AppBarTheme(color: Color(0xff1f655d)),
+  appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)),
   bottomAppBarColor: const Color(0xFFFFFFFF),
 );
 // ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
@@ -42,10 +42,19 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   hintColor: Colors.white,                                    // цвет текста в форме логина
 );
 
-//TODO сделать?
+//TODO доделать
 ThemeData pinkTheme = ThemeData.dark().copyWith(
-  primaryColor: const Color(0xaacc66cc),
-  appBarTheme: const AppBarTheme(color: Color(0xaacc66cc)),
+  primaryColor: const Color(0xFFE18AAA),
+  appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
+  canvasColor: const Color(0xFFE18AAA),
+  backgroundColor: const Color(0xFFEFCFD4),
+  scaffoldBackgroundColor: const Color(0xFFFDEBF7),
+  disabledColor: const Color(0xFFEFCFD4),
+  bottomAppBarColor: const Color(0xFFFFFFFF),
+  cardColor: const Color(0xFFE4A0B7),
+  highlightColor: const Color(0xFFE4A0B7),
+  hintColor: const Color(0xFFFC28FB),
+  focusColor: const Color(0xFFFFADF0),
 );
 
 
