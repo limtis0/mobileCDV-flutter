@@ -6,6 +6,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:mobile_cdv/src/logic/structures/event.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../logic/main_activity.dart';
 import '../logic/time_operations.dart';
 
@@ -15,24 +16,6 @@ class EventCalendar extends StatefulWidget {
 
   @override
   State<EventCalendar> createState() => _EventCalendarState();
-}
-
-
-class LoadingIndicator extends StatelessWidget{
-  const LoadingIndicator({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-        title: Text(getTextFromKey("Profile.Loading")),
-        content: const SizedBox(
-          width: 50,
-          height: 5,
-          child: LinearProgressIndicator(
-          ),
-        )
-    );
-  }
 }
 
 class _EventCalendarState extends State<EventCalendar> {
@@ -105,7 +88,6 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         //_selectedDay = selectedDay;
         _focusedDay = focusedDay;
@@ -115,7 +97,6 @@ class _EventCalendarState extends State<EventCalendar> {
           nullIcon = Icons.arrow_drop_down_outlined;
         }
       });
-    }
   }
 
   Color markerColor(Object? obj)
@@ -183,6 +164,18 @@ class _EventCalendarState extends State<EventCalendar> {
   AutoScrollController listScrollController = AutoScrollController();
   PageController controller = PageController();
 
+  void _launchURL(String _url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+
+  Color _checkButton(Event _event){
+    if(_event.meetLink != ""){
+      return setColor(_event.form)!;
+    }else {
+      return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -203,6 +196,9 @@ class _EventCalendarState extends State<EventCalendar> {
                     listScrollController.scrollToIndex(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)), preferPosition: AutoScrollPosition.begin);
                     break;
                   }
+                }else {
+                  listScrollController.scrollToIndex(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)), preferPosition: AutoScrollPosition.begin);
+                  break;
                 }
               }
             },
@@ -229,14 +225,14 @@ class _EventCalendarState extends State<EventCalendar> {
               },
             ),
             startingDayOfWeek: StartingDayOfWeek.monday,
-            calendarStyle: const CalendarStyle(
+            calendarStyle: CalendarStyle(
               outsideDaysVisible: false,
               todayDecoration: BoxDecoration(
-                color: Colors.blue,
+                color: Theme.of(context).focusColor,
                 shape: BoxShape.circle
               ),
               selectedDecoration: BoxDecoration(
-                color: Colors.blue,
+                color: Theme.of(context).focusColor,
                 shape: BoxShape.circle,
               ),
             ),
@@ -260,9 +256,9 @@ class _EventCalendarState extends State<EventCalendar> {
               });
               _focusedDay = focusedDay;
             },
-            daysOfWeekStyle: const DaysOfWeekStyle(
-              //weekdayStyle: TextStyle(color: Colors.white),
-              weekendStyle: TextStyle(color: Colors.red),
+            daysOfWeekStyle: DaysOfWeekStyle(
+              weekdayStyle: TextStyle(color: Theme.of(context).highlightColor),
+              weekendStyle: const TextStyle(color: Colors.red),
             ),
             headerStyle: const HeaderStyle(
                 titleTextStyle: TextStyle(
@@ -352,11 +348,86 @@ class _EventCalendarState extends State<EventCalendar> {
                                     width: 5,
                                   ),
                                 ),
-                                color: Colors.grey[200],
+                                color: Theme.of(context).backgroundColor,
                               ),
                               child: ListTile(
                                   onTap: (){
-
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext dialogContext) {
+                                          return AlertDialog(
+                                            backgroundColor: Theme.of(context).cardColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(30),
+                                              side: BorderSide(
+                                                color: setColor(_getEventsForDay(_eventDays![index])[evIndex].form)!,
+                                                width: 3
+                                              )
+                                            ),
+                                            content: Container(
+                                              color: Theme.of(context).cardColor,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    _getEventsForDay(_eventDays![index])[evIndex].subjectName,
+                                                    textAlign: TextAlign.center,
+                                                    style: const TextStyle(
+                                                        fontWeight: FontWeight.bold
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "${getTextFromKey("Schedule.subject")}: ${_getEventsForDay(_eventDays![index])[evIndex].subject}",
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  const Divider(
+                                                    thickness: 1.5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(top: 16),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          '${getTextFromKey("Schedule.date")}: ${_months[_eventDays![index].month-1]}, ${_getEventsForDay(_eventDays![index])[evIndex].startDate.day} (${formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].startDate)}-${formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].endDate)})',
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                        Text(
+                                                          '${getTextFromKey("Schedule.room")}: ${_getEventsForDay(_eventDays![index])[evIndex].room}',
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                        Text(
+                                                          '${getTextFromKey("Schedule.group")}: ${_getEventsForDay(_eventDays![index])[evIndex].groupNumber}',
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                        Text(
+                                                          '${getTextFromKey("Schedule.teacher")}: ${_getEventsForDay(_eventDays![index])[evIndex].teacher}',
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(top: 10),
+                                                          child: ElevatedButton(
+                                                            style: ButtonStyle(
+                                                                backgroundColor: MaterialStateProperty.all<Color>(
+                                                                    _checkButton(_getEventsForDay(_eventDays![index])[evIndex])
+                                                                )
+                                                            ),
+                                                            onPressed: (){
+                                                              _launchURL(_getEventsForDay(_eventDays![index])[evIndex].meetLink);
+                                                            },
+                                                            child: Text(
+                                                                getTextFromKey("Schedule.joinMeeting")
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                    );
                                   },
                                   title: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -372,19 +443,19 @@ class _EventCalendarState extends State<EventCalendar> {
                                                 Text(
                                                   formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].startDate),
                                                   style: TextStyle(
-                                                      color: Colors.grey[700]
+                                                    color: Theme.of(context).primaryColor,
                                                   ),
                                                 ),
                                                 Text(
                                                   " - ",
                                                   style: TextStyle(
-                                                      color: Colors.grey[700]
+                                                    color: Theme.of(context).primaryColor,
                                                   ),
                                                 ),
                                                 Text(
                                                   formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].endDate),
                                                   style: TextStyle(
-                                                      color: Colors.grey[700]
+                                                    color: Theme.of(context).primaryColor,
                                                   ),
                                                 ),
                                               ],
@@ -394,7 +465,7 @@ class _EventCalendarState extends State<EventCalendar> {
                                             _getEventsForDay(_eventDays![index])[evIndex].room,
                                             textAlign: TextAlign.right,
                                             style: TextStyle(
-                                                color: Colors.grey[700]
+                                              color: Theme.of(context).primaryColor,
                                             ),
                                           ),
                                         ],
@@ -405,7 +476,7 @@ class _EventCalendarState extends State<EventCalendar> {
                                           '${_getEventsForDay(_eventDays![index])[evIndex]}',
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
-                                              color: Colors.grey[700]
+                                            color: Theme.of(context).primaryColor,
                                           ),
                                         ),
                                       )

@@ -1,12 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
-import 'package:mobile_cdv/src/pages/login_page.dart';
-import 'package:mobile_cdv/src/widgets/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
 // Pages
@@ -141,9 +134,11 @@ class _ControlsState extends State<Controls> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).canvasColor,
         items: getBottomTabs(_bottomTabs),
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Theme.of(context).bottomAppBarColor,
         onTap: goTo,
       ),
     );

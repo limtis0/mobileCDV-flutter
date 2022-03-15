@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
@@ -27,7 +26,6 @@ class ProfileLogin extends StatefulWidget {
 }
 
 class _ProfileStatePage extends State<Profile> {
-  //ImageProvider avatar = Image(image: Image.file(File('${globals.path}/avatar.png')).image).image;
 
   void processSignOut() async {
     showDialog(
@@ -51,7 +49,7 @@ class _ProfileStatePage extends State<Profile> {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundColor: Colors.blue,
+              backgroundColor: Theme.of(context).hintColor,
               radius: 72,
               child: CircleAvatar(
                 radius: 70,
@@ -244,6 +242,11 @@ class _ProfileState extends State<ProfileLogin> {
           ),
           selPage(globals.isLoggined),
           ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                Theme.of(context).hintColor
+              )
+            ),
             child: Text(
                 _text,
             ),

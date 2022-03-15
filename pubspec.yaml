@@ -25,6 +25,7 @@ dependencies:
   http: ^0.13.4
   jwt_decode: ^0.3.1
   csv: ^5.0.1
+  url_launcher: ^6.0.20 #offical package made by flutter если че
 
   # Storing data
   shared_preferences: ^2.0.13

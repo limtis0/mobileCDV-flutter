@@ -8,10 +8,9 @@ import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/notifications.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/theme_manager.dart';
-import 'package:mobile_cdv/src/login_application.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+
 import 'src/application.dart';
-import 'package:mobile_cdv/src/logic/storage.dart' as store;
 
 void main() => startApp();
 

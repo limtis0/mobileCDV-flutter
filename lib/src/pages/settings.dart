@@ -1,13 +1,10 @@
 import 'dart:io' show exit;
 
 import 'package:flutter/material.dart';
-
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../logic/theme_manager.dart';
-import 'package:provider/provider.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
 class LocaleDialog extends StatelessWidget {

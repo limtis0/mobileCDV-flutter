@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
+// Не редачить, только если очень хочеться
 ThemeData lightTheme = ThemeData.light().copyWith(
-    primaryColor: const Color(0xfff5f5f5)
+  primaryColor: Colors.grey[700]!,
+  backgroundColor: Colors.grey[200]!,
+  bottomAppBarColor: Colors.blue,
+  hintColor: Colors.blue,
+  cardColor: Colors.white,
+  highlightColor: Colors.black,
+  focusColor: Colors.lightBlueAccent,
 );
 
+// Не редачить, только если очень хочеться
 ThemeData darkTheme = ThemeData.dark().copyWith(
-    primaryColor: const Color(0xff1f655d), //
-    appBarTheme: const AppBarTheme(color: Color(0xff1f655d)) // цвет верхней панели
+  primaryColor: const Color(0xFFFFFFFF),
+  backgroundColor: const Color(0xFF333333),
+  appBarTheme: const AppBarTheme(color: Color(0xff1f655d)),
+  bottomAppBarColor: const Color(0xFFFFFFFF),
 );
-
+// ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
+/*
+* Цвет не обезательно должен быть в хексе (смотри документацию) можно и просто  Colors.red
+* Названия переменых ничего не значат, смотри мои коменты (Костыль да, но если будем обновы делать поменяю уже так уж и быть)
+* Чтобы создать новую тему нужно связаться со мной там на фронте нужно добавлять риколы, если захочеш могу показать
+* Чтобы увидеть изменения темы нужно полностью перезагрузить приложение (Хот релоад не работает!!!)
+* */
+// Тема амолед ..................  ↓ наслдевать тему от light или dark
 ThemeData amoledTheme = ThemeData.dark().copyWith(
-    primaryColor: const Color(0xFF000000),
-    appBarTheme: const AppBarTheme(color: Color(0xFF000000)),
-    canvasColor: const Color(0xFF000000),
-    backgroundColor: const Color(0xFF000000),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(selectedItemColor: Color(0xFFFFFFFF), selectedLabelStyle: TextStyle(color: Color(0xFFFFFFFF))),
-    scaffoldBackgroundColor: const Color(0xFF000000),
+  primaryColor: const Color(0xFFFFFFFF),                      // цвет текста в ивентах
+  appBarTheme: const AppBarTheme(color: Color(0xFF000000)),   // цвет апп бара (панель сверху)
+  canvasColor: const Color(0xFF000000),                       // цвет ботом бара (панель внизу)
+  backgroundColor: const Color(0xFF333333),                   // цвет бэк граунда в ивентах
+  scaffoldBackgroundColor: const Color(0xFF000000),           // цвет бэк граунда в окнах
+  hintColor: const Color(0xFF333333),                         // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
+  bottomAppBarColor: const Color(0xFFFFFFFF),                 // цвет текста в ботом баре (панель снизу)
+  cardColor: const Color(0xFF333333),                         // цвет бэкграунда в поп апе
+  highlightColor: const Color(0xFFFFFFFF),                    // цвет дней недели
+  focusColor: const Color(0xFF333333),                        // цвет круга в календаре (сегодняшний день)
 );
 
+//TODO сделать?
 ThemeData purpleTheme = ThemeData.dark().copyWith(
-    primaryColor: const Color(0xaacc66cc),
-    appBarTheme: const AppBarTheme(color: Color(0xaacc66cc)),
+  primaryColor: const Color(0xaacc66cc),
+  appBarTheme: const AppBarTheme(color: Color(0xaacc66cc)),
 );
 
 
