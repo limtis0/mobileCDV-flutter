@@ -128,7 +128,6 @@ class _EventCalendarState extends State<EventCalendar> {
         return Colors.teal;
       case "W":
         return Colors.teal;*/
-        //TODO Сделать цвета
       default:
         return Colors.grey;
     }
@@ -189,7 +188,6 @@ class _EventCalendarState extends State<EventCalendar> {
           TableCalendar(
             onCalendarCreated: (controller){
               _eventDays = _getDateTimes();
-              //TODO refactor???
               for(int i = 0; i != _eventDays?.length; i++){
                 if(!checkDay(DateTime.now())){
                   if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0){
@@ -392,7 +390,7 @@ class _EventCalendarState extends State<EventCalendar> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "${getTextFromKey("Schedule.subject")}: ${_getEventsForDay(_eventDays![index])[evIndex].subject}",
+                                                    _getEventsForDay(_eventDays![index])[evIndex].subject,
                                                     textAlign: TextAlign.center,
                                                   ),
                                                   const Divider(

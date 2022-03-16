@@ -32,6 +32,7 @@ Future<void> startApp() async
   if(prefs.getBool('isUserLoggedIn') == null){
     await prefs.setBool('isUserLoggedIn', false);
   }
+
   if(prefs.getBool('isUserLoggedIn')!){
     globals.isLoggedIn = true;
   }else {
@@ -57,7 +58,7 @@ Future<void> showTimetable() async
   initializeDateFormatting().then((_) async => runApp(
       ChangeNotifierProvider<ThemeModel>(
         create: (BuildContext context) => ThemeModel(),
-        child: MainApp(),
+        child: const MainApp(),
       )
   )); // run app
 }

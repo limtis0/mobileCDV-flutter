@@ -10,7 +10,6 @@ import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 class LocaleDialog extends StatelessWidget {
   const LocaleDialog({Key? key}) : super(key: key);
 
-  //TODO do design
   @override
   Widget build(BuildContext context){
     return AlertDialog(
