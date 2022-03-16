@@ -43,18 +43,18 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
 );
 
 //TODO доделать
-ThemeData pinkTheme = ThemeData.dark().copyWith(
+ThemeData pinkTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xFFE18AAA),
   appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
   canvasColor: const Color(0xFFE18AAA),
-  backgroundColor: const Color(0xFFEFCFD4),
+  backgroundColor: const Color(0xFFFBD3ED),
   scaffoldBackgroundColor: const Color(0xFFFDEBF7),
-  disabledColor: const Color(0xFFEFCFD4),
-  bottomAppBarColor: const Color(0xFFFFFFFF),
-  cardColor: const Color(0xFFE4A0B7),
+  disabledColor: const Color(0xFFE18AAA),
+  bottomAppBarColor: const Color(0xFFFDEBF7),
+  cardColor: const Color(0xFFFBD3ED),
   highlightColor: const Color(0xFFE4A0B7),
-  hintColor: const Color(0xFFFC28FB),
-  focusColor: const Color(0xFFFFADF0),
+  hintColor: const Color(0xFFE4A0B7),
+  focusColor: const Color(0xFFE18AAA),
 );
 
 
