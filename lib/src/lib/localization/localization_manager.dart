@@ -10,16 +10,12 @@ String? getLocaleType(){
   switch(localeId){
     case 1:
       return "en";
-      break;
     case 2:
       return "pl";
-      break;
     case 3:
       return "ru";
-      break;
     case 4:
       return "tr";
-      break;
   }
   return "pl";
 }

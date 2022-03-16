@@ -4,7 +4,6 @@ import 'package:mobile_cdv/src/logic/decoder.dart';
 import 'package:mobile_cdv/src/logic/request.dart';
 import 'package:mobile_cdv/src/logic/storage.dart';
 import 'package:mobile_cdv/src/logic/time_operations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile_cdv/src/logic/structures/exceptions.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
