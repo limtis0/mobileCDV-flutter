@@ -25,14 +25,13 @@ String getMonthsFromNowLastDayAPI(int months)
 // NOTIFICATIONS AND LOGIC
 DateTime getScheduledDate(String lessonDate)
 {
-  return DateTime.parse(lessonDate).toLocal(); // Sets to UTC automatically
+  return DateTime.parse(lessonDate).toLocal();
 }
 
 // Returns seconds left until a lesson from schedule (For notifications)
-int getSecondsUntilScheduledDate(String lessonDate)
+int getSecondsUntilScheduledDate(DateTime lessonDate)
 {
-  DateTime lessonTime = getScheduledDate(lessonDate);
-  return lessonTime.difference(DateTime.now().toUtc()).inSeconds;
+  return lessonDate.difference(DateTime.now()).inSeconds;
 }
 
 // EVENTS
