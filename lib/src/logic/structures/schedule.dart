@@ -2,8 +2,8 @@ import '../time_operations.dart';
 
 class ScheduleTableItem
 {
-  final int id;
-  final String status;
+  // final int id;
+  // final String status;
   final String subject;
   final String subjectName;
   final String groupNumber;
@@ -13,11 +13,11 @@ class ScheduleTableItem
   final String teacher;
   final String room;
   final String meetLink;
-  final String surveyStatus;
+  // final String surveyStatus;
 
   const ScheduleTableItem({
-    required this.id,
-    required this.status,
+    // required this.id,
+    // required this.status,
     required this.subject,
     required this.subjectName,
     required this.groupNumber,
@@ -27,16 +27,15 @@ class ScheduleTableItem
     required this.teacher,
     required this.room,
     required this.meetLink,
-    required this.surveyStatus,
+    // required this.surveyStatus,
   });
 
   factory ScheduleTableItem.fromJson(Map<String, dynamic> json)
   {
     return ScheduleTableItem
       (
-      // Skipped profile
-      id: json['Id'],
-      status: json['Status'],
+      // id: json['Id'],
+      // status: json['Status'],
       subject: json['Subject'],
       subjectName: json['ThemaGroup'],
       groupNumber: json['GroupNr'],
@@ -46,7 +45,7 @@ class ScheduleTableItem
       teacher: json['Teacher'],
       room: json['Room'],
       meetLink: json['HangoutLink'],
-      surveyStatus: json['SurveyStatus'],
+      // surveyStatus: json['SurveyStatus'],
     );
   }
 }

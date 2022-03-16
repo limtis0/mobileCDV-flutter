@@ -20,6 +20,7 @@ Future<void> startApp() async
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await initPrefs();
+  await globals.loadFromPrefs();
 
   NotificationService().init(); // init notification service
 

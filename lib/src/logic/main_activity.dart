@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-
 import 'structures/usertoken.dart';
 import 'structures/login_response.dart';
 import 'package:mobile_cdv/src/logic/decoder.dart';
@@ -21,11 +17,8 @@ Future<void> activitySignIn(String email, String password) async
   await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
   globals.avatar = await imageToWidget('avatar.png');
 
-  await setPrefsOnSignIn(email, password, loginResponse.token, token);
-
-  globals.name = token.userName;
-  globals.type = token.userType;
-  globals.album = token.userAlbumNumer;
+  await setPrefsOnSignIn(email.trim(), password, loginResponse.token, token);
+  await globals.loadFromPrefs();
 
   try
   {
@@ -38,27 +31,10 @@ Future<void> activitySignIn(String email, String password) async
   }
 }
 
-void removeGlobals(){
-  globals.name = '';
-  globals.pass = '';
-  globals.album = '';
-  globals.type = '';
-  globals.isLoggedIn = false;
-}
 Future<void> activitySignOut() async
 {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  removeGlobals();
-
-  await prefs.setBool('isUserLoggedIn', false);
-
-  await prefs.remove('savedEmail');
-  await prefs.remove('savedPassword');
-  await prefs.remove('savedTokenEncoded');
-  await prefs.remove('savedUserName');
-  await prefs.remove('savedUserType');
-  await prefs.remove('savedUserAlbumNumber');
+  await clearPrefs();
+  globals.clear();
 
   await removeFile('avatar.png');
 }

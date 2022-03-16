@@ -72,3 +72,17 @@ Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded
    await prefs.setString('savedUserType', token.userType);
    await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 }
+
+Future<void> clearPrefs() async
+{
+   final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+   await prefs.setBool('isUserLoggedIn', false);
+
+   await prefs.remove('savedEmail');
+   await prefs.remove('savedPassword');
+   await prefs.remove('savedTokenEncoded');
+   await prefs.remove('savedUserName');
+   await prefs.remove('savedUserType');
+   await prefs.remove('savedUserAlbumNumber');
+}
