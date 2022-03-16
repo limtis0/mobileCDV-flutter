@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/material.dart';
+
+import 'globals.dart' as globals;
 import 'structures/usertoken.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,9 +28,11 @@ Future<void> removeFile(String fileName) async
    await file.delete();
 }
 
-/* TODO Choose the library with Image data type that suits front-end
-   and make getImageFromFile() function;
- */
+Future<ImageProvider> imageToWidget(String fileName) async
+{
+   final String filePath = await getLocalPath();
+   return Image(image: Image.file(File('$filePath/$fileName')).image).image;
+}
 
 Future<void> initPrefs() async
 {

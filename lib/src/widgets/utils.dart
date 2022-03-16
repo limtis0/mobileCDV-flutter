@@ -29,7 +29,7 @@ Map<DateTime, List<Event>> setEvents()
 
     mapEvents[scheduledDate]!.add(Event.fromScheduleItem(schedule[i]));
   }
-  if(globals.isLoggined) {
+  if(globals.isLoggedIn) {
     return mapEvents;
   } else {
     return {};

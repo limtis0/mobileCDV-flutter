@@ -14,12 +14,12 @@ import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 
 Future<void> activitySignIn(String email, String password) async
 {
-  final LoginResponse loginResponse = await fetchLogin(email, password);
+  final LoginResponse loginResponse = await fetchLogin(email.trim(), password);
 
   UserToken token = decodeToken(loginResponse.token);
 
   await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
-  globals.avatar = Image(image: Image.file(File('${globals.path}/avatar.png')).image).image;
+  globals.avatar = await imageToWidget('avatar.png');
 
   await setPrefsOnSignIn(email, password, loginResponse.token, token);
 
@@ -43,8 +43,7 @@ void removeGlobals(){
   globals.pass = '';
   globals.album = '';
   globals.type = '';
-  globals.isLoggined = false;
-  globals.path = '';
+  globals.isLoggedIn = false;
 }
 Future<void> activitySignOut() async
 {

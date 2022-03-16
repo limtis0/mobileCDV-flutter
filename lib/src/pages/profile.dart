@@ -36,7 +36,7 @@ class _ProfileStatePage extends State<Profile> {
         }
     );
     await activitySignOut();
-    globals.isLoggined = false;
+    globals.isLoggedIn = false;
     Navigator.pop(context);
     setState(() {});
   }
@@ -206,7 +206,7 @@ class _ProfileState extends State<ProfileLogin> {
           }
       );
       await activitySignIn(log ,pass);
-      globals.isLoggined = true;
+      globals.isLoggedIn = true;
       Navigator.pop(context);
       setState(() {
         _text = getTextFromKey("Profile.signOut");
@@ -221,7 +221,7 @@ class _ProfileState extends State<ProfileLogin> {
 
   void processSignOut() async {
     await activitySignOut();
-    globals.isLoggined = false;
+    globals.isLoggedIn = false;
     setState(() {
       _text = getTextFromKey("Login.Page.btn");
     });
@@ -240,7 +240,7 @@ class _ProfileState extends State<ProfileLogin> {
               color: Colors.red,
             ),
           ),
-          selPage(globals.isLoggined),
+          selPage(globals.isLoggedIn),
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
@@ -251,7 +251,7 @@ class _ProfileState extends State<ProfileLogin> {
                 _text,
             ),
             onPressed: (){
-              if(!globals.isLoggined){
+              if(!globals.isLoggedIn){
                 processLogin(globals.email, globals.pass);
                 _text = getTextFromKey("Login.Page.btn");
                 setState(() {
@@ -291,7 +291,7 @@ class LoadingIndicator extends StatelessWidget{
 
 
 String _retText(){
-  if(globals.isLoggined){
+  if(globals.isLoggedIn){
     return getTextFromKey("Profile.signOut");
   }else{
     return getTextFromKey("Login.Page.btn");

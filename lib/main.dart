@@ -33,12 +33,11 @@ Future<void> startApp() async
     await prefs.setBool('isUserLoggedIn', false);
   }
   if(prefs.getBool('isUserLoggedIn')!){
-    globals.isLoggined = true;
+    globals.isLoggedIn = true;
   }else {
-    globals.isLoggined = false;
+    globals.isLoggedIn = false;
   }
 
-  globals.path = await getLocalPath();
   globals.theme = prefs.getInt('themeId')!;
 
   showTimetable();
@@ -51,7 +50,7 @@ Future<void> showTimetable() async
   try{
     await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
   }catch(e){
-    globals.isLoggined == false;
+    globals.isLoggedIn == false;
   }
 
 
