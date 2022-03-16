@@ -4,6 +4,7 @@ import 'structures/schedule.dart';
 import 'structures/exceptions.dart';
 import 'structures/login_response.dart';
 import 'package:http/http.dart' as http;
+import 'notifications.dart';
 
 // LOGIN
 Future<LoginResponse> fetchLogin(String login, String password) async
@@ -23,7 +24,7 @@ Future<LoginResponse> fetchLogin(String login, String password) async
   }
   else
   {
-    throw RequestErrorException('Failed to login');
+    throw RequestErrorException('Failed to log in');
   }
 }
 
@@ -46,6 +47,8 @@ Future<void> fetchSchedule(String userType, String userId, String dateFrom, Stri
     {
       globals.schedule.insert(ScheduleTableItem.fromJson(lesson));
     }
+    // TODO Connect to prefs and settings
+    NotificationService().setNotificationQueue(3600, 20);
   }
   else
   {

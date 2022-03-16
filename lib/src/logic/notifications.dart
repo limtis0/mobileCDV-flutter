@@ -1,5 +1,9 @@
+import 'dart:math';
+import 'globals.dart' as globals;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:mobile_cdv/src/logic/time_operations.dart';
+import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService
@@ -79,9 +83,38 @@ class NotificationService
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
+  Future<void> setNotificationQueue(int secondsOffset, int queueSize) async
+  {
+    cancelAllNotifications();
+
+    List<ScheduleTableItem> schedule = globals.schedule.list();
+    int slice = 0;
+
+    while (slice < schedule.length - 1)
+    {
+      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < 0)
+      {
+        break;
+      }
+      slice++;
+    }
+    schedule = schedule.sublist(slice);
+
+    for (int i = 0; i < min(schedule.length, queueSize); i++)
+    {
+      showNotification
+      (
+          i,
+          '${schedule[i].subjectName} (${schedule[i].room})',
+          '${formatScheduleTime(schedule[i].startDate)}-${formatScheduleTime(schedule[i].startDate)}',
+          getSecondsUntilScheduledDate(schedule[i].startDate) - secondsOffset
+      );
+    }
+  }
+
   // TODO IDK if needed. Needs testing
   // // Needs a call in main
-  // // Call to ask for permissions,
+  // // Call to ask for permissions for IOS,
   // void requestIOSPermission(
   //     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) {
   //   flutterLocalNotificationsPlugin

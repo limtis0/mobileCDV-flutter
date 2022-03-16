@@ -32,18 +32,18 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   primaryColor: const Color(0xFFFFFFFF),                      // цвет текста в ивентах
   appBarTheme: const AppBarTheme(color: Color(0xFF000000)),   // цвет апп бара (панель сверху)
   canvasColor: const Color(0xFF000000),                       // цвет ботом бара (панель внизу)
-  backgroundColor: const Color(0xFF333333),                   // цвет бэк граунда в ивентах
+  backgroundColor: const Color(0xFF262626),                   // цвет бэк граунда в ивентах
   scaffoldBackgroundColor: const Color(0xFF000000),           // цвет бэк граунда в окнах
-  disabledColor: const Color(0xFF333333),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
+  disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
   bottomAppBarColor: const Color(0xFFFFFFFF),                 // цвет текста в ботом баре (панель снизу)
-  cardColor: const Color(0xFF333333),                         // цвет бэкграунда в поп апе
+  cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
   highlightColor: const Color(0xFFFFFFFF),                    // цвет дней недели
-  focusColor: const Color(0xFF333333),                        // цвет круга в календаре (сегодняшний день)
+  focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
   dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина
 );
 
-//TODO доделать
+// Pink theme
 ThemeData pinkTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xFFE18AAA),
   appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
@@ -55,7 +55,7 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
   cardColor: const Color(0xFFFBD3ED),
   highlightColor: const Color(0xFFE4A0B7),
   hintColor: const Color(0xFFE4A0B7),
-  focusColor: const Color(0xFFE18AAA),
+  focusColor: const Color(0xFFFBD3ED),
 );
 
 
