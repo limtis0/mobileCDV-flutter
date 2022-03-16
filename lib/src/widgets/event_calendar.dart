@@ -1,11 +1,11 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
+import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:mobile_cdv/src/logic/structures/event.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../logic/main_activity.dart';
 import '../logic/time_operations.dart';
@@ -26,10 +26,10 @@ class _EventCalendarState extends State<EventCalendar> {
   DateTime? _selectedDay;
   int? _lastTime;
   List<DateTime>? _eventDays;
-  LinkedHashMap<DateTime, List<Event>>? kEvents;
+  LinkedHashMap<DateTime, List<ScheduleTableItem>>? kEvents;
 
   void refreshEvents(){
-    kEvents = LinkedHashMap<DateTime, List<Event>>(
+    kEvents = LinkedHashMap<DateTime, List<ScheduleTableItem>>(
       equals: isSameDay,
       hashCode: getHashCode,
     )..addAll(setEvents());
@@ -63,7 +63,7 @@ class _EventCalendarState extends State<EventCalendar> {
     return list;
   }
 
-  List<Event> _getEventsForDay(DateTime day) {
+  List<ScheduleTableItem> _getEventsForDay(DateTime day) {
     refreshEvents();
     return kEvents![day] ?? [];
   }
@@ -101,7 +101,7 @@ class _EventCalendarState extends State<EventCalendar> {
 
   Color markerColor(Object? obj)
   {
-    obj as Event;
+    obj as ScheduleTableItem;
     return setColor(obj.form)!;
   }
 
@@ -167,7 +167,7 @@ class _EventCalendarState extends State<EventCalendar> {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
-  Color _checkButton(Event _event){
+  Color _checkButton(ScheduleTableItem _event){
     if(_event.meetLink != ""){
       return setColor(_event.form)!;
     }else {

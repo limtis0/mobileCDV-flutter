@@ -1,5 +1,4 @@
 import '../logic/time_operations.dart';
-import 'package:mobile_cdv/src/logic/structures/event.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
@@ -11,9 +10,9 @@ extension StringExtension on String {
   }
 }
 
-Map<DateTime, List<Event>> setEvents()
+Map<DateTime, List<ScheduleTableItem>> setEvents()
 {
-  Map<DateTime, List<Event>> mapEvents = {};
+  Map<DateTime, List<ScheduleTableItem>> mapEvents = {};
   List<ScheduleTableItem> schedule = globals.schedule.list();
 
   for (int i = 0; i < schedule.length; i++)
@@ -27,7 +26,7 @@ Map<DateTime, List<Event>> setEvents()
       mapEvents[scheduledDate] = [];
     }
 
-    mapEvents[scheduledDate]!.add(Event.fromScheduleItem(schedule[i]));
+    mapEvents[scheduledDate]!.add(schedule[i]);
   }
   if(globals.isLoggedIn) {
     return mapEvents;
