@@ -486,7 +486,7 @@ class _EventCalendarState extends State<EventCalendar> {
                                       Padding(
                                         padding: const EdgeInsets.only(right: 110),
                                         child: Text(
-                                          '${_getEventsForDay(_eventDays![index])[evIndex]}',
+                                          _getEventsForDay(_eventDays![index])[evIndex].subjectName,
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                             color: Theme.of(context).primaryColor,
