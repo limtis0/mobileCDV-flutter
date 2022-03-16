@@ -40,6 +40,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   highlightColor: const Color(0xFFFFFFFF),                    // цвет дней недели
   focusColor: const Color(0xFF333333),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
+  dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина
 );
 
 //TODO доделать

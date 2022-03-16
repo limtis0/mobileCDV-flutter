@@ -24,6 +24,7 @@ class _EventCalendarState extends State<EventCalendar> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  int? _lastTime;
   List<DateTime>? _eventDays;
   LinkedHashMap<DateTime, List<Event>>? kEvents;
 
@@ -88,15 +89,14 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-      setState(() {
-        //_selectedDay = selectedDay;
-        _focusedDay = focusedDay;
-        if(checkDay(selectedDay)){
-          listScrollController.scrollToIndex(getIndex(selectedDay), preferPosition: AutoScrollPosition.begin);
-          _calendarFormat = CalendarFormat.week;
-          nullIcon = Icons.arrow_drop_down_outlined;
-        }
-      });
+    setState(() {
+      _focusedDay = focusedDay;
+      if(checkDay(selectedDay)){
+        listScrollController.scrollToIndex(getIndex(selectedDay), preferPosition: AutoScrollPosition.begin);
+        _calendarFormat = CalendarFormat.week;
+        nullIcon = Icons.arrow_drop_down_outlined;
+      }
+    });
   }
 
   Color markerColor(Object? obj)
@@ -117,9 +117,9 @@ class _EventCalendarState extends State<EventCalendar> {
         return Colors.purpleAccent;
       case "C":
         return Colors.orange;
-        //TODO Сделать цвета
       case "EGSAM":
         return Colors.purple;
+        //TODO Сделать цвета
       /*case "W":
         return Colors.teal;
       case "W":
@@ -193,11 +193,23 @@ class _EventCalendarState extends State<EventCalendar> {
               for(int i = 0; i != _eventDays?.length; i++){
                 if(!checkDay(DateTime.now())){
                   if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0){
-                    listScrollController.scrollToIndex(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)), preferPosition: AutoScrollPosition.begin);
+                    listScrollController.scrollToIndex(
+                        getIndex(
+                            DateTime(
+                                DateTime.now().year,
+                                DateTime.now().month,
+                                DateTime.now().day + i)
+                        ), preferPosition: AutoScrollPosition.begin);
                     break;
                   }
                 }else {
-                  listScrollController.scrollToIndex(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)), preferPosition: AutoScrollPosition.begin);
+                  listScrollController.scrollToIndex(
+                      getIndex(
+                          DateTime(
+                              DateTime.now().year,
+                              DateTime.now().month,
+                              DateTime.now().day)
+                      ), preferPosition: AutoScrollPosition.begin);
                   break;
                 }
               }
@@ -251,7 +263,10 @@ class _EventCalendarState extends State<EventCalendar> {
                 refreshEvents();
                 _eventDays = _getDateTimes();
                 if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
-                  listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
+                  _lastTime = focusedDay.month;
+                  if(_lastTime != focusedDay.month) {
+                    listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
+                  }
                 }
               });
               _focusedDay = focusedDay;
