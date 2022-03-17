@@ -47,8 +47,10 @@ Future<void> fetchSchedule(String userType, String userId, String dateFrom, Stri
     {
       globals.schedule.insert(ScheduleTableItem.fromJson(lesson));
     }
-    // TODO Connect to prefs and settings
-    NotificationService().setNotificationQueue(3600, 20);
+    if (globals.notificationsToggle)
+    {
+      NotificationService().setNotificationQueue(globals.notificationsTime, 32);
+    }
   }
   else
   {

@@ -105,8 +105,8 @@ class NotificationService
       showNotification
       (
           i,
-          '${schedule[i].subjectName} (${schedule[i].room})',
-          '${formatScheduleTime(schedule[i].startDate)}-${formatScheduleTime(schedule[i].startDate)}',
+          '${schedule[i].subjectName} [${schedule[i].room}]',
+          '${formatScheduleTime(schedule[i].startDate)}-${formatScheduleTime(schedule[i].endDate)}',
           getSecondsUntilScheduledDate(schedule[i].startDate) - secondsOffset
       );
     }
