@@ -90,6 +90,7 @@ class NotificationService
     List<ScheduleTableItem> schedule = globals.schedule.list();
     int slice = 0;
 
+    // Slices schedule to set only valid notifications
     while (slice < schedule.length - 1)
     {
       if (DateTime.now().difference(schedule[slice].startDate).inSeconds < 0)
@@ -100,14 +101,28 @@ class NotificationService
     }
     schedule = schedule.sublist(slice);
 
+    DateTime scheduledTime;
+    int? notificationTime;
     for (int i = 0; i < min(schedule.length, queueSize); i++)
     {
+      // Sets notification for evening if lesson is in the morning
+      scheduledTime = schedule[i].startDate;
+      if (scheduledTime.hour <= 9)
+      {
+        notificationTime = getSecondsUntilScheduledDate(DateTime(scheduledTime.year, scheduledTime.month, scheduledTime.day - 1, 21));
+      }
+      else
+      {
+        notificationTime = getSecondsUntilScheduledDate(scheduledTime) - secondsOffset;
+      }
+
+      // Sets notification
       showNotification
       (
           i,
           '${schedule[i].subjectName} [${schedule[i].room}]',
           '${formatScheduleTime(schedule[i].startDate)}-${formatScheduleTime(schedule[i].endDate)}',
-          getSecondsUntilScheduledDate(schedule[i].startDate) - secondsOffset
+          notificationTime,
       );
     }
   }
