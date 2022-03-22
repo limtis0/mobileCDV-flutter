@@ -3,7 +3,7 @@ import '../time_operations.dart';
 class ScheduleTableItem
 {
   // final int id;
-  // final String status;
+  final String status;
   final String subject;
   final String subjectName;
   final String groupNumber;
@@ -17,7 +17,7 @@ class ScheduleTableItem
 
   const ScheduleTableItem({
     // required this.id,
-    // required this.status,
+    required this.status,
     required this.subject,
     required this.subjectName,
     required this.groupNumber,
@@ -35,7 +35,7 @@ class ScheduleTableItem
     return ScheduleTableItem
       (
       // id: json['Id'],
-      // status: json['Status'],
+      status: json['Status'],
       subject: json['Subject'],
       subjectName: json['ThemaGroup'],
       groupNumber: json['GroupNr'],

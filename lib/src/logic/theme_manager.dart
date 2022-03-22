@@ -8,7 +8,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   bottomAppBarColor: Colors.blue,
   disabledColor: Colors.blue,
   cardColor: Colors.white,
-  highlightColor: Colors.black,
+  primaryColorLight: Colors.black,
   focusColor: Colors.lightBlueAccent,
   hintColor: Colors.black,
 );
@@ -37,7 +37,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
   bottomAppBarColor: const Color(0xFFFFFFFF),                 // цвет текста в ботом баре (панель снизу)
   cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
-  highlightColor: const Color(0xFFFFFFFF),                    // цвет дней недели
+  primaryColorLight: const Color(0xFFFFFFFF),                    // цвет дней недели
   focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
   dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина

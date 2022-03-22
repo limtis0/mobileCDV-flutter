@@ -18,6 +18,33 @@ class EventCalendar extends StatefulWidget {
   State<EventCalendar> createState() => _EventCalendarState();
 }
 
+class RoomText extends StatelessWidget {
+  ScheduleTableItem event;
+  RoomText({Key? key, required this.event}) : super(key: key);
+
+  bool isCancelled = false;
+
+  String getCanceledText(ScheduleTableItem _event) {
+    if(_event.status == "CANCELLED"){
+      isCancelled = true;
+      return getTextFromKey("Event.CANCELLED");
+    }
+    isCancelled = false;
+    return _event.room;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      getCanceledText(event),
+      textAlign: TextAlign.right,
+      style: TextStyle(
+        color: isCancelled ? Colors.red : Theme.of(context).primaryColor,
+      ),
+    );
+  }
+}
+
 class _EventCalendarState extends State<EventCalendar> {
 
   DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
@@ -181,7 +208,6 @@ class _EventCalendarState extends State<EventCalendar> {
       onRefresh: () async {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
-        setState(() {});
       },
       child: Column(
         children: [
@@ -261,8 +287,8 @@ class _EventCalendarState extends State<EventCalendar> {
                 refreshEvents();
                 _eventDays = _getDateTimes();
                 if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
-                  _lastTime = focusedDay.month;
                   if(_lastTime != focusedDay.month) {
+                    _lastTime = focusedDay.month;
                     listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
                   }
                 }
@@ -270,7 +296,7 @@ class _EventCalendarState extends State<EventCalendar> {
               _focusedDay = focusedDay;
             },
             daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: TextStyle(color: Theme.of(context).highlightColor),
+              weekdayStyle: TextStyle(color: Theme.of(context).primaryColorLight),
               weekendStyle: const TextStyle(color: Colors.red),
             ),
             headerStyle: const HeaderStyle(
@@ -474,12 +500,8 @@ class _EventCalendarState extends State<EventCalendar> {
                                               ],
                                             ),
                                           ),
-                                          Text(
-                                            _getEventsForDay(_eventDays![index])[evIndex].room,
-                                            textAlign: TextAlign.right,
-                                            style: TextStyle(
-                                              color: Theme.of(context).primaryColor,
-                                            ),
+                                          RoomText(
+                                            event: _getEventsForDay(_eventDays![index])[evIndex],
                                           ),
                                         ],
                                       ),
@@ -511,3 +533,13 @@ class _EventCalendarState extends State<EventCalendar> {
     );
   }
 }
+/*
+                                          Text(
+                                            //_getEventsForDay(_eventDays![index])[evIndex].room,
+                                            //getCanceledText(_getEventsForDay(_eventDays![index])[evIndex]),
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                              color: Theme.of(context).primaryColor,
+                                            ),
+                                          ),
+ */

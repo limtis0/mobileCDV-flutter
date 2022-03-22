@@ -57,7 +57,11 @@ String getTextFromKey([String key = "noKey"])
     if(fields?.length != null) {
       for (int i = 0; i != fields?.length; i++) {
         if (fields?[i][0] == key) {
-          return fields?[i][localeId];
+          if(fields?[i][localeId] != "") {
+            return fields?[i][localeId];
+          }else {
+            return "Translation missing for $key";
+          }
         }
       }
     }

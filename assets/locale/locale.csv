@@ -1,12 +1,12 @@
 ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",EN,PL,RU,TR
 noKey,No key provided,No key provided,No key provided,No key provided
-Main.Account,Profile,Profil,Профиль,Profil
+Main.Account,Profile,???,Профиль,Profil
 Main.Schedule,Schedule,Rozkład,Расписание,Takvim
 Main.Settings,Settings,Ustawienie,Настройки,Ayarlar
 Settings.locale,Language,Język,Язык,Dil
 Settings.AlertDialog,Restart required,???,Требуется перезапуск,Yeniden Başlatma Gerekli
 Setting.AlertDialog.Restart,Restart,???,Перезапуск,Yeniden Başlat
-Login.Page.Email,E-mail,E-mail,E-mail,E-Posta
+Login.Page.Email,E-mail,???,E-mail,E-Posta
 Login.Page.Password,Password,???,Пароль,Parola
 Login.Page.Hint.password,Enter password,???,Введите пароль,Parolayı girin
 Login.Page.Hint.login,Enter e-mail,???,Введите e-mail,E-Posta
@@ -39,9 +39,26 @@ Calendar.october,October,???,Октябрь,Ekim
 Calendar.november,November,???,Ноябрь,Kasım 
 Calendar.december,December,???,Декабрь,Aralık 
 Profile.Loading,Loading...,???,Загрузка,Yükleniyor
-Schedule.subject,Subject,???,Тема,???
-Schedule.date,Date,???,Время,???
-Schedule.room,Room,???,Кабинет,???
-Schedule.group,Group,???,Группа,???
-Schedule.teacher,Teacher,???,Учитель,???
-Schedule.joinMeeting,Join meeting,???,Присоединиться,???
+Schedule.date,Date,???,Время,Tarih
+Schedule.room,Room,???,Кабинет,Sınıf
+Schedule.group,Group,???,Группа,Grup
+Schedule.teacher,Teacher,???,Учитель,Eğitmen
+Schedule.joinMeeting,Join meeting,???,Присоединиться,Derse katıl
+Static.HelpDialog,Help,???,Помощь,???
+Static.Wyklad,Lecture,Wyklad,Лекция ,
+Static.Warsztaty,Workshops,Warsztaty,,
+Static.Labaratoria,Labratory,Laboratoria ,Лаборатория ,
+Static.Elearning,E-learning ,E-learning,E-learning ,
+Static.Cwiczenia,Exercises ,Czwiczenia,Упражнения ,
+Static.Lektorat,Readership,Lectorat,Лекторат,
+Static.Projekt,Project,Projekt,Проект,
+Static.Praktyki,Practices ,Praktyki,Практика,
+Static.Seminarium,Seminar,Seminarium,Семинар,
+Staic.Konwesatorium,Conversation ,Konwersatorium ,,
+Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,
+Static.Rezewacja,Reserwation,Rezerwacja ,Резервация,
+Static.Dyzur,Standby,Dyżur ,Дежурство,
+Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,,
+Static.HelpText1,Pull schedule list from the top to refresh.,,,
+Static.HelpText2,Pull schedule list from the bottom to get to the next month.,,,
+Static.HelpText3,"Tap ""schedule"" button on the bottom-bar to get today's date.",,,
