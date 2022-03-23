@@ -31,10 +31,11 @@ dependencies:
   path_provider: ^2.0.9
 
   # Frontend
-  table_calendar: ^3.0.4
+  table_calendar: ^3.0.4 # may be deleted in future
   flutter_local_notifications: ^9.4.0
   provider: ^6.0.2
   scroll_to_index: any
+  syncfusion_flutter_calendar: ^19.4.56
 
 
 dev_dependencies:

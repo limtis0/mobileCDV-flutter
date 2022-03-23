@@ -1,3 +1,6 @@
+/*
+  TODO В помойку
+ */
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
@@ -533,13 +536,3 @@ class _EventCalendarState extends State<EventCalendar> {
     );
   }
 }
-/*
-                                          Text(
-                                            //_getEventsForDay(_eventDays![index])[evIndex].room,
-                                            //getCanceledText(_getEventsForDay(_eventDays![index])[evIndex]),
-                                            textAlign: TextAlign.right,
-                                            style: TextStyle(
-                                              color: Theme.of(context).primaryColor,
-                                            ),
-                                          ),
- */
