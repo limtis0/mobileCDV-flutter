@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io' show exit;
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../logic/theme_manager.dart';
 import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/notifications.dart';
 
 class LocaleDialog extends StatelessWidget {
   const LocaleDialog({Key? key}) : super(key: key);
@@ -53,6 +55,17 @@ class _SettingState extends State<Settings> {
           return const LocaleDialog();
         }
     );
+  }
+
+  void switchNotificationState(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(!value){
+      await NotificationService().cancelAllNotifications();
+    }else {
+      await NotificationService().setNotificationQueue(globals.notificationsTime, 32);
+    }
+    await prefs.setBool("notificationsToggle", value);
+    print(value);
   }
 
   @override
@@ -150,6 +163,27 @@ class _SettingState extends State<Settings> {
                         }
                       },
                     ),
+                  )
+                ],
+              ),
+              const Divider(
+                thickness: 1.5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    getTextFromKey("Settings.notification")
+                  ),
+                  Switch(
+                    activeColor: Theme.of(context).toggleableActiveColor,
+                    value: globals.notificationsToggle,
+                    onChanged: (value){
+                      setState(() {
+                        globals.notificationsToggle = value;
+                        switchNotificationState(value);
+                      });
+                    },
                   )
                 ],
               ),

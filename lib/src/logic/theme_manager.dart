@@ -11,6 +11,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   primaryColorLight: Colors.black,
   focusColor: Colors.lightBlueAccent,
   hintColor: Colors.black,
+  toggleableActiveColor: Colors.blue,
 );
 
 // Не редачить, только если очень хочеться
@@ -19,6 +20,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   backgroundColor: const Color(0xFF333333),
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)),
   bottomAppBarColor: const Color(0xFFFFFFFF),
+  toggleableActiveColor: const Color(0xff00ADB5)
 );
 // ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
 /*
@@ -35,12 +37,13 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   backgroundColor: const Color(0xFF262626),                   // цвет бэк граунда в ивентах
   scaffoldBackgroundColor: const Color(0xFF000000),           // цвет бэк граунда в окнах
   disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
-  bottomAppBarColor: const Color(0xFFFFFFFF),                 // цвет текста в ботом баре (панель снизу)
+
   cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
   primaryColorLight: const Color(0xFFFFFFFF),                    // цвет дней недели
   focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
   dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина
+  toggleableActiveColor: Colors.white,                        // цвет тодгла в настройках нотификаций
 );
 
 // Pink theme
@@ -56,6 +59,7 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
   highlightColor: const Color(0xFFE4A0B7),
   hintColor: const Color(0xFFE4A0B7),
   focusColor: const Color(0xFFFBD3ED),
+  toggleableActiveColor: const Color(0xFFE18AAA),                        // цвет тодгла в настройках нотификаций
 );
 
 

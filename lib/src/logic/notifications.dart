@@ -93,7 +93,7 @@ class NotificationService
     // Slices schedule to set only valid notifications
     while (slice < schedule.length - 1)
     {
-      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < 0)
+      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < globals.notificationsTime)
       {
         break;
       }
