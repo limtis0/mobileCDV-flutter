@@ -258,7 +258,63 @@ class _ProfileState extends State<ProfileLogin> {
                   _error = "";
                 });
               }else {
-                processSignOut();
+                showDialog(
+                    context: context,
+                    builder: (context){
+                      return AlertDialog(
+                        backgroundColor: Theme.of(context).dialogBackgroundColor,
+                        title: Text(getTextFromKey("Profile.Confirmation")),
+                        content: SizedBox(
+                          height: 90,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 15),
+                                  child: Text(
+                                      getTextFromKey("Login.ask")
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: ElevatedButton(
+                                        child: Text(getTextFromKey("Profile.signOut")),
+                                        onPressed: (){
+                                          processSignOut();
+                                        },
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(
+                                                Theme.of(context).disabledColor
+                                            )
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: ElevatedButton(
+                                        child: Text(getTextFromKey("Profile.Cancel")),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(
+                                                Theme.of(context).disabledColor
+                                            )
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ),
+                        )
+                      );
+                    }
+                );
                 _text = getTextFromKey("Profile.signOut");
                 setState(() {
                   _error = "";

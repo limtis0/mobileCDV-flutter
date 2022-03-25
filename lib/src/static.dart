@@ -380,24 +380,16 @@ class _ControlsState extends State<Controls> {
   }
 
   //TODO refactor
-  bool isSchedule = false;
+  //bool isSchedule = false;
+
   void _onItemTapped(int? index) {
     setState(() {
       _selectedIndex = index!;
-      switch (_selectedIndex) {
-        case 1:
-          if (isSchedule) {
-            refreshCalendar();
-          } else {
-            isSchedule = true;
-          }
-          break;
-      }
     });
   }
 
-  final PageController controller = PageController(initialPage: 1);
 
+/*
   //TODO refactor
   void refreshCalendar(){
     setState(() {
@@ -406,10 +398,13 @@ class _ControlsState extends State<Controls> {
           controller.animateToPage(1, duration: const Duration(microseconds: 1), curve: Curves.ease));
     });
   }
+*/
+
+  final PageController controller = PageController(initialPage: 1);
 
   void goTo(int index){
     controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
-    _onItemTapped(index);
+    //_onItemTapped(index);
   }
 
   @override
