@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io' show exit;
 
 import 'package:flutter/material.dart';
@@ -57,7 +56,7 @@ class _SettingState extends State<Settings> {
     );
   }
 
-  void switchNotificationState(bool value) async {
+  Future<void> switchNotificationState(bool value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if(!value){
       await NotificationService().cancelAllNotifications();
@@ -65,7 +64,6 @@ class _SettingState extends State<Settings> {
       await NotificationService().setNotificationQueue(globals.notificationsTime, 32);
     }
     await prefs.setBool("notificationsToggle", value);
-    print(value);
   }
 
   @override
