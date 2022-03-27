@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'structures/usertoken.dart';
 import 'package:jwt_decode/jwt_decode.dart';
+
+import 'package:mobile_cdv/src/logic/structures/usertoken.dart';
 
 UserToken decodeToken(String token)
 {

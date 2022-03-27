@@ -5,7 +5,7 @@ import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../logic/theme_manager.dart';
-import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/notifications.dart';
 
 class LocaleDialog extends StatelessWidget {

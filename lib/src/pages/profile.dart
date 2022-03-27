@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
-import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import '../logic/main_activity.dart';
 
@@ -205,7 +205,7 @@ class _ProfileState extends State<ProfileLogin> {
             return const LoadingIndicator();
           }
       );
-      await activitySignIn(log ,pass);
+      await activitySignIn(log, pass, true);
       globals.isLoggedIn = true;
       Navigator.pop(context);
       setState(() {
@@ -284,6 +284,7 @@ class _ProfileState extends State<ProfileLogin> {
                                         child: Text(getTextFromKey("Profile.signOut")),
                                         onPressed: (){
                                           processSignOut();
+                                          Navigator.pop(context);
                                         },
                                         style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all<Color>(

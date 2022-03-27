@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'globals.dart' as globals;
+import 'storage/globals.dart' as globals;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:mobile_cdv/src/logic/time_operations.dart';
@@ -22,7 +22,6 @@ class NotificationService
   // Initialization
   Future<void> init() async
   {
-    // Timezone initialization
     tz.initializeTimeZones();
 
     // Android settings
@@ -51,7 +50,7 @@ class NotificationService
     );
   }
 
-  Future<void> showNotification(int id, String title, String body, int seconds) async
+  Future<void> setNotification(int id, String title, String body, int seconds) async
   {
     await flutterLocalNotificationsPlugin.zonedSchedule(
         id,
@@ -117,7 +116,7 @@ class NotificationService
       }
 
       // Sets notification
-      showNotification
+      setNotification
       (
           i,
           '${schedule[i].subjectName} [${schedule[i].room}]',

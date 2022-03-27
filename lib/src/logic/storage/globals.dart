@@ -2,9 +2,8 @@ library mobile_cdv.globals;
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'structures/schedule.dart';
+import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
-// GLOBALS
 Schedule schedule = Schedule();
 
 bool isLoggedIn = false;
@@ -28,6 +27,8 @@ Future<void> loadFromPrefs() async
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   isLoggedIn = prefs.getBool('isUserLoggedIn') ?? false;
+
+  theme = prefs.getInt('themeId') ?? 0;
   
   email = prefs.getString('savedEmail') ?? '';
   pass = prefs.getString('savedPassword') ?? '';

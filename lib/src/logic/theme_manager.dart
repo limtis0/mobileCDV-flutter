@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
 // Не редачить, только если очень хочеться
 ThemeData lightTheme = ThemeData.light().copyWith(

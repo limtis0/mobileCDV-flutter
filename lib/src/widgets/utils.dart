@@ -1,5 +1,5 @@
 import '../logic/time_operations.dart';
-import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
 final eventsList = setEvents();

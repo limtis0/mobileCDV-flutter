@@ -210,7 +210,7 @@ class _EventCalendarState extends State<EventCalendar> {
     return RefreshIndicator(
       onRefresh: () async {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
-        await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
+        await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!, false);
       },
       child: Column(
         children: [

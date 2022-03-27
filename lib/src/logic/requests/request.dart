@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'globals.dart' as globals;
-import 'structures/schedule.dart';
-import 'structures/exceptions.dart';
-import 'structures/login_response.dart';
+import '../storage/globals.dart' as globals;
+import '../structures/schedule.dart';
+import '../structures/exceptions.dart';
+import '../structures/login_response.dart';
 import 'package:http/http.dart' as http;
-import 'notifications.dart';
+import '../notifications.dart';
 
 // LOGIN
 Future<LoginResponse> fetchLogin(String login, String password) async

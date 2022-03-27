@@ -6,9 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/notifications.dart';
-import 'package:mobile_cdv/src/logic/storage.dart';
+import 'package:mobile_cdv/src/logic/storage/shared_prefs.dart';
 import 'package:mobile_cdv/src/logic/theme_manager.dart';
-import 'package:mobile_cdv/src/logic/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
 import 'src/application.dart';
 
@@ -26,22 +26,6 @@ Future<void> startApp() async
 
   await initLocalization(prefs.getString('localization') ?? 'en'); // init localization
 
-  if (prefs.getInt('themeId') == null) {
-    await prefs.setInt('themeId', 0);
-  }
-
-  if(prefs.getBool('isUserLoggedIn') == null){
-    await prefs.setBool('isUserLoggedIn', false);
-  }
-
-  if(prefs.getBool('isUserLoggedIn')!){
-    globals.isLoggedIn = true;
-  }else {
-    globals.isLoggedIn = false;
-  }
-
-  globals.theme = prefs.getInt('themeId')!;
-
   showTimetable();
 }
 
@@ -49,12 +33,13 @@ Future<void> startApp() async
 Future<void> showTimetable() async
 {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  try{
-    await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!);
-  }catch(e){
+  try
+  {
+    await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!, false);
+  }
+  catch(e){
     globals.isLoggedIn == false;
   }
-
 
   initializeDateFormatting().then((_) async => runApp(
       ChangeNotifierProvider<ThemeModel>(
