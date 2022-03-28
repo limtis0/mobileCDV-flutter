@@ -1,52 +1,52 @@
-",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",EN,PL,RU,TR
+ID,EN,PL,RU,TR
 noKey,No key provided,No key provided,No key provided,No key provided
-Main.Account,Profile,???,Профиль,Profil
-Main.Schedule,Schedule,Rozkład,Расписание,Takvim
+Main.Account,Profile,Profil,Профиль,Profil
+Main.Schedule,Schedule,Plan zajęć,Расписание,Takvim
 Main.Settings,Settings,Ustawienie,Настройки,Ayarlar
 Settings.locale,Language,Język,Язык,Dil
-Settings.AlertDialog,Restart required,???,Требуется перезапуск,Yeniden Başlatma Gerekli
-Setting.AlertDialog.Restart,Restart,???,Перезапуск,Yeniden Başlat
-Login.Page.Email,E-mail,???,E-mail,E-Posta
-Login.Page.Password,Password,???,Пароль,Parola
-Login.Page.Hint.password,Enter password,???,Введите пароль,Parolayı girin
-Login.Page.Hint.login,Enter e-mail,???,Введите e-mail,E-Posta
-Settings.AlertDialog.q,Restart now?,???,Перезапустить сейчас?,Yeniden Başlatılsın mı?
-Profile.signOut,Sign out,???,Выйти из аккаунта,Cıkış Yap
-Login.Page.btn,Sign in,???,Войти,Giriş Yap
-Settings.locale.choose,Choose language,???,Выбрать язык,Dil Seç
-Settings.c.lang,Language,???,Язык,Dil 
-Settings.theme,Theme,???,Тема,Tema
-Settings.theme.choose,Select theme,???,Выбрать тему,Tema Seç
-Login.Page.error,Bad login or password,???,Неправильный логин или пароль,Hatalı şifre veya kullanıcı adı
-noSchedule.page,Log into your account to see Schedule,???,Войдите в аккаунт чтобы увидеть расписание,Planı görmek için lutfen giriş yapın
-Calendar.monday,Monday,???,Понедельник,Pazartesi
-Calendar.tuesday,Tuesday,???,Вторник,Salı
-Calendar.wednesday,Wednesday,???,Среда,Çarsamba
-Calendar.thursday,Thursday,???,Четверг,Perşembe 
-Calendar.friday,Friday,???,Пятница,Cuma
-Calendar.saturday,Saturday,???,Суббота,Cumartesi
-Calendar.sunday,Sunday,???,Воскресенье,Pazartesi
-Calendar.january,January,???,Январь,Ocak
-Calendar.february,February,???,Февраль,Şubat
-Calendar.march,March,???,Март,Mart
-Calendar.april,April,???,Апрель,Nisan
-Calendar.may,May,???,Май,Mayis
-Calendar.june,June,???,Июнь,Haziran
-Calendar.july,July,???,Июль,Temmuz
-Calendar.august,August,???,Август,Ağustos
-Calendar.september,September,???,Сентябрь,Eylül 
-Calendar.october,October,???,Октябрь,Ekim 
-Calendar.november,November,???,Ноябрь,Kasım 
-Calendar.december,December,???,Декабрь,Aralık 
-Profile.Loading,Loading...,???,Загрузка,Yükleniyor
-Schedule.date,Date,???,Время,Tarih
-Schedule.room,Room,???,Кабинет,Sınıf
-Schedule.group,Group,???,Группа,Grup
-Schedule.teacher,Teacher,???,Учитель,Eğitmen
-Schedule.joinMeeting,Join meeting,???,Присоединиться,Derse katıl
-Static.HelpDialog,Help,???,Помощь,???
+Settings.AlertDialog,Restart required,Wymagane ponowne uruchomienie,Требуется перезапуск,Yeniden Başlatma Gerekli
+Setting.AlertDialog.Restart,Restart,Ponowne uruchomienie,Перезапуск,Yeniden Başlat
+Login.Page.Email,E-mail,E-mail,E-mail,E-Posta
+Login.Page.Password,Password,Hasło,Пароль,Parola
+Login.Page.Hint.password,Enter password,Wprowadź hasło,Введите пароль,Parolayı girin
+Login.Page.Hint.login,Enter e-mail,Wprowadź e-mail,Введите e-mail,E-Posta
+Settings.AlertDialog.q,Restart now?,Ponownie uruchomić teraz?,Перезапустить сейчас?,Yeniden Başlatılsın mı?
+Profile.signOut,Sign out,Wyloguj,Выйти из аккаунта,Cıkış Yap
+Login.Page.btn,Sign in,Zaloguj,Войти,Giriş Yap
+Settings.locale.choose,Choose language,Wybierz język,Выбрать язык,Dil Seç
+Settings.c.lang,Language,Język,Язык,Dil 
+Settings.theme,Theme,Motyw,Тема,Tema
+Settings.theme.choose,Select theme,Wybierz motyw,Выбрать тему,Tema Seç
+Login.Page.error,Bad login or password,Błędny login lub hasło,Неправильный логин или пароль,Hatalı şifre veya kullanıcı adı
+noSchedule.page,Log into your account to see Schedule,Zaloguj się na swoje konto aby zobaczyć plan,Войдите в аккаунт чтобы увидеть расписание,Planı görmek için lutfen giriş yapın
+Calendar.monday,Monday,Poniedziałek,Понедельник,Pazartesi
+Calendar.tuesday,Tuesday,Wtorek,Вторник,Salı
+Calendar.wednesday,Wednesday,Środa,Среда,Çarsamba
+Calendar.thursday,Thursday,Czwartek,Четверг,Perşembe 
+Calendar.friday,Friday,Piątek,Пятница,Cuma
+Calendar.saturday,Saturday,Sobota,Суббота,Cumartesi
+Calendar.sunday,Sunday,Niedziela,Воскресенье,Pazartesi
+Calendar.january,January,Styczeń,Январь,Ocak
+Calendar.february,February,Luty,Февраль,Şubat
+Calendar.march,March,Marzec,Март,Mart
+Calendar.april,April,Kwiećeń,Апрель,Nisan
+Calendar.may,May,Maj,Май,Mayis
+Calendar.june,June,Czerwiec,Июнь,Haziran
+Calendar.july,July,Lipiec,Июль,Temmuz
+Calendar.august,August,Sierpeń,Август,Ağustos
+Calendar.september,September,Wrzesień,Сентябрь,Eylül 
+Calendar.october,October,Październik,Октябрь,Ekim 
+Calendar.november,November,Listopad,Ноябрь,Kasım 
+Calendar.december,December,Grudzień,Декабрь,Aralık 
+Profile.Loading,Loading...,Ładowanie...,Загрузка,Yükleniyor
+Schedule.date,Date,Data,Время,Tarih
+Schedule.room,Room,Sala,Кабинет,Sınıf
+Schedule.group,Group,Grupa,Группа,Grup
+Schedule.teacher,Teacher,Profesor,Учитель,Eğitmen
+Schedule.joinMeeting,Join meeting,Dołącz do spotkania,Присоединиться,Derse katıl
+Static.HelpDialog,Help,Pomoc,Помощь,???
 Static.Wyklad,Lecture,Wyklad,Лекция ,
-Static.Warsztaty,Workshops,Warsztaty,,
+Static.Warsztaty,Workshops,Warsztaty,Мастерская,
 Static.Labaratoria,Labratory,Laboratoria ,Лаборатория ,
 Static.Elearning,E-learning ,E-learning,E-learning ,
 Static.Cwiczenia,Exercises ,Czwiczenia,Упражнения ,
@@ -54,14 +54,15 @@ Static.Lektorat,Readership,Lectorat,Лекторат,
 Static.Projekt,Project,Projekt,Проект,
 Static.Praktyki,Practices ,Praktyki,Практика,
 Static.Seminarium,Seminar,Seminarium,Семинар,
-Staic.Konwesatorium,Conversation ,Konwersatorium ,,
+Staic.Konwesatorium,Conversation ,Konwersatorium ,Обсуждение,
 Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,
-Static.Rezewacja,Reserwation,Rezerwacja ,Резервация,
+Static.Rezewacja,Reservation,Rezerwacja ,Резервация,
 Static.Dyzur,Standby,Dyżur ,Дежурство,
-Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,,
-Static.HelpText1,Pull schedule list from the top to refresh.,,,
-Static.HelpText2,Pull schedule list from the bottom to get to the next month.,,,
-Static.HelpText3,"Tap ""schedule"" button on the bottom-bar to get today's date.",,,
-Login.ask,Do you really want to sign out?,,,
-Profile.Cancel,Cancel,,,
-Profile.Confirmation,Confirmation,,,
+Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,Встреча,
+Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć,,
+Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc,,
+Static.HelpText3,"Tap ""schedule"" button on the bottom-bar to get today's date.","Wciśnij ""plan zajęć"" aby wyświetlić dzisiejszą datę",,
+Login.ask,Do you really want to sign out?,Czy chcesz się wylogować?,,
+Profile.Cancel,Cancel,Anuluj,Отменить,
+Profile.Confirmation,Confirm,Potwierdź,Подтвердить,
+Settings.notification,Send notification,Wyślij powiadomienie,,
