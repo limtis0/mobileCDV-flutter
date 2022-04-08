@@ -52,11 +52,19 @@ class NotificationService
 
   Future<void> setNotification(int id, String title, String body, int seconds) async
   {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
+    tz.TZDateTime time = tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds));
+
+    /*
+    Due to the weird bug, somehow it may see some dates in future as in past
+    So I've placed this if statement here.
+    If this will result in missing notifications TODO: fix
+    */
+    if (time.isAfter(tz.TZDateTime.now(tz.local))) {
+      await flutterLocalNotificationsPlugin.zonedSchedule(
         id,
         title,
         body,
-        tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
+        time,
         const NotificationDetails(
           android: AndroidNotificationDetails(
             'Main Channel',
@@ -74,7 +82,8 @@ class NotificationService
         ),
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: true,
-    );
+      );
+    }
   }
 
   Future<void> cancelAllNotifications() async

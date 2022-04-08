@@ -94,7 +94,7 @@ class HelpItem extends StatelessWidget {
       case "EGSAM":
         return Colors.purple;
       case "EMPTY":
-        return Theme.of(context!).errorColor;
+        return Theme.of(context!).cardColor;
     //TODO Сделать цвета
     /*case "W":
         return Colors.teal;
@@ -134,7 +134,7 @@ class HelpItem extends StatelessWidget {
 
 Widget HelpDialog(BuildContext context) {
   return AlertDialog(
-    backgroundColor: Theme.of(context).errorColor,
+    backgroundColor: Theme.of(context).cardColor,
     title: Text(
       getTextFromKey("Static.HelpDialog"),
       textAlign: TextAlign.center,
