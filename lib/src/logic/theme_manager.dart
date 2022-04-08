@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
+// TODO Можно переписать вообще все эти темы, потому что это ад какой-то
+// Мне кажется есть нормальный путь а не вот это вот
+// Хотя оно вроде работает
+
 // Не редачить, только если очень хочеться
 ThemeData lightTheme = ThemeData.light().copyWith(
   primaryColor: Colors.grey[700]!,
@@ -49,7 +53,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
   colorScheme: const ColorScheme.dark().copyWith              // цвет оверфлова при пролистывании
     (secondary: Colors.white),
-  errorColor: Colors.white                                    // цвет текста на кнопке в профиле (вова ты чево наделал...)
+  errorColor: Colors.white,                                    // цвет текста на кнопке в профиле (вова ты чево наделал...)
 );
 
 // Pink theme

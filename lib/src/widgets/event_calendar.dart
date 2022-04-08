@@ -251,7 +251,7 @@ class _EventCalendarState extends State<EventCalendar> {
             },
             calendarBuilders: CalendarBuilders(
               markerBuilder: (context, day, events) {
-                if (events.isEmpty) return SizedBox();
+                if (events.isEmpty) return const SizedBox();
                 return ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -467,7 +467,10 @@ class _EventCalendarState extends State<EventCalendar> {
                                                               _launchURL(_getEventsForDay(_eventDays![index])[evIndex].meetLink);
                                                             },
                                                             child: Text(
-                                                                getTextFromKey("Schedule.joinMeeting")
+                                                                getTextFromKey("Schedule.joinMeeting"),
+                                                              style: TextStyle(
+                                                                color: Theme.of(context).errorColor
+                                                              ),
                                                             ),
                                                           ),
                                                         )
