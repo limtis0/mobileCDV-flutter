@@ -116,8 +116,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                   SizedBox(
                     width: 230,
                     child: TextField(
+                      cursorColor: Theme.of(context).toggleableActiveColor,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Theme.of(context).hintColor)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Theme.of(context).toggleableActiveColor, width: 2)
+                        ),
                         hintText: getTextFromKey("Login.Page.Hint.login"),
                       ),
                       onChanged: (value){
@@ -147,8 +154,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                     width: 230,
                     child: TextField(
                       obscureText: true,
+                      cursorColor: Theme.of(context).toggleableActiveColor,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Theme.of(context).hintColor)
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Theme.of(context).toggleableActiveColor, width: 2)
+                        ),
                         hintText: getTextFromKey("Login.Page.Hint.password"),
                       ),
                       onChanged: (value){
