@@ -262,7 +262,7 @@ class _ProfileState extends State<ProfileLogin> {
                     context: context,
                     builder: (context){
                       return AlertDialog(
-                        backgroundColor: Theme.of(context).dialogBackgroundColor,
+                        backgroundColor: Theme.of(context).cardColor,
                         title: Text(getTextFromKey("Profile.Confirmation")),
                         content: SizedBox(
                           height: 90,
