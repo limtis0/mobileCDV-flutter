@@ -44,6 +44,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   primaryColorLight: Colors.white,                            // цвет дней недели
   appBarTheme: const AppBarTheme(color: Colors.black),        // цвет апп бара (панель сверху)
   canvasColor: Colors.black,                                  // цвет ботом бара (панель внизу)
+  bottomAppBarColor: Colors.white,                            // цвет выбранной категории в ботом баре
   backgroundColor: const Color(0xFF262626),                   // цвет бэк граунда в ивентах
   scaffoldBackgroundColor: Colors.black,                      // цвет бэк граунда в окнах
   disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
