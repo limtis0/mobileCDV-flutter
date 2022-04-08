@@ -205,6 +205,8 @@ class _EventCalendarState extends State<EventCalendar> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: Theme.of(context).toggleableActiveColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       onRefresh: () async {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!, false);

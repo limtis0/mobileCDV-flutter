@@ -16,12 +16,14 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 
 // Не редачить, только если очень хочеться
 ThemeData darkTheme = ThemeData.dark().copyWith(
-  primaryColor: const Color(0xFFFFFFFF),
-  primaryColorLight: const Color(0xFFFFFFFF),
+  primaryColor: Colors.white,
+  primaryColorLight: Colors.white,
   backgroundColor: const Color(0xFF333333),
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)),
-  bottomAppBarColor: const Color(0xFFFFFFFF),
-  toggleableActiveColor: const Color(0xff00ADB5)
+  bottomAppBarColor: Colors.white,
+  toggleableActiveColor: const Color(0xff00ADB5),
+  colorScheme: const ColorScheme.dark().copyWith
+    (secondary: const Color(0xff00ADB5)),
 );
 // ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
 /*
@@ -32,18 +34,20 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 * */
 // Тема амолед ..................  ↓ наслдевать тему от light или dark
 ThemeData amoledTheme = ThemeData.dark().copyWith(
-  primaryColor: const Color(0xFFFFFFFF),                      // цвет текста в ивентах
-  primaryColorLight: const Color(0xFFFFFFFF),                 // цвет дней недели
-  appBarTheme: const AppBarTheme(color: Color(0xFF000000)),   // цвет апп бара (панель сверху)
-  canvasColor: const Color(0xFF000000),                       // цвет ботом бара (панель внизу)
+  primaryColor: Colors.white,                                 // цвет текста в ивентах
+  primaryColorLight: Colors.white,                            // цвет дней недели
+  appBarTheme: const AppBarTheme(color: Colors.black),        // цвет апп бара (панель сверху)
+  canvasColor: Colors.black,                                  // цвет ботом бара (панель внизу)
   backgroundColor: const Color(0xFF262626),                   // цвет бэк граунда в ивентах
-  scaffoldBackgroundColor: const Color(0xFF000000),           // цвет бэк граунда в окнах
+  scaffoldBackgroundColor: Colors.black,                      // цвет бэк граунда в окнах
   disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
   cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
   focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
-  dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина
+  dialogBackgroundColor: Colors.black,                        // цвет лоадинг скрина
   toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
+  colorScheme: const ColorScheme.dark().copyWith              // цвет оверфлова при пролистывании
+    (secondary: Colors.white),
 );
 
 // Pink theme
@@ -57,10 +61,11 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
   disabledColor: const Color(0xFFE18AAA),
   bottomAppBarColor: const Color(0xFFFDEBF7),
   cardColor: const Color(0xFFFDEBF7),
-  highlightColor: const Color(0xFFE4A0B7),
   hintColor: const Color(0xFFE4A0B7),
   focusColor: const Color(0xFFFBD3ED),
   toggleableActiveColor: const Color(0xFFE18AAA),
+  colorScheme: const ColorScheme.light().copyWith
+    (secondary: const Color(0xFFE18AAA)),
 );
 
 
