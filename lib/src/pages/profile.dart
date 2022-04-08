@@ -263,6 +263,9 @@ class _ProfileState extends State<ProfileLogin> {
             ),
             child: Text(
                 _text,
+              style: TextStyle(
+                color: Theme.of(context).errorColor
+              ),
             ),
             onPressed: (){
               if(!globals.isLoggedIn){

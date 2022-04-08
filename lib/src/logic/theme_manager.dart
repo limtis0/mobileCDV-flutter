@@ -12,6 +12,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   focusColor: Colors.lightBlueAccent,
   hintColor: Colors.black,
   toggleableActiveColor: Colors.blue,
+  errorColor: Colors.white
 );
 
 // Не редачить, только если очень хочеться
@@ -24,6 +25,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   toggleableActiveColor: const Color(0xff00ADB5),
   colorScheme: const ColorScheme.dark().copyWith
     (secondary: const Color(0xff00ADB5)),
+  errorColor: Colors.white
 );
 // ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
 /*
@@ -47,6 +49,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
   colorScheme: const ColorScheme.dark().copyWith              // цвет оверфлова при пролистывании
     (secondary: Colors.white),
+  errorColor: Colors.white                                    // цвет текста на кнопке в профиле (вова ты чево наделал...)
 );
 
 // Pink theme
@@ -65,6 +68,7 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
   toggleableActiveColor: const Color(0xFFE18AAA),
   colorScheme: const ColorScheme.light().copyWith
     (secondary: const Color(0xFFE18AAA)),
+  errorColor: Colors.white
 );
 
 
