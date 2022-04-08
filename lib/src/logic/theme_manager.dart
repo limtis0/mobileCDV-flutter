@@ -44,6 +44,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   hintColor: Colors.white,                                    // цвет текста в форме логина
   dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина
   toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
+  errorColor: const Color(0xFF000000)                         // цвет юэкграунда в легенде (пустым кружочкам ставиться этот цвет
 );
 
 // Pink theme
