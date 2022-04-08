@@ -1,6 +1,3 @@
-/*
-  TODO В помойку
- */
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
@@ -149,7 +146,7 @@ class _EventCalendarState extends State<EventCalendar> {
         return Colors.orange;
       case "EGSAM":
         return Colors.purple;
-        //TODO Сделать цвета
+      //TODO Сделать цвета
       /*case "W":
         return Colors.teal;
       case "W":

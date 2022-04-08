@@ -4,11 +4,11 @@ import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 // Не редачить, только если очень хочеться
 ThemeData lightTheme = ThemeData.light().copyWith(
   primaryColor: Colors.grey[700]!,
+  primaryColorLight: Colors.black,
   backgroundColor: Colors.grey[200]!,
   bottomAppBarColor: Colors.blue,
   disabledColor: Colors.blue,
   cardColor: Colors.white,
-  primaryColorLight: Colors.black,
   focusColor: Colors.lightBlueAccent,
   hintColor: Colors.black,
   toggleableActiveColor: Colors.blue,
@@ -17,6 +17,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 // Не редачить, только если очень хочеться
 ThemeData darkTheme = ThemeData.dark().copyWith(
   primaryColor: const Color(0xFFFFFFFF),
+  primaryColorLight: const Color(0xFFFFFFFF),
   backgroundColor: const Color(0xFF333333),
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)),
   bottomAppBarColor: const Color(0xFFFFFFFF),
@@ -32,23 +33,23 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 // Тема амолед ..................  ↓ наслдевать тему от light или dark
 ThemeData amoledTheme = ThemeData.dark().copyWith(
   primaryColor: const Color(0xFFFFFFFF),                      // цвет текста в ивентах
+  primaryColorLight: const Color(0xFFFFFFFF),                 // цвет дней недели
   appBarTheme: const AppBarTheme(color: Color(0xFF000000)),   // цвет апп бара (панель сверху)
   canvasColor: const Color(0xFF000000),                       // цвет ботом бара (панель внизу)
   backgroundColor: const Color(0xFF262626),                   // цвет бэк граунда в ивентах
   scaffoldBackgroundColor: const Color(0xFF000000),           // цвет бэк граунда в окнах
   disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
-
   cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
-  primaryColorLight: const Color(0xFFFFFFFF),                    // цвет дней недели
   focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
   dialogBackgroundColor: const Color(0xFF000000),             // цвет лоадинг скрина
-  toggleableActiveColor: Colors.white,                        // цвет тодгла в настройках нотификаций
+  toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
 );
 
 // Pink theme
 ThemeData pinkTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xFFE18AAA),
+  primaryColorLight: const Color(0xFFE18AAA),
   appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
   canvasColor: const Color(0xFFE18AAA),
   backgroundColor: const Color(0xFFFBD3ED),
@@ -59,7 +60,7 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
   highlightColor: const Color(0xFFE4A0B7),
   hintColor: const Color(0xFFE4A0B7),
   focusColor: const Color(0xFFFBD3ED),
-  toggleableActiveColor: const Color(0xFFE18AAA),                        // цвет тодгла в настройках нотификаций
+  toggleableActiveColor: const Color(0xFFE18AAA),
 );
 
 
@@ -83,7 +84,7 @@ enum ThemeType { Light, Dark, Amoled, Purple }
 
 class ThemeModel extends ChangeNotifier {
   ThemeData currentTheme = setTheme();
-  ThemeType _themeType = ThemeType.Light;
+  ThemeType? _themeType;
 
   toggleTheme(int id) {
     switch(id){
