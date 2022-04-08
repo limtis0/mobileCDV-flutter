@@ -44,25 +44,26 @@ Schedule.room,Room,Sala,Кабинет,Sınıf
 Schedule.group,Group,Grupa,Группа,Grup
 Schedule.teacher,Teacher,Profesor,Учитель,Eğitmen
 Schedule.joinMeeting,Join meeting,Dołącz do spotkania,Присоединиться,Derse katıl
-Static.HelpDialog,Help,Pomoc,Помощь,???
-Static.Wyklad,Lecture,Wyklad,Лекция ,
-Static.Warsztaty,Workshops,Warsztaty,Мастерская,
-Static.Labaratoria,Labratory,Laboratoria ,Лаборатория ,
-Static.Elearning,E-learning ,E-learning,E-learning ,
-Static.Cwiczenia,Exercises ,Czwiczenia,Упражнения ,
+Static.HelpDialog,Help,Pomoc,Помощь,Yardım
+Static.Wyklad,Lecture,Wyklad,Лекция ,Ders 
+Static.Warsztaty,Workshops,Warsztaty,Мастерская,Atölye
+Static.Labaratoria,Labratory,Laboratoria ,Лаборатория ,Laboratuvar
+Static.Elearning,E-learning ,E-learning,E-learning ,E-Learning
+Static.Cwiczenia,Exercises ,Czwiczenia,Упражнения ,Egzersizler
 Static.Lektorat,Readership,Lectorat,Лекторат,
-Static.Projekt,Project,Projekt,Проект,
-Static.Praktyki,Practices ,Praktyki,Практика,
-Static.Seminarium,Seminar,Seminarium,Семинар,
-Staic.Konwesatorium,Conversation ,Konwersatorium ,Обсуждение,
-Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,
-Static.Rezewacja,Reservation,Rezerwacja ,Резервация,
+Static.Projekt,Project,Projekt,Проект,Proje
+Static.Praktyki,Practices ,Praktyki,Практика,Uygulamalar
+Static.Seminarium,Seminar,Seminarium,Семинар,Seminer
+Staic.Konwesatorium,Conversation ,Konwersatorium ,Обсуждение,Konuşma
+Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,Sınav
+Static.Rezewacja,Reservation,Rezerwacja ,Резервация,Rezervasyon
 Static.Dyzur,Standby,Dyżur ,Дежурство,
-Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,Встреча,
+Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,Встреча,Meeting
 Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć,,
 Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc,,
-Static.HelpText3,"Tap ""schedule"" button on the bottom-bar to get today's date.","Wciśnij ""plan zajęć"" aby wyświetlić dzisiejszą datę",,
-Login.ask,Do you really want to sign out?,Czy chcesz się wylogować?,,
-Profile.Cancel,Cancel,Anuluj,Отменить,
-Profile.Confirmation,Confirm,Potwierdź,Подтвердить,
-Settings.notification,Send notification,Wyślij powiadomienie,,
+Static.HelpText3,Tap the 'Schedule' button on the bottom-bar to get today's date.,Wciśnij 'Plan zajęć' aby wyświetlić dzisiejszą datę,,Bugünün tarihini görmek için alt çubuktaki 'Planla' düğmesine dokunun.
+Login.ask,Do you want to sign out?,Czy chcesz się wylogować?,,Çıkış mı yapmak istiyorsunuz?
+Profile.Cancel,Cancel,Anuluj,Отменить,İptal et
+Profile.Confirmation,Confirm,Potwierdź,Подтвердить,Onayla
+Settings.notification,Notifications,Powiadomienia,Уведомления,Bildirimler
+Event.CANCELLED,Canceled,Odwolane,Отменено,
