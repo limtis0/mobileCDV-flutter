@@ -44,7 +44,6 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
   focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
   hintColor: Colors.white,                                    // цвет текста в форме логина
-  dialogBackgroundColor: Colors.black,                        // цвет лоадинг скрина
   toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
   colorScheme: const ColorScheme.dark().copyWith              // цвет оверфлова при пролистывании
     (secondary: Colors.white),
