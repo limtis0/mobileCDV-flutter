@@ -248,15 +248,26 @@ class _EventCalendarState extends State<EventCalendar> {
               return _getEventsForDay(day);
             },
             calendarBuilders: CalendarBuilders(
-              singleMarkerBuilder: (context, day, event){
-                return Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: markerColor(event),//
-                  ), //Change color
-                  width: 5.0,
-                  height: 5.0,
-                  margin: const EdgeInsets.symmetric(horizontal: 1.5),
+              markerBuilder: (context, day, events) {
+                if (events.isEmpty) return SizedBox();
+                return ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: events.length,
+                  itemBuilder: (context, index){
+                    return Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      padding: const EdgeInsets.all(1),
+                      child: Container(
+                        width: 5,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: markerColor(events[index]),
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
             ),
