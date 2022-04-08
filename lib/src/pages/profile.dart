@@ -337,7 +337,7 @@ class LoadingIndicator extends StatelessWidget{
     return AlertDialog(
       backgroundColor: Theme.of(context).cardColor,
       title: Text(getTextFromKey("Profile.Loading")),
-      content: const SizedBox(
+      content: SizedBox(
         width: 50,
         height: 5,
         child: LinearProgressIndicator(
