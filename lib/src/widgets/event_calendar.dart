@@ -46,7 +46,7 @@ class RoomText extends StatelessWidget {
 }
 
 class _EventCalendarState extends State<EventCalendar> {
-
+  PageController? _pageController;
   DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
   CalendarFormat _calendarFormat = CalendarFormat.week;
   DateTime _focusedDay = DateTime.now();
@@ -215,6 +215,7 @@ class _EventCalendarState extends State<EventCalendar> {
         children: [
           TableCalendar(
             onCalendarCreated: (controller){
+              _pageController = controller;
               _eventDays = _getDateTimes();
               for(int i = 0; i != _eventDays?.length; i++){
                 if(!checkDay(DateTime.now())){
