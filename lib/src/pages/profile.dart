@@ -289,7 +289,7 @@ class _ProfileState extends State<ProfileLogin> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 15),
                                   child: Text(
-                                      getTextFromKey("Login.ask")
+                                      getTextFromKey("Login.ask"),
                                   ),
                                 ),
                                 Row(
@@ -298,7 +298,13 @@ class _ProfileState extends State<ProfileLogin> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10),
                                       child: ElevatedButton(
-                                        child: Text(getTextFromKey("Profile.signOut")),
+                                        child:
+                                        Text(
+                                            getTextFromKey("Profile.signOut"),
+                                          style: TextStyle(
+                                              color: Theme.of(context).errorColor
+                                          ),
+                                        ),
                                         onPressed: (){
                                           processSignOut();
                                           Navigator.pop(context);
@@ -313,7 +319,12 @@ class _ProfileState extends State<ProfileLogin> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: ElevatedButton(
-                                        child: Text(getTextFromKey("Profile.Cancel")),
+                                        child: Text(
+                                            getTextFromKey("Profile.Cancel"),
+                                          style: TextStyle(
+                                              color: Theme.of(context).errorColor
+                                          ),
+                                        ),
                                         onPressed: (){
                                           Navigator.pop(context);
                                         },
