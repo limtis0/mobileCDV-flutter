@@ -160,6 +160,24 @@ class _EventCalendarState extends State<EventCalendar> {
     }
   }
 
+  // Hence we are initializing calendar with -12 months from now as starting point
+  // Current month will be on 12th page
+  final int _initialPage = 12;
+  void calendarToToday(){
+    int calcPage = _initialPage;
+    switch(_calendarFormat){
+      case CalendarFormat.month:
+        break;
+      case CalendarFormat.twoWeeks:
+        calcPage = calcPage * 2 + 2;
+        break;
+      case CalendarFormat.week:
+        calcPage = calcPage * 4 + 4;
+        break;
+    }
+    _pageController!.animateToPage(calcPage, duration: const Duration(milliseconds: 250), curve: Curves.ease);
+  }
+
   IconData nullIcon = Icons.arrow_drop_down_outlined;
 
   final List<String> _weekdays = [
