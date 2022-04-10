@@ -380,26 +380,11 @@ class _ControlsState extends State<Controls> {
     }
   }
 
-  //TODO refactor
-  //bool isSchedule = false;
-
   void _onItemTapped(int? index) {
     setState(() {
       _selectedIndex = index!;
     });
   }
-
-
-/*
-  //TODO refactor
-  void refreshCalendar(){
-    setState(() {
-      isSchedule = false;
-      controller.animateToPage(2, duration: const Duration(microseconds: 1), curve: Curves.ease).whenComplete(() =>
-          controller.animateToPage(1, duration: const Duration(microseconds: 1), curve: Curves.ease));
-    });
-  }
-*/
 
   final PageController controller = PageController(initialPage: 1);
 
