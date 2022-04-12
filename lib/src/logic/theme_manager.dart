@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
-// TODO Можно переписать вообще все эти темы, потому что это ад какой-то
-// Мне кажется есть нормальный путь а не вот это вот
-// Хотя оно вроде работает
+// TODO Rewrite all themes
 
 // Не редачить, только если очень хочеться
 ThemeData lightTheme = ThemeData.light().copyWith(

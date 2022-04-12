@@ -139,6 +139,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     return setColor(obj.form)!;
   }
 
+  // Change to global dict
   Color? setColor(String type){
     switch(type){
       case "W":
@@ -170,7 +171,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   // Hence we are initializing calendar with -12 months from now as starting point
   // Current month will be on 12th page
   final int _initialPage = 12;
-  void calendarToToday(){
+  void calendarToToday() async {
     int calcPage = _initialPage;
     switch(_calendarFormat){
       case CalendarFormat.month:
@@ -182,7 +183,8 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
         calcPage = calcPage * 4 + 4;
         break;
     }
-    _pageController!.animateToPage(calcPage, duration: const Duration(milliseconds: 250), curve: Curves.ease);
+    await _pageController!.animateToPage(calcPage, duration: const Duration(milliseconds: 250), curve: Curves.ease);
+    await listScrollController.scrollToIndex(getIndex(DateTime.now()), preferPosition: AutoScrollPosition.begin);
   }
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;

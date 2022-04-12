@@ -79,6 +79,7 @@ class HelpItem extends StatelessWidget {
   BuildContext? context;
   HelpItem({Key? key, required this.type, required this.textKey, this.context}) : super(key: key);
 
+  // TODO Change to global dict
   Color? setColor(String type){
     switch(type){
       case "W":
