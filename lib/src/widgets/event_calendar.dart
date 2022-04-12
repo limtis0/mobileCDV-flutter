@@ -15,7 +15,7 @@ class EventCalendar extends StatefulWidget {
 
 
   @override
-  State<EventCalendar> createState() => _EventCalendarState();
+  State<EventCalendar> createState() => EventCalendarState();
 }
 
 class RoomText extends StatelessWidget {
@@ -45,7 +45,14 @@ class RoomText extends StatelessWidget {
   }
 }
 
-class _EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveClientMixin {
+class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveClientMixin {
+  // Singleton pattern
+  static final EventCalendarState _eventCalendarState = EventCalendarState._internal();
+  factory EventCalendarState() {
+    return _eventCalendarState;
+  }
+  EventCalendarState._internal();
+
   PageController? _pageController;
   DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
   CalendarFormat _calendarFormat = CalendarFormat.week;

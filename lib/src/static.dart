@@ -381,6 +381,9 @@ class _ControlsState extends State<Controls> {
   }
 
   void _onItemTapped(int? index) {
+    if (_selectedIndex == 1 && index == 1){
+      return EventCalendarState().calendarToToday();
+    }
     setState(() {
       _selectedIndex = index!;
     });
@@ -390,7 +393,7 @@ class _ControlsState extends State<Controls> {
 
   void goTo(int index){
     controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
-    //_onItemTapped(index);
+    _onItemTapped(index);
   }
 
   @override
