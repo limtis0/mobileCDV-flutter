@@ -187,6 +187,15 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     await listScrollController.scrollToIndex(getIndex(DateTime.now()), preferPosition: AutoScrollPosition.begin);
   }
 
+  void calendarToNextMonth() async {
+    final int selMonth = _focusedDay.month;
+    int curMonth = selMonth;
+    while (curMonth == selMonth) {
+      await _pageController!.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.ease);
+      curMonth = _focusedDay.month;
+    }
+  }
+
   IconData nullIcon = Icons.arrow_drop_down_outlined;
 
   final List<String> _weekdays = [
