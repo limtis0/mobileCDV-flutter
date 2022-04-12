@@ -45,7 +45,7 @@ class RoomText extends StatelessWidget {
   }
 }
 
-class _EventCalendarState extends State<EventCalendar> {
+class _EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveClientMixin {
   PageController? _pageController;
   DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
   CalendarFormat _calendarFormat = CalendarFormat.week;
@@ -221,7 +221,11 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return RefreshIndicator(
       color: Theme.of(context).toggleableActiveColor,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -305,14 +309,6 @@ class _EventCalendarState extends State<EventCalendar> {
               ),
             ),
             onDaySelected: _onDaySelected,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-
-                });
-              }
-            },
             onPageChanged: (focusedDay) {
               _currentPage = DateTime(focusedDay.year, focusedDay.month);
               setState(() {
