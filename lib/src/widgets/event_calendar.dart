@@ -67,23 +67,16 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
       equals: isSameDay,
       hashCode: getHashCode,
     )..addAll(setEvents());
+
   }
 
   @override
   void initState() {
     super.initState();
-
     _selectedDay = _focusedDay;
     _eventDays = _getDateTimes();
     refreshEvents();
-    setState(() {
-
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    setState((){ });
   }
 
   List<DateTime> _getDateTimes() {
@@ -187,13 +180,14 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     await listScrollController.scrollToIndex(getIndex(DateTime.now()), preferPosition: AutoScrollPosition.begin);
   }
 
-  void calendarToNextMonth() async {
+  Future<void> calendarToNextMonth() async {
     final int selMonth = _focusedDay.month;
     int curMonth = selMonth;
     while (curMonth == selMonth) {
       await _pageController!.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.ease);
       curMonth = _focusedDay.month;
     }
+    await listScrollController.scrollToIndex(kEvents!.length - 1, preferPosition: AutoScrollPosition.begin);
   }
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;
@@ -244,140 +238,139 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return RefreshIndicator(
-      color: Theme.of(context).toggleableActiveColor,
-      backgroundColor: Theme.of(context).backgroundColor,
-      onRefresh: () async {
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!, false);
-      },
-      child: Column(
-        children: [
-          TableCalendar(
-            onCalendarCreated: (controller){
-              _pageController = controller;
-              _eventDays = _getDateTimes();
-              for(int i = 0; i != _eventDays?.length; i++){
-                if(!checkDay(DateTime.now())){
-                  if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0){
-                    listScrollController.scrollToIndex(
-                        getIndex(
-                            DateTime(
-                                DateTime.now().year,
-                                DateTime.now().month,
-                                DateTime.now().day + i)
-                        ), preferPosition: AutoScrollPosition.begin);
-                    break;
-                  }
-                }else {
+
+    return Column(
+      children: [
+        TableCalendar(
+          onCalendarCreated: (controller){
+            _pageController = controller;
+            _eventDays = _getDateTimes();
+            for(int i = 0; i != _eventDays?.length; i++){
+              if(!checkDay(DateTime.now())){
+                if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0){
                   listScrollController.scrollToIndex(
                       getIndex(
                           DateTime(
                               DateTime.now().year,
                               DateTime.now().month,
-                              DateTime.now().day)
+                              DateTime.now().day + i)
                       ), preferPosition: AutoScrollPosition.begin);
                   break;
                 }
+              }else {
+                listScrollController.scrollToIndex(
+                    getIndex(
+                        DateTime(
+                            DateTime.now().year,
+                            DateTime.now().month,
+                            DateTime.now().day)
+                    ), preferPosition: AutoScrollPosition.begin);
+                break;
               }
-            },
-            locale: calendarLocalization,
-            firstDay: kFirstDay,
-            lastDay: kLastDay,
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            calendarFormat: _calendarFormat,
-            eventLoader: (day) {
-              return _getEventsForDay(day);
-            },
-            calendarBuilders: CalendarBuilders(
-              markerBuilder: (context, day, events) {
-                if (events.isEmpty) return const SizedBox();
-                return ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: events.length,
-                  itemBuilder: (context, index){
-                    return Container(
-                      margin: const EdgeInsets.only(top: 30),
-                      padding: const EdgeInsets.all(1),
-                      child: Container(
-                        width: 5,
-                        height: 5,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: markerColor(events[index]),
-                        ),
+            }
+          },
+          locale: calendarLocalization,
+          firstDay: kFirstDay,
+          lastDay: kLastDay,
+          focusedDay: _focusedDay,
+          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+          calendarFormat: _calendarFormat,
+          eventLoader: (day) {
+            return _getEventsForDay(day);
+          },
+          calendarBuilders: CalendarBuilders(
+            markerBuilder: (context, day, events) {
+              if (events.isEmpty) return const SizedBox();
+              return ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: events.length,
+                itemBuilder: (context, index){
+                  return Container(
+                    margin: const EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.all(1),
+                    child: Container(
+                      width: 5,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: markerColor(events[index]),
                       ),
-                    );
-                  },
-                );
-              },
-            ),
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
-              todayDecoration: BoxDecoration(
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          startingDayOfWeek: StartingDayOfWeek.monday,
+          calendarStyle: CalendarStyle(
+            outsideDaysVisible: false,
+            todayDecoration: BoxDecoration(
                 color: Theme.of(context).focusColor,
                 shape: BoxShape.circle
-              ),
-              selectedDecoration: BoxDecoration(
-                color: Theme.of(context).focusColor,
-                shape: BoxShape.circle,
-              ),
             ),
-            onDaySelected: _onDaySelected,
-            onPageChanged: (focusedDay) {
-              _currentPage = DateTime(focusedDay.year, focusedDay.month);
-              setState(() {
-                refreshEvents();
-                _eventDays = _getDateTimes();
-                if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
-                  if(_lastTime != focusedDay.month) {
-                    _lastTime = focusedDay.month;
-                    listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
-                  }
-                }
-              });
-              _focusedDay = focusedDay;
-            },
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: TextStyle(color: Theme.of(context).primaryColorLight),
-              weekendStyle: const TextStyle(color: Colors.red),
-            ),
-            headerStyle: const HeaderStyle(
-                titleTextStyle: TextStyle(
-                  //color: Theme.of(context).colorScheme.primary,
-                  fontSize: 20,
-                ),
-                formatButtonVisible: false,
+            selectedDecoration: BoxDecoration(
+              color: Theme.of(context).focusColor,
+              shape: BoxShape.circle,
             ),
           ),
-          IconButton(
-            icon: Icon(
-                nullIcon
-            ),
-            onPressed: (){
-              setState(() {
-                switch (_calendarFormat) {
-                  case CalendarFormat.week:
-                    nullIcon = Icons.arrow_drop_up_outlined;
-                    _calendarFormat = CalendarFormat.month;
-                    break;
-                  case CalendarFormat.month:
-                    nullIcon = Icons.arrow_drop_down_outlined;
-                    _calendarFormat = CalendarFormat.week;
-                    break;
-                  default:
-                    nullIcon = Icons.arrow_drop_down_outlined;
-                    _calendarFormat = CalendarFormat.week;
-                    break;
+          onDaySelected: _onDaySelected,
+          onPageChanged: (focusedDay) {
+            _currentPage = DateTime(focusedDay.year, focusedDay.month);
+            setState(() {
+              refreshEvents();
+              _eventDays = _getDateTimes();
+              if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
+                if(_lastTime != focusedDay.month) {
+                  _lastTime = focusedDay.month;
+                  listScrollController.scrollToIndex(kEvents!.length - 1, preferPosition: AutoScrollPosition.begin);
                 }
-              });
-            },
+              }
+            });
+            _focusedDay = focusedDay;
+          },
+          daysOfWeekStyle: DaysOfWeekStyle(
+            weekdayStyle: TextStyle(color: Theme.of(context).primaryColorLight),
+            weekendStyle: const TextStyle(color: Colors.red),
           ),
-          Expanded(
+          headerStyle: const HeaderStyle(
+            titleTextStyle: TextStyle(
+              //color: Theme.of(context).colorScheme.primary,
+              fontSize: 20,
+            ),
+            formatButtonVisible: false,
+          ),
+        ),
+        IconButton(
+          icon: Icon(
+              nullIcon
+          ),
+          onPressed: (){
+            setState(() {
+              switch (_calendarFormat) {
+                case CalendarFormat.week:
+                  nullIcon = Icons.arrow_drop_up_outlined;
+                  _calendarFormat = CalendarFormat.month;
+                  break;
+                case CalendarFormat.month:
+                  nullIcon = Icons.arrow_drop_down_outlined;
+                  _calendarFormat = CalendarFormat.week;
+                  break;
+                default:
+                  nullIcon = Icons.arrow_drop_down_outlined;
+                  _calendarFormat = CalendarFormat.week;
+                  break;
+              }
+            });
+          },
+        ),
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await calendarToNextMonth();
+            },
             child: ListView.builder(
+              reverse: true,
               controller: listScrollController,
               itemCount: _getDateTimes().length,
               itemBuilder: (context, index) {
@@ -443,11 +436,11 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                           return AlertDialog(
                                             backgroundColor: Theme.of(context).cardColor,
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(30),
-                                              side: BorderSide(
-                                                color: setColor(_getEventsForDay(_eventDays![index])[evIndex].form)!,
-                                                width: 3
-                                              )
+                                                borderRadius: BorderRadius.circular(30),
+                                                side: BorderSide(
+                                                    color: setColor(_getEventsForDay(_eventDays![index])[evIndex].form)!,
+                                                    width: 3
+                                                )
                                             ),
                                             content: Container(
                                               color: Theme.of(context).cardColor,
@@ -500,9 +493,9 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                                               _launchURL(_getEventsForDay(_eventDays![index])[evIndex].meetLink);
                                                             },
                                                             child: Text(
-                                                                getTextFromKey("Schedule.joinMeeting"),
+                                                              getTextFromKey("Schedule.joinMeeting"),
                                                               style: const TextStyle(
-                                                                color: Colors.white
+                                                                  color: Colors.white
                                                               ),
                                                             ),
                                                           ),
@@ -575,10 +568,10 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                   ),
                 );
               },
-            )
-          )
-        ],
-      )
+            ),
+          ),
+        )
+      ],
     );
   }
 }

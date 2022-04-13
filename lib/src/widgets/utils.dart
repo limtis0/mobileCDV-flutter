@@ -13,7 +13,8 @@ extension StringExtension on String {
 Map<DateTime, List<ScheduleTableItem>> setEvents()
 {
   Map<DateTime, List<ScheduleTableItem>> mapEvents = {};
-  List<ScheduleTableItem> schedule = globals.schedule.list();
+  List<ScheduleTableItem> schedule = List.from(globals.schedule.list().reversed);
+
 
   for (int i = 0; i < schedule.length; i++)
   {

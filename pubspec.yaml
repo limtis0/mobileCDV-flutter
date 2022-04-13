@@ -35,6 +35,7 @@ dependencies:
   flutter_local_notifications: ^9.4.0
   provider: ^6.0.2
   scroll_to_index: any
+  lazy_load_scrollview: ^1.3.0
   # syncfusion_flutter_calendar: ^19.4.56
 
 
