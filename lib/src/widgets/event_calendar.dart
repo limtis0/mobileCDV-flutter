@@ -4,11 +4,10 @@ import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../logic/main_activity.dart';
 import '../logic/time_operations.dart';
+import '../logic/storage/globals.dart' as globals;
 
 class EventCalendar extends StatefulWidget {
   const EventCalendar({Key? key}) : super(key: key);
@@ -129,37 +128,9 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   Color markerColor(Object? obj)
   {
     obj as ScheduleTableItem;
-    return setColor(obj.form)!;
+    return globals.lessonColors[obj.form] ?? Colors.grey;
   }
 
-  // Change to global dict
-  Color? setColor(String type){
-    switch(type){
-      case "W":
-        return Colors.green;
-      case "WR":
-        return Colors.blue[200];
-      case "L":
-        return Colors.blue;
-      case "LK":
-        return Colors.purpleAccent;
-      case "C":
-        return Colors.orange;
-      case "EGSAM":
-        return Colors.purple;
-      //TODO Сделать цвета
-      /*case "W":
-        return Colors.teal;
-      case "W":
-        return Colors.teal;
-      case "W":
-        return Colors.teal;
-      case "W":
-        return Colors.teal;*/
-      default:
-        return Colors.grey;
-    }
-  }
 
   // Hence we are initializing calendar with -12 months from now as starting point
   // Current month will be on 12th page
@@ -226,7 +197,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
 
   Color _checkButton(ScheduleTableItem _event){
     if(_event.meetLink != ""){
-      return setColor(_event.form)!;
+      return globals.lessonColors[_event.form] ?? Colors.grey;
     }else {
       return Colors.grey;
     }
@@ -422,7 +393,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                               decoration: BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
-                                    color: setColor(_getEventsForDay(_eventDays![index])[evIndex].form)!,
+                                    color: globals.lessonColors[_getEventsForDay(_eventDays![index])[evIndex].form] ?? Colors.grey,
                                     width: 5,
                                   ),
                                 ),
@@ -438,7 +409,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                             shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(30),
                                                 side: BorderSide(
-                                                    color: setColor(_getEventsForDay(_eventDays![index])[evIndex].form)!,
+                                                    color: globals.lessonColors[_getEventsForDay(_eventDays![index])[evIndex].form] ?? Colors.grey,
                                                     width: 3
                                                 )
                                             ),

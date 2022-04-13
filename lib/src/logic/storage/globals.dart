@@ -4,8 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
+// Constants
+const int calendarPastMonths = 2; // How many months in past to request from server
+const int calendarFutureMonths = 6; // Same, but for future
+
+const String lessonCanceledIndicator = 'ODWOLANE';
+
+// TODO Fill colors for all lessonTypes. We can't get them :(
+final Map<String, Color> lessonColors = {
+  'W':Colors.green,
+  'WR':Colors.blue[200]!,
+  'L':Colors.blue,
+  'LK':Colors.purpleAccent,
+  'C':Colors.orange,
+  'EGSAM':Colors.purple,
+};
+
 Schedule schedule = Schedule();
 
+// Prefs
 bool isLoggedIn = false;
 
 String name = '';

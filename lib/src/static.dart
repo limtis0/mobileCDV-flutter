@@ -84,44 +84,13 @@ class HelpItem extends StatelessWidget {
   BuildContext? context;
   HelpItem({Key? key, required this.type, required this.textKey, this.context}) : super(key: key);
 
-  // TODO Change to global dict
-  Color? setColor(String type){
-    switch(type){
-      case "W":
-        return Colors.green;
-      case "WR":
-        return Colors.blue[200];
-      case "L":
-        return Colors.blue;
-      case "LK":
-        return Colors.purpleAccent;
-      case "C":
-        return Colors.orange;
-      case "EGSAM":
-        return Colors.purple;
-      case "EMPTY":
-        return Theme.of(context!).cardColor;
-    //TODO Сделать цвета
-    /*case "W":
-        return Colors.teal;
-      case "W":
-        return Colors.teal;
-      case "W":
-        return Colors.teal;
-      case "W":
-        return Colors.teal;*/
-      default:
-        return Colors.grey;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         CircleAvatar(
           radius: 5,
-          backgroundColor: setColor(type),
+          backgroundColor: globals.lessonColors[type] ?? Colors.grey,
         ),
         SizedBox(
           width: 140,

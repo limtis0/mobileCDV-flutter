@@ -22,13 +22,14 @@ Future<void> activitySignIn(String email, String password, bool imageDecode) asy
 
   try
   {
-    await fetchSchedule(token.userType, token.userId.toString(),
-        getMonthsFromNowFirstDayAPI(-2), getMonthsFromNowLastDayAPI(6), loginResponse.token);
+    await fetchSchedule(
+        token.userType, token.userId.toString(),
+        getMonthsFromNowFirstDayAPI(-globals.calendarPastMonths),
+        getMonthsFromNowLastDayAPI(globals.calendarFutureMonths),
+        loginResponse.token
+    );
   }
-  on RequestErrorException
-  {
-    rethrow;
-  }
+  on RequestErrorException { rethrow; }
 }
 
 Future<void> activitySignOut() async
