@@ -263,8 +263,8 @@ class _ProfileState extends State<ProfileLogin> {
             ),
             child: Text(
                 _text,
-              style: TextStyle(
-                color: Theme.of(context).errorColor
+              style: const TextStyle(
+                color: Colors.white
               ),
             ),
             onPressed: (){
@@ -301,8 +301,8 @@ class _ProfileState extends State<ProfileLogin> {
                                         child:
                                         Text(
                                             getTextFromKey("Profile.signOut"),
-                                          style: TextStyle(
-                                              color: Theme.of(context).errorColor
+                                          style: const TextStyle(
+                                              color: Colors.white
                                           ),
                                         ),
                                         onPressed: (){
@@ -321,8 +321,8 @@ class _ProfileState extends State<ProfileLogin> {
                                       child: ElevatedButton(
                                         child: Text(
                                             getTextFromKey("Profile.Cancel"),
-                                          style: TextStyle(
-                                              color: Theme.of(context).errorColor
+                                          style: const TextStyle(
+                                              color: Colors.white
                                           ),
                                         ),
                                         onPressed: (){

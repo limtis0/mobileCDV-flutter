@@ -501,8 +501,8 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                                             },
                                                             child: Text(
                                                                 getTextFromKey("Schedule.joinMeeting"),
-                                                              style: TextStyle(
-                                                                color: Theme.of(context).errorColor
+                                                              style: const TextStyle(
+                                                                color: Colors.white
                                                               ),
                                                             ),
                                                           ),
