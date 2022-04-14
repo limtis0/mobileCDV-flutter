@@ -24,7 +24,7 @@ class RoomText extends StatelessWidget {
   bool isCancelled = false;
 
   String getCanceledText(ScheduleTableItem _event) {
-    if(_event.status == "ODWOLANE"){
+    if(_event.status == globals.lessonCanceledStatus){
       isCancelled = true;
       return getTextFromKey("Event.CANCELLED");
     }

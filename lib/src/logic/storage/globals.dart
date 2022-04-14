@@ -8,7 +8,7 @@ import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 const int calendarPastMonths = 2; // How many months in past to request from server
 const int calendarFutureMonths = 6; // Same, but for future
 
-const String lessonCanceledIndicator = 'ODWOLANE';
+const String lessonCanceledStatus = 'ODWOLANE';
 
 // TODO Fill colors for all lessonTypes. We can't get them :(
 final Map<String, Color> lessonColors = {
