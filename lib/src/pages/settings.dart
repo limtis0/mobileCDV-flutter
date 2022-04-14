@@ -23,8 +23,15 @@ class LocaleDialog extends StatelessWidget {
       actions: [
         ElevatedButton(
           onPressed: () => exit(0),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Theme.of(context).disabledColor)
+          ),
           child: Text(
-            getTextFromKey("Setting.AlertDialog.Restart")
+            getTextFromKey("Setting.AlertDialog.Restart"),
+            style: const TextStyle(
+                color: Colors.white
+            ),
           ),
         )
       ],
