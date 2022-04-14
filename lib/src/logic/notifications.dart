@@ -101,7 +101,7 @@ class NotificationService
     // Slices schedule to set only valid notifications
     while (slice < schedule.length - 1)
     {
-      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < globals.notificationsTime)
+      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < globals.notificationsTime + 60) // +60 just to be sure
       {
         break;
       }
@@ -113,11 +113,15 @@ class NotificationService
     int? notificationTime;
     for (int i = 0; i < min(schedule.length, queueSize); i++)
     {
+      // Ignores canceled lessons
+      if (schedule[i].status == globals.lessonCanceledStatus) { continue; }
+
       // Sets notification for evening if lesson is in the morning
       scheduledTime = schedule[i].startDate;
       if (scheduledTime.hour <= 9)
       {
-        notificationTime = getSecondsUntilScheduledDate(DateTime(scheduledTime.year, scheduledTime.month, scheduledTime.day - 1, 21));
+        notificationTime = getSecondsUntilScheduledDate(DateTime(
+            scheduledTime.year, scheduledTime.month, scheduledTime.day - 1, 21));
       }
       else
       {
