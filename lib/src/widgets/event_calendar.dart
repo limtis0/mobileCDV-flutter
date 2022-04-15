@@ -105,7 +105,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   int getIndex(DateTime day){
     int i = 0;
     for(var item in _eventDays!){
-      if(item.day == day.day){
+      if(item.day >= day.day){
         return i;
       }else{
         i++;
