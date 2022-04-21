@@ -85,9 +85,9 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 
 // Не редачить, только если очень хочеться
 ThemeData darkTheme = ThemeData.dark().copyWith(
-  scaffoldBackgroundColor: Colors.grey[850]!,
-  appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)),
-  colorScheme: const ColorScheme.dark().copyWith
+  scaffoldBackgroundColor: Colors.grey[850]!, // App-Background color
+  appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)), // Top-bar color
+  colorScheme: const ColorScheme.dark().copyWith // Scroll overflow color
     (secondary: const Color(0xFF00ADB5)),
 )
   ..addOwn(const ThemeExtensionFields(
@@ -102,18 +102,11 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     buttonColor: Color(0xFF787878),
     functionalObjectsColor: Color(0xff00ADB5),
 ));
-// ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
-/*
-* Цвет не обезательно должен быть в хексе (смотри документацию) можно и просто  Colors.red
-* Названия переменых ничего не значат, смотри мои коменты (Костыль да, но если будем обновы делать поменяю уже так уж и быть)
-* Чтобы создать новую тему нужно связаться со мной там на фронте нужно добавлять риколы, если захочеш могу показать
-* Чтобы увидеть изменения темы нужно полностью перезагрузить приложение (Хот релоад не работает!!!)
-* */
-// Тема амолед ..................  ↓ наслдевать тему от light или dark
+
 ThemeData amoledTheme = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: Colors.black,
-  appBarTheme: const AppBarTheme(color: Colors.black),        // APP BAR THEME
-  colorScheme: const ColorScheme.dark().copyWith              // OVERFLOW COLOR
+  appBarTheme: const AppBarTheme(color: Colors.black),
+  colorScheme: const ColorScheme.dark().copyWith
     (secondary: Colors.white),
 )
   ..addOwn(const ThemeExtensionFields(
