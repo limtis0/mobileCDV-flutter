@@ -25,7 +25,7 @@ class LocaleDialog extends StatelessWidget {
           onPressed: () => exit(0),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
-                Theme.of(context).disabledColor)
+                themeOf(context).buttonColor!)
           ),
           child: Text(
             getTextFromKey("Setting.AlertDialog.Restart"),
@@ -181,7 +181,7 @@ class _SettingState extends State<Settings> {
                     getTextFromKey("Settings.notification")
                   ),
                   Switch(
-                    activeColor: Theme.of(context).toggleableActiveColor,
+                    activeColor: themeOf(context).functionalObjectsColor,
                     value: globals.notificationsToggle,
                     onChanged: (value){
                       setState(() {

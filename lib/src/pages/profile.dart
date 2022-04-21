@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/theme_manager.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import '../logic/main_activity.dart';
 
@@ -49,7 +50,7 @@ class _ProfileStatePage extends State<Profile> {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundColor: Theme.of(context).disabledColor,
+              backgroundColor: themeOf(context).buttonColor,
               radius: 72,
               child: CircleAvatar(
                 radius: 70,
@@ -116,14 +117,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                   SizedBox(
                     width: 230,
                     child: TextField(
-                      cursorColor: Theme.of(context).toggleableActiveColor,
+                      cursorColor: themeOf(context).functionalObjectsColor,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Theme.of(context).hintColor)
+                            borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
                         ),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Theme.of(context).toggleableActiveColor, width: 2)
+                            borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
                         ),
                         hintText: getTextFromKey("Login.Page.Hint.login"),
                       ),
@@ -154,14 +155,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                     width: 230,
                     child: TextField(
                       obscureText: true,
-                      cursorColor: Theme.of(context).toggleableActiveColor,
+                      cursorColor: themeOf(context).functionalObjectsColor,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Theme.of(context).hintColor)
+                            borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
                         ),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Theme.of(context).toggleableActiveColor, width: 2)
+                            borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
                         ),
                         hintText: getTextFromKey("Login.Page.Hint.password"),
                       ),
@@ -258,7 +259,7 @@ class _ProfileState extends State<ProfileLogin> {
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
-                Theme.of(context).disabledColor
+                  themeOf(context).buttonColor!
               )
             ),
             child: Text(
@@ -279,7 +280,7 @@ class _ProfileState extends State<ProfileLogin> {
                     context: context,
                     builder: (context){
                       return AlertDialog(
-                        backgroundColor: Theme.of(context).cardColor,
+                        backgroundColor: themeOf(context).popUpBackgroundColor,
                         title: Text(getTextFromKey("Profile.Confirmation")),
                         content: SizedBox(
                           height: 90,
@@ -311,7 +312,7 @@ class _ProfileState extends State<ProfileLogin> {
                                         },
                                         style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all<Color>(
-                                                Theme.of(context).disabledColor
+                                                themeOf(context).buttonColor!
                                             )
                                         ),
                                       ),
@@ -330,7 +331,7 @@ class _ProfileState extends State<ProfileLogin> {
                                         },
                                         style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all<Color>(
-                                                Theme.of(context).disabledColor
+                                                themeOf(context).buttonColor!
                                             )
                                         ),
                                       ),
@@ -363,13 +364,13 @@ class LoadingIndicator extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).cardColor,
+      backgroundColor: themeOf(context).popUpBackgroundColor,
       title: Text(getTextFromKey("Profile.Loading")),
       content: SizedBox(
         width: 50,
         height: 5,
         child: LinearProgressIndicator(
-          color: Theme.of(context).toggleableActiveColor,
+          color: themeOf(context).functionalObjectsColor,
         ),
       )
     );

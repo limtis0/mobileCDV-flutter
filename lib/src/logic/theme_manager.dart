@@ -1,32 +1,107 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
-// TODO Rewrite all themes
+
+class ThemeExtensionFields {
+  final Color? popUpBackgroundColor;
+  final Color? eventBackgroundColor;
+  final Color? eventTextColor;
+  final Color? fieldTextColor;
+  final Color? calendarWeekdaysColor;
+  final Color? calendarFocusedDayColor;
+  final Color? bottomBarColor;
+  final Color? bottomBarSelectedColor;
+  final Color? buttonColor;
+  final Color? functionalObjectsColor;
+
+  const ThemeExtensionFields({
+    this.popUpBackgroundColor,
+    this.eventBackgroundColor,
+    this.eventTextColor,
+    this.fieldTextColor,
+    this.calendarWeekdaysColor,
+    this.calendarFocusedDayColor,
+    this.bottomBarColor,
+    this.bottomBarSelectedColor,
+    this.buttonColor,
+    this.functionalObjectsColor,
+  });
+
+  // Null-safety
+  factory ThemeExtensionFields.empty() {
+    return const ThemeExtensionFields(
+      popUpBackgroundColor: Colors.white,
+      eventBackgroundColor: Color(0xFFEEEEEE),
+      eventTextColor: Color(0xFF616161),
+      fieldTextColor: Colors.black,
+      calendarWeekdaysColor: Colors.black,
+      calendarFocusedDayColor: Colors.lightBlueAccent,
+      bottomBarColor: Colors.white,
+      bottomBarSelectedColor: Colors.blue,
+      buttonColor: Colors.blue,
+      functionalObjectsColor: Colors.blue,
+    );
+  }
+}
+
+extension ThemeDataExtensions on ThemeData {
+  static final Map<int, ThemeExtensionFields> _own = {};
+
+  void addOwn(ThemeExtensionFields own) {
+    _own[globals.theme] = own;
+  }
+
+  static ThemeExtensionFields? empty;
+
+  // Null-safety
+  ThemeExtensionFields own() {
+    var o = _own[globals.theme];
+    if (o == null) {
+      empty ??= ThemeExtensionFields.empty();
+      o = empty;
+    }
+    return o!;
+  }
+}
+// Helper method. Call themeOf(context) to get the color in widgets
+ThemeExtensionFields themeOf(BuildContext context) => Theme.of(context).own();
 
 // Не редачить, только если очень хочеться
 ThemeData lightTheme = ThemeData.light().copyWith(
-  primaryColor: Colors.grey[700]!,
-  primaryColorLight: Colors.black,
-  backgroundColor: Colors.grey[200]!,
-  bottomAppBarColor: Colors.blue,
-  disabledColor: Colors.blue,
-  cardColor: Colors.white,
-  focusColor: Colors.lightBlueAccent,
-  hintColor: Colors.black,
-  toggleableActiveColor: Colors.blue,
-);
+  scaffoldBackgroundColor: Colors.grey[50]!,
+)
+  ..addOwn(const ThemeExtensionFields(
+    popUpBackgroundColor: Colors.white,
+    eventBackgroundColor: Color(0xFFEEEEEE),
+    eventTextColor: Color(0xFF616161),
+    fieldTextColor: Colors.black,
+    calendarWeekdaysColor: Colors.black,
+    calendarFocusedDayColor: Colors.lightBlueAccent,
+    bottomBarColor: Colors.white,
+    bottomBarSelectedColor: Colors.blue,
+    buttonColor: Colors.blue,
+    functionalObjectsColor: Colors.blue,
+));
 
 // Не редачить, только если очень хочеться
 ThemeData darkTheme = ThemeData.dark().copyWith(
-  primaryColor: Colors.white,
-  primaryColorLight: Colors.white,
-  backgroundColor: const Color(0xFF333333),
+  scaffoldBackgroundColor: Colors.grey[850]!,
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)),
-  bottomAppBarColor: Colors.white,
-  toggleableActiveColor: const Color(0xff00ADB5),
   colorScheme: const ColorScheme.dark().copyWith
-    (secondary: const Color(0xff00ADB5)),
-);
+    (secondary: const Color(0xFF00ADB5)),
+)
+  ..addOwn(const ThemeExtensionFields(
+    popUpBackgroundColor: Color(0xFF424242),
+    eventBackgroundColor: Color(0xFF333333),
+    eventTextColor: Colors.white,
+    fieldTextColor: Color(0xFFACACAC),
+    calendarWeekdaysColor: Colors.white,
+    calendarFocusedDayColor: Color(0xFF494949),
+    bottomBarColor: Color(0xFF303030),
+    bottomBarSelectedColor: Colors.white,
+    buttonColor: Color(0xFF787878),
+    functionalObjectsColor: Color(0xff00ADB5),
+));
 // ДАЛЬШЕ ИДУТ КАСТОМНЫЕ ТЕМЫ
 /*
 * Цвет не обезательно должен быть в хексе (смотри документацию) можно и просто  Colors.red
@@ -36,39 +111,43 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 * */
 // Тема амолед ..................  ↓ наслдевать тему от light или dark
 ThemeData amoledTheme = ThemeData.dark().copyWith(
-  primaryColor: Colors.white,                                 // цвет текста в ивентах
-  primaryColorLight: Colors.white,                            // цвет дней недели
-  appBarTheme: const AppBarTheme(color: Colors.black),        // цвет апп бара (панель сверху)
-  canvasColor: Colors.black,                                  // цвет ботом бара (панель внизу)
-  bottomAppBarColor: Colors.white,                            // цвет выбранной категории в ботом баре
-  backgroundColor: const Color(0xFF262626),                   // цвет бэк граунда в ивентах
-  scaffoldBackgroundColor: Colors.black,                      // цвет бэк граунда в окнах
-  disabledColor: const Color(0xFF262626),                     // цвет кнопок и рамки вокруг аватарки (если че скажи я вынесу отдельным полем)
-  cardColor: const Color(0xFF262626),                         // цвет бэкграунда в поп апе
-  focusColor: const Color(0xFF262626),                        // цвет круга в календаре (сегодняшний день)
-  hintColor: Colors.white,                                    // цвет текста в форме логина
-  toggleableActiveColor: Colors.white,                        // цвет тоглла в настройках нотификаций
-  colorScheme: const ColorScheme.dark().copyWith              // цвет оверфлова при пролистывании
+  scaffoldBackgroundColor: Colors.black,
+  appBarTheme: const AppBarTheme(color: Colors.black),        // APP BAR THEME
+  colorScheme: const ColorScheme.dark().copyWith              // OVERFLOW COLOR
     (secondary: Colors.white),
-);
+)
+  ..addOwn(const ThemeExtensionFields(
+  popUpBackgroundColor: Color(0xFF262626),
+  eventBackgroundColor: Color(0xFF262626),
+  eventTextColor: Colors.white,
+  fieldTextColor: Colors.white,
+  calendarWeekdaysColor: Colors.white,
+  calendarFocusedDayColor: Color(0xFF262626),
+  bottomBarColor: Colors.black,
+  bottomBarSelectedColor: Colors.white,
+  buttonColor: Color(0xFF262626),
+  functionalObjectsColor: Colors.white,
+));
 
 // Pink theme
 ThemeData pinkTheme = ThemeData.light().copyWith(
-  primaryColor: const Color(0xFFE18AAA),
-  primaryColorLight: const Color(0xFFE18AAA),
-  appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
-  canvasColor: const Color(0xFFE18AAA),
-  backgroundColor: const Color(0xFFFBD3ED),
   scaffoldBackgroundColor: const Color(0xFFFDEBF7),
-  disabledColor: const Color(0xFFE18AAA),
-  bottomAppBarColor: const Color(0xFFFDEBF7),
-  cardColor: const Color(0xFFFDEBF7),
-  hintColor: const Color(0xFFE4A0B7),
-  focusColor: const Color(0xFFFBD3ED),
-  toggleableActiveColor: const Color(0xFFE18AAA),
+  appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
   colorScheme: const ColorScheme.light().copyWith
     (secondary: const Color(0xFFE18AAA)),
-);
+)
+  ..addOwn(const ThemeExtensionFields(
+    popUpBackgroundColor: Color(0xFFFDEBF7),
+    eventBackgroundColor: Color(0xFFFBD3ED),
+    eventTextColor: Color(0xFFE18AAA),
+    fieldTextColor: Color(0xFFE4A0B7),
+    calendarWeekdaysColor: Color(0xFFE18AAA),
+    calendarFocusedDayColor: Color(0xFFFBD3ED),
+    bottomBarColor: Color(0xFFE18AAA),
+    bottomBarSelectedColor: Color(0xFFFDEBF7),
+    buttonColor: Color(0xFFE18AAA),
+    functionalObjectsColor: Color(0xFFE18AAA),
+));
 
 
 ThemeData setTheme() {

@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
+import 'package:mobile_cdv/src/logic/theme_manager.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -38,7 +39,7 @@ class RoomText extends StatelessWidget {
       getCanceledText(event),
       textAlign: TextAlign.right,
       style: TextStyle(
-        color: isCancelled ? Colors.red : Theme.of(context).primaryColor,
+        color: isCancelled ? Colors.red : themeOf(context).eventTextColor!,
       ),
     );
   }
@@ -105,7 +106,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   int getIndex(DateTime day){
     int i = 0;
     for(var item in _eventDays!){
-      if(item.day >= day.day){
+      if(item.day == day.day){
         return i;
       }else{
         i++;
@@ -277,11 +278,11 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
           calendarStyle: CalendarStyle(
             outsideDaysVisible: false,
             todayDecoration: BoxDecoration(
-                color: Theme.of(context).focusColor,
+                color: themeOf(context).calendarFocusedDayColor,
                 shape: BoxShape.circle
             ),
             selectedDecoration: BoxDecoration(
-              color: Theme.of(context).focusColor,
+              color: themeOf(context).calendarFocusedDayColor,
               shape: BoxShape.circle,
             ),
           ),
@@ -301,7 +302,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             _focusedDay = focusedDay;
           },
           daysOfWeekStyle: DaysOfWeekStyle(
-            weekdayStyle: TextStyle(color: Theme.of(context).primaryColorLight),
+            weekdayStyle: TextStyle(color: themeOf(context).calendarWeekdaysColor),
             weekendStyle: const TextStyle(color: Colors.red),
           ),
           headerStyle: const HeaderStyle(
@@ -397,7 +398,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                     width: 5,
                                   ),
                                 ),
-                                color: Theme.of(context).backgroundColor,
+                                color: themeOf(context).eventBackgroundColor,
                               ),
                               child: ListTile(
                                   onTap: (){
@@ -405,7 +406,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                         context: context,
                                         builder: (BuildContext dialogContext) {
                                           return AlertDialog(
-                                            backgroundColor: Theme.of(context).cardColor,
+                                            backgroundColor: themeOf(context).popUpBackgroundColor,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(30),
                                                 side: BorderSide(
@@ -414,7 +415,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                                 )
                                             ),
                                             content: Container(
-                                              color: Theme.of(context).cardColor,
+                                              color: themeOf(context).popUpBackgroundColor,
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
@@ -495,19 +496,19 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                                 Text(
                                                   formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].startDate),
                                                   style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
+                                                    color: themeOf(context).eventTextColor,
                                                   ),
                                                 ),
                                                 Text(
                                                   " - ",
                                                   style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
+                                                    color: themeOf(context).eventTextColor,
                                                   ),
                                                 ),
                                                 Text(
                                                   formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].endDate),
                                                   style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
+                                                    color: themeOf(context).eventTextColor,
                                                   ),
                                                 ),
                                               ],
@@ -524,7 +525,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                           _getEventsForDay(_eventDays![index])[evIndex].subjectName,
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
-                                            color: Theme.of(context).primaryColor,
+                                            color: themeOf(context).eventTextColor,
                                           ),
                                         ),
                                       )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/theme_manager.dart';
 
 // Pages
 import 'pages/profile.dart';
@@ -109,7 +110,7 @@ class HelpItem extends StatelessWidget {
 
 Widget HelpDialog(BuildContext context) {
   return AlertDialog(
-    backgroundColor: Theme.of(context).cardColor,
+    backgroundColor: themeOf(context).popUpBackgroundColor,
     title: Text(
       getTextFromKey("Static.HelpDialog"),
       textAlign: TextAlign.center,
@@ -391,10 +392,10 @@ class _ControlsState extends State<Controls> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Theme.of(context).canvasColor,
+        backgroundColor: themeOf(context).bottomBarColor,
         items: getBottomTabs(_bottomTabs),
         currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).bottomAppBarColor,
+        selectedItemColor: themeOf(context).bottomBarSelectedColor,
         onTap: goTo,
       ),
     );
