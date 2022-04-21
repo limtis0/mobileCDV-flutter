@@ -66,7 +66,8 @@ extension ThemeDataExtensions on ThemeData {
 // Helper method. Call themeOf(context) to get the color in widgets
 ThemeExtensionFields themeOf(BuildContext context) => Theme.of(context).own();
 
-// Не редачить, только если очень хочеться
+
+// THEMES
 ThemeData lightTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: Colors.grey[50]!,
 )
@@ -83,7 +84,6 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     functionalObjectsColor: Colors.blue,
 ));
 
-// Не редачить, только если очень хочеться
 ThemeData darkTheme = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: Colors.grey[850]!, // App-Background color
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)), // Top-bar color
@@ -122,7 +122,6 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   functionalObjectsColor: Colors.white,
 ));
 
-// Pink theme
 ThemeData pinkTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: const Color(0xFFFDEBF7),
   appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
@@ -143,6 +142,7 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
 ));
 
 
+// Logic
 ThemeData setTheme() {
   switch(globals.theme) {
     case 0:
