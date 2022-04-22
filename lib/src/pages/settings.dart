@@ -13,28 +13,38 @@ class LocaleDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    return AlertDialog(
-      title: Text(
-        getTextFromKey("Settings.AlertDialog")
-      ),
-      content: Text(
-        getTextFromKey("Settings.AlertDialog.q")
-      ),
-      actions: [
-        ElevatedButton(
-          onPressed: () => exit(0),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-                themeOf(context).buttonColor!)
+    return WillPopScope(
+      onWillPop: () async { return false; },
+      child: AlertDialog(
+          backgroundColor: themeOf(context).popUpBackgroundColor,
+          title: Text(
+            getTextFromKey("Settings.AlertDialog"),
+            textAlign: TextAlign.center,
           ),
-          child: Text(
-            getTextFromKey("Setting.AlertDialog.Restart"),
-            style: const TextStyle(
-                color: Colors.white
-            ),
-          ),
-        )
-      ],
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                getTextFromKey("Settings.AlertDialog.q"),
+              ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: () => exit(0),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      themeOf(context).buttonColor!),
+                ),
+                child: Text(
+                  getTextFromKey("Setting.AlertDialog.Restart"),
+                  style: const TextStyle(
+                      color: Colors.white
+                  ),
+                ),
+              )
+            ],
+          )
+      ),
     );
   }
 }
@@ -48,7 +58,6 @@ class Settings extends StatefulWidget {
 
 class _SettingState extends State<Settings> {
 
-  final String _currentLocale = getTextFromKey("Settings.locale");
   String dropdownValue = getTextFromKey("Settings.locale.choose");
   String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
 
