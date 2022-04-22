@@ -194,7 +194,6 @@ class Controls extends StatefulWidget {
 
 class _ControlsState extends State<Controls> {
   int _selectedIndex = 1;
-  //String _title = getTextFromKey("Main.Schedule");
 
   PreferredSizeWidget _customAppBar(int index) {
     switch(index) {
@@ -229,20 +228,15 @@ class _ControlsState extends State<Controls> {
     }
   }
 
-  void _onItemTapped(int? index) {
-    if (globals.isLoggedIn && _selectedIndex == 1 && index == 1){
+  final PageController controller = PageController(initialPage: 1);
+  void goTo(int index){
+    controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
+    if (globals.isLoggedIn && _selectedIndex == 1 && index == 1) {
       return EventCalendarState().calendarToToday();
     }
     setState(() {
-      _selectedIndex = index!;
+      _selectedIndex = index;
     });
-  }
-
-  final PageController controller = PageController(initialPage: 1);
-
-  void goTo(int index){
-    controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
-    _onItemTapped(index);
   }
 
   @override
@@ -259,7 +253,9 @@ class _ControlsState extends State<Controls> {
             Canvas(pageId: 2),
           ],
           onPageChanged: (index) {
-            _onItemTapped(index);
+            setState(() {
+              _selectedIndex = index;
+            });
           }
         ),
       ),
