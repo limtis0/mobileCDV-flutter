@@ -36,13 +36,13 @@ final Map<String, String> lessonNames = {
   'TODO_E_LEARNING':getTextFromKey('Static.Elearning'),
   'C':getTextFromKey('Static.Cwiczenia'),
   'LK':getTextFromKey('Static.Lektorat'),
-  'TODO_PROJECT':getTextFromKey('Static.Projekt'),
+  'TODO_PROJEKT':getTextFromKey('Static.Projekt'),
   'TODO_PRAKTYKI':getTextFromKey('Static.Praktyki'),
   'TODO_SEMINARIUM':getTextFromKey('Static.Seminarium'),
-  'TODO_KOWERSATORIUM':getTextFromKey('Staic.Konwesatorium'), // TODO FIX NAME
+  'TODO_KONWERSATORIUM':getTextFromKey('Static.Konwersatorium'),
   'TODO_SPOTKANIE':getTextFromKey('Static.Spotkanie'),
   'EGSAM':getTextFromKey('Static.Zaliczenie'),
-  'TODO_REZERWACJA':getTextFromKey('Static.Rezewacja'), // TODO FIX NAME
+  'TODO_REZERWACJA':getTextFromKey('Static.Rezerwacja'),
   'TODO_DYZUR':getTextFromKey('Static.Dyzur'),
 };
 

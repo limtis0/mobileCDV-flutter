@@ -52,9 +52,9 @@ class ReqLoginPage extends StatelessWidget{
 
 class Canvas extends StatelessWidget {
   final int pageId;
-  bool isLogged = false;
+  final bool isLogged = false;
 
-  Canvas({Key? key, required this.pageId}) : super(key: key);
+  const Canvas({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +73,9 @@ class Canvas extends StatelessWidget {
 }
 
 class HelpItem extends StatelessWidget {
-  String type;
-  String textKey;
-  BuildContext? context;
-  HelpItem({Key? key, required this.type, required this.textKey, this.context}) : super(key: key);
+  final String type;
+  final BuildContext? context;
+  const HelpItem({Key? key, required this.type, this.context}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +90,7 @@ class HelpItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-              getTextFromKey(textKey),
+              globals.lessonNames[type] ?? "ERROR",
               softWrap: true,
             ),
           ),
@@ -101,7 +100,7 @@ class HelpItem extends StatelessWidget {
   }
 }
 
-Widget HelpDialog(BuildContext context) {
+Widget helpDialog(BuildContext context) {
   return AlertDialog(
     backgroundColor: themeOf(context).popUpBackgroundColor,
     title: Text(
@@ -116,37 +115,34 @@ Widget HelpDialog(BuildContext context) {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // TODO: Fill all lesson types
                 Padding(
                   padding: const EdgeInsets.only(left: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
                           type: "W",
-                          textKey: "Static.Wyklad",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
                           type: "L",
-                          textKey: "Static.Labaratoria",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
                           type: "C",
-                          textKey: "Static.Cwiczenia",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
-                          type: "TODO",
-                          textKey: "Static.Projekt",
+                          type: "TODO_PROJEKT",
                         ),
                       ),
                     ],
@@ -156,33 +152,29 @@ Widget HelpDialog(BuildContext context) {
                   padding: const EdgeInsets.only(left: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
                           type: "WR",
-                          textKey: "Static.Warsztaty",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
-                          type: "ELEARNING TODO",
-                          textKey: "Static.Elearning",
+                          type: "TODO_E_LEARNING",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
                           type: "LK",
-                          textKey: "Static.Lektorat",
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 5),
                         child: HelpItem(
-                          type: "TODO",
-                          textKey: "Static.Praktyki",
+                          type: "TODO_PRAKTYKI",
                         ),
                       ),
                     ],
@@ -203,32 +195,28 @@ Widget HelpDialog(BuildContext context) {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 5),
                               child: HelpItem(
-                                type: "TODO",
-                                textKey: "Static.Seminarium",
+                                type: "TODO_SEMINARIUM",
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 5),
                               child: HelpItem(
-                                type: "TODO",
-                                textKey: "Staic.Konwesatorium",
+                                type: "TODO_KONWERSATORIUM",
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: HelpItem(
+                                type: "TODO_SPOTKANIE",
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: HelpItem(
                                 type: "EGSAM",
-                                textKey: "Static.Spotkanie",
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "EMPTY",
-                                textKey: "Static.Zaliczenie",
                                 context: context,
                               ),
                             ),
@@ -243,16 +231,14 @@ Widget HelpDialog(BuildContext context) {
                             Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: HelpItem(
-                                type: "EMPTY",
-                                textKey: "Static.Rezewacja",
+                                type: "TODO_REZERWACJA",
                                 context: context,
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: HelpItem(
-                                type: "EMPTY",
-                                textKey: "Static.Dyzur",
+                                type: "TODO_DYZUR",
                                 context: context,
                               ),
                             ),
@@ -333,7 +319,7 @@ class _ControlsState extends State<Controls> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context){
-                      return HelpDialog(context);
+                      return helpDialog(context);
                     },
                   );
                 },
@@ -373,7 +359,7 @@ class _ControlsState extends State<Controls> {
       body: SafeArea(
         child: PageView(
           controller: controller,
-          children: [
+          children: const [
             Canvas(pageId: 0),
             Canvas(pageId: 1),
             Canvas(pageId: 2),

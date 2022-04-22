@@ -18,7 +18,7 @@ Settings.c.lang,Language,Język,Язык,Dil
 Settings.theme,Theme,Motyw,Тема,Tema
 Settings.theme.choose,Select theme,Wybierz motyw,Выбрать тему,Tema Seç
 Login.Page.error,Bad login or password,Błędny login lub hasło,Неправильный логин или пароль,Hatalı şifre veya kullanıcı adı
-noSchedule.page,Log into your account to see Schedule,Zaloguj się na swoje konto aby zobaczyć plan,Войдите в аккаунт чтобы увидеть расписание,Planı görmek için lutfen giriş yapın
+noSchedule.page,Log into your account to see Schedule,Zaloguj się na swoje konto aby zobaczyć plan,"Войдите в аккаунт, чтобы увидеть расписание",Planı görmek için lutfen giriş yapın
 Calendar.monday,Monday,Poniedziałek,Понедельник,Pazartesi
 Calendar.tuesday,Tuesday,Wtorek,Вторник,Salı
 Calendar.wednesday,Wednesday,Środa,Среда,Çarsamba
@@ -48,22 +48,22 @@ Static.HelpDialog,Help,Pomoc,Помощь,Yardım
 Static.Wyklad,Lecture,Wyklad,Лекция ,Ders 
 Static.Warsztaty,Workshops,Warsztaty,Мастерская,Atölye
 Static.Labaratoria,Labratory,Laboratoria ,Лаборатория ,Laboratuvar
-Static.Elearning,E-learning ,E-learning,E-learning ,E-Learning
+Static.Elearning,E-Learning ,E-Learning,E-Learning ,E-Learning
 Static.Cwiczenia,Exercises ,Czwiczenia,Упражнения ,Egzersizler
 Static.Lektorat,Readership,Lectorat,Лекторат,
 Static.Projekt,Project,Projekt,Проект,Proje
 Static.Praktyki,Practices ,Praktyki,Практика,Uygulamalar
 Static.Seminarium,Seminar,Seminarium,Семинар,Seminer
-Staic.Konwesatorium,Conversation ,Konwersatorium ,Обсуждение,Konuşma
+Static.Konwersatorium,Conversation ,Konwersatorium ,Обсуждение,Konuşma
 Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,Sınav
-Static.Rezewacja,Reservation,Rezerwacja ,Резервация,Rezervasyon
+Static.Rezerwacja,Reservation,Rezerwacja ,Резервация,Rezervasyon
 Static.Dyzur,Standby,Dyżur ,Дежурство,
 Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,Встреча,Meeting
-Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć,,
-Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc,,
-Static.HelpText3,Tap the 'Schedule' button on the bottom-bar to get today's date.,Wciśnij 'Plan zajęć' aby wyświetlić dzisiejszą datę,,Bugünün tarihini görmek için alt çubuktaki 'Planla' düğmesine dokunun.
-Login.ask,Do you want to sign out?,Czy chcesz się wylogować?,,Çıkış mı yapmak istiyorsunuz?
+Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć.,"Потяните расписание сверху, чтобы обновить его.",
+Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc.,"Потяните расписание снизу, чтобы перейти на следующий месяц.",
+Static.HelpText3,Tap the 'Schedule' button on the bottom-bar to get to today's date.,Wciśnij 'Plan zajęć' aby wyświetlić dzisiejszą datę.,"Нажмите на кнопку 'Расписание', чтобы перейти к сегодняшней дате.",Bugünün tarihini görmek için alt çubuktaki 'Planla' düğmesine dokunun.
+Login.ask,Do you want to sign out?,Czy chcesz się wylogować?,"Уверены, что хотите выйти?",Çıkış mı yapmak istiyorsunuz?
 Profile.Cancel,Cancel,Anuluj,Отменить,İptal et
 Profile.Confirmation,Confirm,Potwierdź,Подтвердить,Onayla
 Settings.notification,Notifications,Powiadomienia,Уведомления,Bildirimler
-Event.CANCELLED,Canceled,Odwolane,Отменено,
+Event.CANCELLED,Canceled,Odwołane,Отменено,
