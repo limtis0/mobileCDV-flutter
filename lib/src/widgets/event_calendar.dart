@@ -13,30 +13,20 @@ import '../logic/storage/globals.dart' as globals;
 class EventCalendar extends StatefulWidget {
   const EventCalendar({Key? key}) : super(key: key);
 
-
   @override
   State<EventCalendar> createState() => EventCalendarState();
 }
 
 class RoomText extends StatelessWidget {
-  ScheduleTableItem event;
+  final ScheduleTableItem event;
   RoomText({Key? key, required this.event}) : super(key: key);
 
-  bool isCancelled = false;
-
-  String getCanceledText(ScheduleTableItem _event) {
-    if(_event.status == globals.lessonCanceledStatus){
-      isCancelled = true;
-      return getTextFromKey("Event.CANCELLED");
-    }
-    isCancelled = false;
-    return _event.room;
-  }
+  late final bool isCancelled = (event.status == globals.lessonCanceledStatus);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      getCanceledText(event),
+      isCancelled ? getTextFromKey("Event.CANCELLED") : event.room,
       textAlign: TextAlign.right,
       style: TextStyle(
         color: isCancelled ? Colors.red : themeOf(context).eventTextColor!,
