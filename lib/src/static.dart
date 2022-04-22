@@ -85,13 +85,15 @@ class HelpItem extends StatelessWidget {
           radius: 5,
           backgroundColor: globals.lessonColors[type] ?? Colors.grey,
         ),
-        SizedBox(
-          width: 140,
+        ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: double.infinity,
+          ),
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
               globals.lessonNames[type] ?? "ERROR",
-              softWrap: true,
+              softWrap: false,
             ),
           ),
         )
@@ -103,190 +105,82 @@ class HelpItem extends StatelessWidget {
 Widget helpDialog(BuildContext context) {
   return AlertDialog(
     backgroundColor: themeOf(context).popUpBackgroundColor,
-    title: Text(
-      getTextFromKey("Static.HelpDialog"),
-      textAlign: TextAlign.center,
-    ),
-    content: SizedBox(
-      height: 450,
-      child: Center(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // TODO: Fill all lesson types
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "W",
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "L",
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "C",
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "TODO_PROJEKT",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "WR",
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "TODO_E_LEARNING",
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "LK",
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: HelpItem(
-                          type: "TODO_PRAKTYKI",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 35),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "TODO_SEMINARIUM",
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "TODO_KONWERSATORIUM",
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "TODO_SPOTKANIE",
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "EGSAM",
-                                context: context,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 35),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "TODO_REZERWACJA",
-                                context: context,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: HelpItem(
-                                type: "TODO_DYZUR",
-                                context: context,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+    title:
+    Text(getTextFromKey("Static.HelpDialog"), textAlign: TextAlign.center),
+    content:
+    Wrap(
+      // TODO: Fill all lesson types
+      children: <Widget>[
+      Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Wrap(
+                direction: Axis.vertical,
+                spacing: 5,
+                children: const [
+                  HelpItem(type: "W"),
+                  HelpItem(type: "L"),
+                  HelpItem(type: "C"),
+                  HelpItem(type: "TODO_PROJEKT"),
                 ],
               ),
-            ),
-            const Divider(thickness: 1.5,),
-            Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: SizedBox(
-                  width: 250,
-                  child: Text(
-                    getTextFromKey("Static.HelpText1"),
-                    softWrap: true,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-            ),
-            Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: SizedBox(
-                  width: 250,
-                  child: Text(
-                    getTextFromKey("Static.HelpText2"),
-                    softWrap: true,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-            ),
-            Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: SizedBox(
-                  width: 250,
-                  child: Text(
-                    getTextFromKey("Static.HelpText3"),
-                    softWrap: true,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-            ),
-          ],
-        )
-      )
+              const SizedBox(width: 10),
+              Wrap(
+                direction: Axis.vertical,
+                spacing: 5,
+                children: const [
+                  HelpItem(type: "WR"),
+                  HelpItem(type: "TODO_E_LEARNING"),
+                  HelpItem(type: "LK"),
+                  HelpItem(type: "TODO_PRAKTYKI"),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Wrap(
+                direction: Axis.vertical,
+                spacing: 5,
+                children: const [
+                  HelpItem(type: "TODO_SEMINARIUM"),
+                  HelpItem(type: "TODO_KONWERSATORIUM"),
+                  HelpItem(type: "TODO_SPOTKANIE"),
+                  HelpItem(type: "EGSAM"),
+                  HelpItem(type: "TODO_REZERWACJA"),
+                  HelpItem(type: "TODO_DYZUR"),
+                ],
+              ),
+            ],
+          ),
+          const Padding(padding: EdgeInsets.all(10), child: Divider(thickness: 1.5)),
+          Column(
+            children: <Widget>[
+              Text(
+                getTextFromKey("Static.HelpText1"),
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                getTextFromKey("Static.HelpText2"),
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                getTextFromKey("Static.HelpText3"),
+                textAlign: TextAlign.center,
+                softWrap: true,
+              )
+            ]
+          ),
+        ],
+      )]
     )
   );
 }

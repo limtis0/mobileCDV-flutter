@@ -22,7 +22,7 @@ final Map<String, Color> lessonColors = {
   'TODO_PROJEKT':Colors.pink,
   'TODO_PRAKTYKI':Colors.indigo[900]!,
   'TODO_SEMINARIUM':Colors.indigo,
-  'TODO_KONWERSATORIUM':Colors.deepOrange[600]!,
+  'TODO_KONWERSATORIUM':Colors.deepOrange!,
   'TODO_SPOTKANIE':Colors.purple,
   'EGSAM':Colors.purple[600]!,
   'TODO_REZERWACJA':Colors.purple[700]!,
