@@ -62,7 +62,7 @@ class Canvas extends StatelessWidget {
       case 0:
         return const ProfileLogin();
       case 1:
-        if(globals.isLoggedIn) { return const EventCalendar(); }
+        if (globals.isLoggedIn) { return const EventCalendar(); }
         return const ReqLoginPage();
       case 2:
         return const Settings();
@@ -86,15 +86,10 @@ class HelpItem extends StatelessWidget {
           backgroundColor: globals.lessonColors[type] ?? Colors.grey,
         ),
         ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: double.infinity,
-          ),
+          constraints: const BoxConstraints(maxWidth: double.infinity),
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Text(
-              globals.lessonNames[type] ?? "ERROR",
-              softWrap: false,
-            ),
+            child: Text(globals.lessonNames[type] ?? "ERROR"),
           ),
         )
       ],
@@ -198,9 +193,7 @@ class _ControlsState extends State<Controls> {
   PreferredSizeWidget _customAppBar(int index) {
     switch(index) {
       case 0:
-        return AppBar(
-          title: Text(getTextFromKey("Main.Account")),
-        );
+        return AppBar(title: Text(getTextFromKey("Main.Account")));
       case 1:
         return AppBar(
           title: Text(getTextFromKey("Main.Schedule")),
@@ -222,18 +215,16 @@ class _ControlsState extends State<Controls> {
           ],
         );
       default:
-        return AppBar(
-          title: Text(getTextFromKey("Main.Settings")),
-        );
+        return AppBar(title: Text(getTextFromKey("Main.Settings")));
     }
   }
 
   final PageController controller = PageController(initialPage: 1);
   void goTo(int index){
-    controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
     if (globals.isLoggedIn && _selectedIndex == 1 && index == 1) {
       return EventCalendarState().calendarToToday();
     }
+    controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
     setState(() {
       _selectedIndex = index;
     });

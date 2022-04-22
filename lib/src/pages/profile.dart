@@ -45,8 +45,7 @@ class _ProfileStatePage extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
+      child: Padding(padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             CircleAvatar(
@@ -54,31 +53,23 @@ class _ProfileStatePage extends State<Profile> {
               radius: 72,
               child: CircleAvatar(
                 radius: 70,
-                backgroundImage: globals.avatar,
+                backgroundImage: globals.avatar
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(10),
-            ),
+            const SizedBox(height: 20),
             Text(
               globals.name,
-              style: const TextStyle(
-                fontSize: 30,
-              ),
+              style: const TextStyle(fontSize: 30),
               textAlign: TextAlign.center,
             ),
             Text(
               globals.type.capitalize(),
-              style: const TextStyle(
-                fontSize: 18,
-              ),
+              style: const TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
             Text(
               'Numer albumu: ${globals.album}',
-              style: const TextStyle(
-                fontSize: 18,
-              ),
+              style: const TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
           ],
