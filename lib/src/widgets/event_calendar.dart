@@ -336,6 +336,8 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
         ),
         Expanded(
           child: RefreshIndicator(
+            color: themeOf(context).functionalObjectsColor,
+            backgroundColor: themeOf(context).eventBackgroundColor,
             onRefresh: () async {
               await calendarToNextMonth();
             },
