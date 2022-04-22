@@ -22,6 +22,7 @@ List<BottomTabs> _bottomTabs = [
   BottomTabs(getTextFromKey("Main.Schedule"), Icons.schedule),
   BottomTabs(getTextFromKey("Main.Settings"), Icons.settings)
 ];
+
 List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
 
   return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
@@ -357,7 +358,7 @@ class _ControlsState extends State<Controls> {
   }
 
   void _onItemTapped(int? index) {
-    if (_selectedIndex == 1 && index == 1){
+    if (globals.isLoggedIn && _selectedIndex == 1 && index == 1){
       return EventCalendarState().calendarToToday();
     }
     setState(() {

@@ -6,12 +6,10 @@ import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class NotificationService
-{
+class NotificationService {
   // Singleton pattern
   static final NotificationService _notificationService = NotificationService._internal();
-  factory NotificationService()
-  {
+  factory NotificationService() {
     return _notificationService;
   }
   NotificationService._internal();
@@ -20,8 +18,7 @@ class NotificationService
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   // Initialization
-  Future<void> init() async
-  {
+  Future<void> init() async {
     tz.initializeTimeZones();
 
     // Android settings
@@ -50,8 +47,7 @@ class NotificationService
     );
   }
 
-  Future<void> setNotification(int id, String title, String body, int seconds) async
-  {
+  Future<void> setNotification(int id, String title, String body, int seconds) async {
     tz.TZDateTime time = tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds));
 
     /*
@@ -86,45 +82,37 @@ class NotificationService
     }
   }
 
-  Future<void> cancelAllNotifications() async
-  {
+  Future<void> cancelAllNotifications() async {
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  Future<void> setNotificationQueue(int secondsOffset, int queueSize) async
-  {
+  Future<void> setNotificationQueue(int secondsOffset, int queueSize) async {
     cancelAllNotifications();
 
     List<ScheduleTableItem> schedule = globals.schedule.list();
     int slice = 0;
 
     // Slices schedule to set only valid notifications
-    while (slice < schedule.length - 1)
-    {
-      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < globals.notificationsTime + 60) // +60 just to be sure
-      {
-        break;
-      }
+    while (slice < schedule.length - 1) {
+      // +60 just to be sure
+      if (DateTime.now().difference(schedule[slice].startDate).inSeconds < globals.notificationsTime + 60) { break; }
       slice++;
     }
     schedule = schedule.sublist(slice);
 
     DateTime scheduledTime;
     int? notificationTime;
-    for (int i = 0; i < min(schedule.length, queueSize); i++)
-    {
+    for (int i = 0; i < min(schedule.length, queueSize); i++) {
       // Ignores canceled lessons
       if (schedule[i].status == globals.lessonCanceledStatus) { continue; }
 
       // Sets notification for evening if lesson is in the morning
       scheduledTime = schedule[i].startDate;
-      if (scheduledTime.hour <= 9)
-      {
+      if (scheduledTime.hour <= 9) {
         notificationTime = getSecondsUntilScheduledDate(DateTime(
             scheduledTime.year, scheduledTime.month, scheduledTime.day - 1, 21));
       }
-      else
-      {
+      else {
         notificationTime = getSecondsUntilScheduledDate(scheduledTime) - secondsOffset;
       }
 

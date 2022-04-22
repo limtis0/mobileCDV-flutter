@@ -66,8 +66,7 @@ ImageProvider? avatar;
 
 int theme = 0;
 
-Future<void> loadFromPrefs() async
-{
+Future<void> loadFromPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   isLoggedIn = prefs.getBool('isUserLoggedIn') ?? false;
@@ -85,8 +84,7 @@ Future<void> loadFromPrefs() async
   notificationsTime = prefs.getInt('notificationsTime') ?? 3600;
 }
 
-void clear()
-{
+void clear() {
   isLoggedIn = false;
   email = '';
   pass = '';

@@ -7,8 +7,7 @@ import 'package:http/http.dart' as http;
 import '../notifications.dart';
 
 // LOGIN
-Future<LoginResponse> fetchLogin(String login, String password) async
-{
+Future<LoginResponse> fetchLogin(String login, String password) async {
   final response = await http.post(
     Uri.parse('https://api.cdv.pl/mobilnecdv-api/login'),
     body: jsonEncode(<String, String>
@@ -18,19 +17,16 @@ Future<LoginResponse> fetchLogin(String login, String password) async
     })
   );
 
-  if (response.statusCode == 200)
-  {
+  if (response.statusCode == 200) {
     return LoginResponse.fromJson(jsonDecode(response.body));
   }
-  else
-  {
+  else {
     throw RequestErrorException('Failed to log in');
   }
 }
 
 // SCHEDULE
-Future<void> fetchSchedule(String userType, String userId, String dateFrom, String dateTo, String token) async
-{
+Future<void> fetchSchedule(String userType, String userId, String dateFrom, String dateTo, String token) async {
   String url = 'https://api.cdv.pl/mobilnecdv-api/schedule/$userType/$userId/1/$dateFrom/$dateTo';
   final response = await http.get(
     Uri.parse(url),
@@ -40,20 +36,16 @@ Future<void> fetchSchedule(String userType, String userId, String dateFrom, Stri
     }
   );
 
-  if (response.statusCode == 200)
-  {
+  if (response.statusCode == 200) {
     globals.schedule.clear();
-    for (Map<String, dynamic> lesson in jsonDecode(response.body))
-    {
+    for (Map<String, dynamic> lesson in jsonDecode(response.body)) {
       globals.schedule.insert(ScheduleTableItem.fromJson(lesson));
     }
-    if (globals.notificationsToggle)
-    {
+    if (globals.notificationsToggle) {
       NotificationService().setNotificationQueue(globals.notificationsTime, 32);
     }
   }
-  else
-  {
+  else {
     throw RequestErrorException('Failed to get schedule');
   }
 }

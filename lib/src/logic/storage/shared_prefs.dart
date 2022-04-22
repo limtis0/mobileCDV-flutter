@@ -1,13 +1,11 @@
 import '../structures/usertoken.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> initPrefs() async
-{
+Future<void> initPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   bool? wasOpenedBefore = prefs.getBool('wasOpenedBefore');
-  if (wasOpenedBefore == true)
-  {
+  if (wasOpenedBefore == true) {
     return;
   }
 
@@ -16,8 +14,7 @@ Future<void> initPrefs() async
   setDefaultPreferences();
 }
 
-Future<void> setDefaultPreferences() async
-{
+Future<void> setDefaultPreferences() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setInt('themeId', 0);
@@ -27,8 +24,7 @@ Future<void> setDefaultPreferences() async
   await prefs.setInt('notificationsTime', 3600);
 }
 
-Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded, UserToken token) async
-{
+Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded, UserToken token) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setBool('isUserLoggedIn', true);
@@ -42,8 +38,7 @@ Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded
   await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
 }
 
-Future<void> clearPrefs() async
-{
+Future<void> clearPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   await prefs.setBool('isUserLoggedIn', false);

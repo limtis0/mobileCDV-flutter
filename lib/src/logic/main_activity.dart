@@ -8,8 +8,7 @@ import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/storage/shared_prefs.dart';
 import 'package:mobile_cdv/src/logic/structures/exceptions.dart';
 
-Future<void> activitySignIn(String email, String password, bool imageDecode) async
-{
+Future<void> activitySignIn(String email, String password, bool imageDecode) async {
   final LoginResponse loginResponse = await fetchLogin(email.trim(), password);
 
   UserToken token = decodeToken(loginResponse.token);
@@ -20,8 +19,7 @@ Future<void> activitySignIn(String email, String password, bool imageDecode) asy
   await setPrefsOnSignIn(email.trim(), password, loginResponse.token, token);
   await globals.loadFromPrefs();
 
-  try
-  {
+  try {
     await fetchSchedule(
         token.userType, token.userId.toString(),
         getMonthsFromNowFirstDayAPI(-globals.calendarPastMonths),
@@ -32,8 +30,7 @@ Future<void> activitySignIn(String email, String password, bool imageDecode) asy
   on RequestErrorException { rethrow; }
 }
 
-Future<void> activitySignOut() async
-{
+Future<void> activitySignOut() async {
   await clearPrefs();
   globals.clear();
 

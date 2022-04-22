@@ -158,7 +158,6 @@ ThemeData setTheme() {
   }
 }
 
-// Не редачить
 enum ThemeType { Light, Dark, Amoled, Purple }
 
 class ThemeModel extends ChangeNotifier {
