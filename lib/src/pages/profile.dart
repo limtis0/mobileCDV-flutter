@@ -45,35 +45,35 @@ class _ProfileStatePage extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            CircleAvatar(
-              backgroundColor: themeOf(context).functionalObjectsColor,
-              radius: 72,
-              child: CircleAvatar(
-                radius: 70,
-                backgroundImage: globals.avatar
-              ),
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          CircleAvatar(
+            backgroundColor: themeOf(context).functionalObjectsColor,
+            radius: 72,
+            child: CircleAvatar(
+              radius: 70,
+              backgroundImage: globals.avatar
             ),
-            const SizedBox(height: 20),
-            Text(
-              globals.name,
-              style: const TextStyle(fontSize: 30),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              globals.type.capitalize(),
-              style: const TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              'Numer albumu: ${globals.album}',
-              style: const TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            globals.name,
+            style: const TextStyle(fontSize: 30),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            globals.type.capitalize(),
+            style: const TextStyle(fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            'Numer albumu: ${globals.album}',
+            style: const TextStyle(fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 10)
+        ],
       ),
     );
   }
@@ -269,73 +269,57 @@ class _ProfileState extends State<ProfileLogin> {
               }else {
                 showDialog(
                     context: context,
-                    builder: (context){
+                    builder: (context) {
                       return AlertDialog(
                         backgroundColor: themeOf(context).popUpBackgroundColor,
-                        title: Text(getTextFromKey("Profile.Confirmation")),
-                        content: SizedBox(
-                          height: 90,
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 15),
-                                  child: Text(
-                                      getTextFromKey("Login.ask"),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      child: ElevatedButton(
-                                        child:
-                                        Text(
-                                            getTextFromKey("Profile.signOut"),
-                                          style: const TextStyle(
-                                              color: Colors.white
-                                          ),
-                                        ),
-                                        onPressed: (){
-                                          processSignOut();
-                                          Navigator.pop(context);
-                                        },
-                                        style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all<Color>(
-                                                themeOf(context).buttonColor!
-                                            )
-                                        ),
-                                      ),
+                        title: Text(
+                          getTextFromKey("Profile.Confirmation"),
+                          textAlign: TextAlign.center,
+                        ),
+                        content:
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(getTextFromKey("Login.ask")),
+                              const SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    child: Text(
+                                      getTextFromKey("Profile.signOut"),
+                                      style: const TextStyle(color: Colors.white)
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: ElevatedButton(
-                                        child: Text(
-                                            getTextFromKey("Profile.Cancel"),
-                                          style: const TextStyle(
-                                              color: Colors.white
-                                          ),
-                                        ),
-                                        onPressed: (){
-                                          Navigator.pop(context);
-                                        },
-                                        style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all<Color>(
-                                                themeOf(context).buttonColor!
-                                            )
-                                        ),
+                                    onPressed: (){
+                                      processSignOut();
+                                      Navigator.pop(context);
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                          themeOf(context).buttonColor!
+                                      )
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                      child: Text(
+                                        getTextFromKey("Profile.Cancel"),
+                                        style: const TextStyle(color: Colors.white),
+                                      ),
+                                      onPressed: (){ Navigator.pop(context); },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(
+                                          themeOf(context).buttonColor!
+                                        )
                                       ),
                                     ),
                                   ],
                                 )
                               ],
                             )
-                          ),
-                        )
-                      );
-                    }
-                );
+                        );
+                      }
+                    );
                 _text = getTextFromKey("Profile.signOut");
                 setState(() {
                   _error = "";
