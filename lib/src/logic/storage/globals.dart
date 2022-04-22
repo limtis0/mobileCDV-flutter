@@ -14,19 +14,19 @@ const String lessonCanceledStatus = 'ODWOLANE';
 // TODO Fill keys for all lessonTypes and all lessonNames. We can't get them :(
 final Map<String, Color> lessonColors = {
   'W':Colors.green,
-  'WR':Colors.blue[200]!,
+  'WR':Colors.teal[300]!,
   'L':Colors.blue,
-  'TODO_E_LEARNING':Colors.grey,
+  'TODO_E_LEARNING':Colors.grey[400]!,
   'C':Colors.orange,
   'LK':Colors.purpleAccent,
-  'TODO_PROJEKT':Colors.grey,
-  'TODO_PRAKTYKI':Colors.grey,
-  'TODO_SEMINARIUM':Colors.grey,
-  'TODO_KOWERSATORIUM':Colors.grey,
-  'TODO_SPOTKANIE':Colors.grey,
-  'EGSAM':Colors.purple,
-  'TODO_REZERWACJA':Colors.grey,
-  'TODO_DYZUR':Colors.grey,
+  'TODO_PROJEKT':Colors.pink,
+  'TODO_PRAKTYKI':Colors.indigo[900]!,
+  'TODO_SEMINARIUM':Colors.indigo,
+  'TODO_KONWERSATORIUM':Colors.deepOrange[600]!,
+  'TODO_SPOTKANIE':Colors.purple,
+  'EGSAM':Colors.purple[600]!,
+  'TODO_REZERWACJA':Colors.purple[700]!,
+  'TODO_DYZUR':Colors.purple[800]!,
 };
 
 final Map<String, String> lessonNames = {
