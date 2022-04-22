@@ -13,11 +13,10 @@ extension StringExtension on String {
 Map<DateTime, List<ScheduleTableItem>> setEvents()
 {
   Map<DateTime, List<ScheduleTableItem>> mapEvents = {};
-  List<ScheduleTableItem> schedule = List.from(globals.schedule.list().reversed);
+  List<ScheduleTableItem> schedule = List.from(globals.schedule.list());
 
 
-  for (int i = 0; i < schedule.length; i++)
-  {
+  for (int i = 0; i < schedule.length; i++) {
     // Calendar events are stored by days, so this is the only reliable option
     DateTime scheduledDate = schedule[i].startDate.toDateOnly();
 

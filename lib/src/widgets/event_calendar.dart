@@ -96,21 +96,19 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   }
 
   bool checkDay(DateTime day){
-    for(var item in _eventDays!){
-      if(item.day == day.day){
+    for(var item in _eventDays!) {
+      if(item.day >= day.day) {
         return true;
       }
     }
     return false;
   }
+
   int getIndex(DateTime day){
     int i = 0;
-    for(var item in _eventDays!){
-      if(item.day == day.day){
-        return i;
-      }else{
-        i++;
-      }
+    for(var item in _eventDays!) {
+      if(item.day >= day.day) { return i; }
+      i++;
     }
     return 0;
   }
@@ -342,7 +340,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
               await calendarToNextMonth();
             },
             child: ListView.builder(
-              reverse: true,
               controller: listScrollController,
               itemCount: _getDateTimes().length,
               itemBuilder: (context, index) {
