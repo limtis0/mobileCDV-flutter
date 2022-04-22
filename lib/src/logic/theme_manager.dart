@@ -92,7 +92,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 )
   ..addOwn(const ThemeExtensionFields(
     popUpBackgroundColor: Color(0xFF424242),
-    eventBackgroundColor: Color(0xFF333333),
+    eventBackgroundColor: Color(0xFF424242),
     eventTextColor: Colors.white,
     fieldTextColor: Color(0xFFACACAC),
     calendarWeekdaysColor: Colors.white,
@@ -118,7 +118,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   calendarFocusedDayColor: Color(0xFF262626),
   bottomBarColor: Colors.black,
   bottomBarSelectedColor: Colors.white,
-  buttonColor: Color(0xFF262626),
+  buttonColor: Color(0xFF303030),
   functionalObjectsColor: Colors.white,
 ));
 
@@ -162,29 +162,23 @@ enum ThemeType { Light, Dark, Amoled, Purple }
 
 class ThemeModel extends ChangeNotifier {
   ThemeData currentTheme = setTheme();
-  ThemeType? _themeType;
 
   toggleTheme(int id) {
     switch(id){
       case 0:
         currentTheme = lightTheme;
-        _themeType = ThemeType.Light;
         return notifyListeners();
       case 1:
         currentTheme = darkTheme;
-        _themeType = ThemeType.Dark;
         return notifyListeners();
       case 2:
         currentTheme = amoledTheme;
-        _themeType = ThemeType.Dark;
         return notifyListeners();
       case 3:
         currentTheme = pinkTheme;
-        _themeType = ThemeType.Dark;
         return notifyListeners();
       default:
         currentTheme = lightTheme;
-        _themeType = ThemeType.Light;
         return notifyListeners();
     }
   }

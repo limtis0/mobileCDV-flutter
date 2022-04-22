@@ -50,7 +50,7 @@ class _ProfileStatePage extends State<Profile> {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundColor: themeOf(context).buttonColor,
+              backgroundColor: themeOf(context).functionalObjectsColor,
               radius: 72,
               child: CircleAvatar(
                 radius: 70,
