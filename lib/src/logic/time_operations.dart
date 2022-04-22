@@ -35,8 +35,7 @@ String formatScheduleTime(DateTime lessonDate) {
 }
 
 extension DateTransform on DateTime {
-  DateTime toDateOnly()
-  {
+  DateTime toDateOnly() {
     return DateTime(year, month, day);
   }
 }
