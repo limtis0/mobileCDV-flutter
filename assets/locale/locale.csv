@@ -58,7 +58,7 @@ Static.Konwersatorium,Conversation ,Konwersatorium ,Обсуждение,Konuşm
 Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,Sınav
 Static.Rezerwacja,Reservation,Rezerwacja ,Резервация,Rezervasyon
 Static.Dyzur,Standby,Dyżur ,Дежурство,
-Static.Spotkanie,Meeting,Spotkanie ogolnouczelniane,Встреча,Meeting
+Static.Spotkanie,Meeting,Spotkanie,Встреча,Meeting
 Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć.,"Потяните расписание сверху, чтобы обновить его.",
 Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc.,"Потяните расписание снизу, чтобы перейти на следующий месяц.",
 Static.HelpText3,Tap the 'Schedule' button on the bottom-bar to get to today's date.,Wciśnij 'Plan zajęć' aby wyświetlić dzisiejszą datę.,"Нажмите на кнопку 'Расписание', чтобы перейти к сегодняшней дате.",Bugünün tarihini görmek için alt çubuktaki 'Planla' düğmesine dokunun.
