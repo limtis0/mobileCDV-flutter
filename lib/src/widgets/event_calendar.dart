@@ -157,7 +157,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
       await _pageController!.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.ease);
       curMonth = _focusedDay.month;
     }
-    await listScrollController.scrollToIndex(kEvents!.length - 1, preferPosition: AutoScrollPosition.begin);
+    await listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
   }
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;
@@ -293,7 +293,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
               if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
                 if(_lastTime != focusedDay.month) {
                   _lastTime = focusedDay.month;
-                  listScrollController.scrollToIndex(kEvents!.length - 1, preferPosition: AutoScrollPosition.begin);
+                  listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
                 }
               }
             });

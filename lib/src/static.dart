@@ -62,16 +62,8 @@ class Canvas extends StatelessWidget {
       case 0:
         return const ProfileLogin();
       case 1:
-        if(globals.isLoggedIn) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              print("a");
-            },
-            child: const EventCalendar(),
-          );
-        }else {
-          return const ReqLoginPage();
-        }
+        if(globals.isLoggedIn) { return const EventCalendar(); }
+        return const ReqLoginPage();
       case 2:
         return const Settings();
       default:
