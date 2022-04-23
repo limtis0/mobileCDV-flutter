@@ -143,18 +143,40 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
 
 
 // Logic
-final Map<int, ThemeData> themes = {
-  0: lightTheme,
-  1: darkTheme,
-  2: amoledTheme,
-  3: pinkTheme,
-};
+ThemeData setTheme() {
+  switch(globals.theme) {
+    case 0:
+      return lightTheme;
+    case 1:
+      return darkTheme;
+    case 2:
+      return amoledTheme;
+    case 3:
+      return pinkTheme;
+    default:
+      return lightTheme;
+  }
+}
 
 class ThemeModel extends ChangeNotifier {
-  ThemeData currentTheme = themes[globals.theme] ?? lightTheme;
-
+  ThemeData currentTheme = setTheme();
   toggleTheme(int id) {
-    currentTheme = themes[id] ?? lightTheme;
-    return notifyListeners();
+    switch(id){
+      case 0:
+        currentTheme = lightTheme;
+        return notifyListeners();
+      case 1:
+        currentTheme = darkTheme;
+        return notifyListeners();
+      case 2:
+        currentTheme = amoledTheme;
+        return notifyListeners();
+      case 3:
+        currentTheme = pinkTheme;
+        return notifyListeners();
+      default:
+        currentTheme = lightTheme;
+        return notifyListeners();
+    }
   }
 }
