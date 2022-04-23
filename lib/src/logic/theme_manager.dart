@@ -161,7 +161,7 @@ ThemeData setTheme() {
 class ThemeModel extends ChangeNotifier {
   ThemeData currentTheme = setTheme();
   toggleTheme(int id) {
-    switch(id){
+    switch(id) {
       case 0:
         currentTheme = lightTheme;
         return notifyListeners();
