@@ -1,5 +1,4 @@
 import '../logic/time_operations.dart';
-import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 
 final eventsList = setEvents();
@@ -10,8 +9,7 @@ extension StringExtension on String {
   }
 }
 
-Map<DateTime, List<ScheduleTableItem>> setEvents()
-{
+Map<DateTime, List<ScheduleTableItem>> setEvents() {
   Map<DateTime, List<ScheduleTableItem>> mapEvents = {};
   List<ScheduleTableItem> schedule = List.from(Schedule().list());
 
@@ -20,27 +18,20 @@ Map<DateTime, List<ScheduleTableItem>> setEvents()
     DateTime scheduledDate = schedule[i].startDate.toDateOnly();
 
     // Null safety
-    if (mapEvents[scheduledDate] == null)
-    {
+    if (mapEvents[scheduledDate] == null) {
       mapEvents[scheduledDate] = [];
     }
 
     mapEvents[scheduledDate]!.add(schedule[i]);
   }
-  if(globals.isLoggedIn) {
-    return mapEvents;
-  } else {
-    return {};
-  }
+  return mapEvents;
 }
 
-int getHashCode(DateTime key)
-{
+int getHashCode(DateTime key) {
   return key.day * 1000000 + key.month * 10000 + key.year;
 }
 
-List<DateTime> daysInRange(DateTime first, DateTime last)
-{
+List<DateTime> daysInRange(DateTime first, DateTime last) {
   final dayCount = last.difference(first).inDays + 1;
   return List.generate
   (
