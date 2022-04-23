@@ -2,7 +2,6 @@ library mobile_cdv.globals;
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 
 // Constants
