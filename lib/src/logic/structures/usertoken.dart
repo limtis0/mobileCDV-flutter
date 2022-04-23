@@ -1,5 +1,4 @@
-class UserToken
-{
+class UserToken {
   // Skipped cbduID, roles and round
   final int userId;
   final String userEmail;
@@ -15,8 +14,7 @@ class UserToken
     required this.userAlbumNumer,
   });
 
-  factory UserToken.fromJson(Map<String, dynamic> json)
-  {
+  factory UserToken.fromJson(Map<String, dynamic> json) {
     return UserToken
       (
       userId: json['verbisId'],

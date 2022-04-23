@@ -89,7 +89,7 @@ class NotificationService {
   Future<void> setNotificationQueue(int secondsOffset, int queueSize) async {
     cancelAllNotifications();
 
-    List<ScheduleTableItem> schedule = globals.schedule.list();
+    List<ScheduleTableItem> schedule =  Schedule().list();
     int slice = 0;
 
     // Slices schedule to set only valid notifications

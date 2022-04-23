@@ -1,5 +1,4 @@
-class RequestErrorException implements Exception
-{
+class RequestErrorException implements Exception {
   String cause;
   RequestErrorException(this.cause);
 }

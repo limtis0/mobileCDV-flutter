@@ -46,9 +46,6 @@ final Map<String, String> lessonNames = {
   'TODO_DYZUR':getTextFromKey('Static.Dyzur'),
 };
 
-
-Schedule schedule = Schedule();
-
 // Prefs
 bool isLoggedIn = false;
 

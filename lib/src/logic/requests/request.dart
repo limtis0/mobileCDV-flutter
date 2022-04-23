@@ -37,9 +37,9 @@ Future<void> fetchSchedule(String userType, String userId, String dateFrom, Stri
   );
 
   if (response.statusCode == 200) {
-    globals.schedule.clear();
+    Schedule().clear();
     for (Map<String, dynamic> lesson in jsonDecode(response.body)) {
-      globals.schedule.insert(ScheduleTableItem.fromJson(lesson));
+      Schedule().insert(ScheduleTableItem.fromJson(lesson));
     }
     if (globals.notificationsToggle) {
       NotificationService().setNotificationQueue(globals.notificationsTime, 32);

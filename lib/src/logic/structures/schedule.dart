@@ -54,28 +54,21 @@ class Schedule
 {
   // Singleton pattern
   static final Schedule _schedule = Schedule._internal();
-  factory Schedule()
-  {
-    return _schedule;
-  }
+  factory Schedule() { return _schedule; }
   Schedule._internal();
 
   // Schedule
   static final List<ScheduleTableItem> _scheduleList = [];
 
   // Sorts by date on insertion
-  void insert(ScheduleTableItem item)
-  {
-    if (_scheduleList.isEmpty)
-    {
+  void insert(ScheduleTableItem item) {
+    if (_scheduleList.isEmpty) {
       _scheduleList.add(item);
       return;
     }
 
-    for (int i = 0; i < _scheduleList.length; i++)
-    {
-      if (item.startDate.isBefore(_scheduleList[i].startDate))
-      {
+    for (int i = 0; i < _scheduleList.length; i++) {
+      if (item.startDate.isBefore(_scheduleList[i].startDate)) {
         _scheduleList.insert(i, item);
         return;
       }
@@ -83,22 +76,14 @@ class Schedule
     _scheduleList.add(item);
   }
 
-  void clear()
-  {
-    _scheduleList.clear();
-  }
+  void clear() { _scheduleList.clear(); }
 
-  List<ScheduleTableItem> list()
-  {
-    return _scheduleList;
-  }
+  List<ScheduleTableItem> list() { return _scheduleList; }
 
   @override
-  String toString()
-  {
+  String toString() {
     String s = '';
-    for (ScheduleTableItem element in _scheduleList)
-    {
+    for (ScheduleTableItem element in _scheduleList) {
       s += '${element.subjectName} - ${element.startDate.toString()}:${element.endDate.toString()}\n';
     }
     return s;

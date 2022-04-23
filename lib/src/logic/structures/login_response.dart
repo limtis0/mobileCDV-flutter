@@ -1,5 +1,4 @@
-class LoginResponse
-{
+class LoginResponse {
   final bool result;
   final String token;
   final String? message;
@@ -12,8 +11,7 @@ class LoginResponse
     required this.photo,
   });
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json)
-  {
+  factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse
       (
       result: json['result'],
