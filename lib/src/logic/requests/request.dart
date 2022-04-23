@@ -42,7 +42,7 @@ Future<void> fetchSchedule(String userType, String userId, String dateFrom, Stri
       Schedule().insert(ScheduleTableItem.fromJson(lesson));
     }
     if (globals.notificationsToggle) {
-      NotificationService().setNotificationQueue(globals.notificationsTime, 32);
+      NotificationService().setNotificationQueue();
     }
   }
   else {

@@ -86,7 +86,8 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  Future<void> setNotificationQueue(int secondsOffset, int queueSize) async {
+  Future<void> setNotificationQueue() async {
+    int secondsOffset = globals.notificationsTime;
     cancelAllNotifications();
 
     List<ScheduleTableItem> schedule =  Schedule().list();
@@ -102,7 +103,7 @@ class NotificationService {
 
     DateTime scheduledTime;
     int? notificationTime;
-    for (int i = 0; i < min(schedule.length, queueSize); i++) {
+    for (int i = 0; i < min(schedule.length, globals.notificationQueueSize); i++) {
       // Ignores canceled lessons
       if (schedule[i].status == globals.lessonCanceledStatus) { continue; }
 

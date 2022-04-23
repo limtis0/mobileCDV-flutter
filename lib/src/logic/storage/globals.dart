@@ -8,6 +8,8 @@ import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 const int calendarPastMonths = 2; // How many months in past to request from server
 const int calendarFutureMonths = 6; // Same, but for future
 
+const int notificationQueueSize = 32;
+
 const String lessonCanceledStatus = 'ODWOLANE';
 
 // TODO Fill keys for all lessonTypes and all lessonNames. We can't get them :(
@@ -43,6 +45,13 @@ final Map<String, String> lessonNames = {
   'EGSAM':getTextFromKey('Static.Zaliczenie'),
   'TODO_REZERWACJA':getTextFromKey('Static.Rezerwacja'),
   'TODO_DYZUR':getTextFromKey('Static.Dyzur'),
+};
+
+final Map<String, int> timesTillNotification = {
+  getTextFromKey('Settings.time.15mins'): 900,
+  getTextFromKey('Settings.time.30mins'): 1800,
+  getTextFromKey('Settings.time.1hour'): 3600,
+  getTextFromKey('Settings.time.2hours'): 7200,
 };
 
 const Map<String, String> locales = {

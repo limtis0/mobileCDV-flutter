@@ -193,14 +193,6 @@ class _ProfileState extends State<ProfileLogin> {
     const LoginWidget()
   ];
 
-  Widget selPage(bool i){
-    if(i){
-      return _screens[0];
-    }else{
-      return _screens[1];
-    }
-  }
-
   String _error = '';
 
   void processLogin(String log, String pass) async {
@@ -245,7 +237,7 @@ class _ProfileState extends State<ProfileLogin> {
               color: Colors.red,
             ),
           ),
-          selPage(globals.isLoggedIn),
+          _screens[globals.isLoggedIn ? 0 : 1],
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(

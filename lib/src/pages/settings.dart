@@ -58,8 +58,9 @@ class Settings extends StatefulWidget {
 
 class _SettingState extends State<Settings> {
 
-  String dropdownValue = getTextFromKey("Settings.locale.choose");
+  String dropdownValueLocale = getTextFromKey("Settings.locale.choose");
   String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
+  String dropdownValueTime = getTextFromKey("Settings.time.choose");
 
   void changeLocale(String loc){
     initLocalization(loc);
@@ -73,12 +74,23 @@ class _SettingState extends State<Settings> {
   Future<void> switchNotificationState(bool toggle) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (toggle) {
-      await NotificationService().setNotificationQueue(globals.notificationsTime, 32);
+      await NotificationService().setNotificationQueue();
     }else {
       await NotificationService().cancelAllNotifications();
     }
     await prefs.setBool("notificationsToggle", toggle);
     globals.notificationsToggle = toggle;
+  }
+
+  Future<void> changeNotificationTime(int seconds) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt("notificationsTime", seconds);
+    globals.notificationsTime = seconds;
+
+    if (globals.notificationsToggle) {
+      NotificationService().setNotificationQueue();
+    }
   }
 
   @override
@@ -107,10 +119,10 @@ class _SettingState extends State<Settings> {
                         child: Text(value),
                       );
                     }).toList(),
-                    value: dropdownValue,
+                    value: dropdownValueLocale,
                     onChanged: (String? newValue) {
-                      dropdownValue = newValue!;
-                      changeLocale(globals.locales[newValue] ?? 'en');
+                      dropdownValueLocale = newValue!;
+                      changeLocale(globals.locales[newValue] ?? "en");
                     },
                   ),
                 ],
@@ -141,7 +153,7 @@ class _SettingState extends State<Settings> {
 
                         int themeId = globals.themes[newValue] ?? 0;
 
-                        await prefs.setInt('themeId', themeId);
+                        await prefs.setInt("themeId", themeId);
                         globals.theme = themeId;
                         notifier.toggleTheme(themeId);
                       },
@@ -167,6 +179,33 @@ class _SettingState extends State<Settings> {
                 ],
               ),
               const Divider(thickness: 1.5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(getTextFromKey("Settings.notificationTime")),
+                  DropdownButton<String>(
+                    items:
+                    <String>[
+                      getTextFromKey("Settings.time.choose"),
+                      getTextFromKey("Settings.time.15mins"),
+                      getTextFromKey("Settings.time.30mins"),
+                      getTextFromKey("Settings.time.1hour"),
+                      getTextFromKey("Settings.time.2hours"),
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    value: dropdownValueTime,
+                    onChanged: (String? newValue) {
+                      dropdownValueTime = newValue!;
+                      changeNotificationTime(globals.timesTillNotification[newValue] ?? 3600);
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),
