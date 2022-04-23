@@ -227,7 +227,6 @@ class _ProfileState extends State<ProfileLogin> {
 
   void processSignOut() async {
     await activitySignOut();
-    globals.isLoggedIn = false;
     setState(() {
       _text = getTextFromKey("Login.Page.btn");
     });
@@ -354,9 +353,9 @@ class LoadingIndicator extends StatelessWidget{
 
 
 String _retText(){
-  if(globals.isLoggedIn){
+  if(globals.isLoggedIn) {
     return getTextFromKey("Profile.signOut");
-  }else{
+  }else {
     return getTextFromKey("Login.Page.btn");
   }
 }

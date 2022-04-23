@@ -33,12 +33,11 @@ Future<void> startApp() async
 Future<void> showTimetable() async
 {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  try
-  {
+  try {
     await activitySignIn(prefs.getString('savedEmail')!, prefs.getString('savedPassword')!, false);
   }
   catch(e){
-    globals.isLoggedIn == false;
+    globals.isLoggedIn = false;
   }
 
   initializeDateFormatting().then((_) async => runApp(
