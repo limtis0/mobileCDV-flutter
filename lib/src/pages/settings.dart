@@ -11,6 +11,7 @@ import 'package:mobile_cdv/src/logic/notifications.dart';
 class LocaleDialog extends StatelessWidget {
   const LocaleDialog({Key? key}) : super(key: key);
 
+  // Language-change dialogue
   @override
   Widget build(BuildContext context){
     return WillPopScope(
@@ -49,6 +50,7 @@ class LocaleDialog extends StatelessWidget {
   }
 }
 
+// Settings page
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -57,11 +59,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingState extends State<Settings> {
-
-  String dropdownValueLocale = getTextFromKey("Settings.locale.choose");
-  String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
-  String dropdownValueTime = getTextFromKey("Settings.time.choose");
-
+  // On-settings-changed functions
   void changeLocale(String loc){
     initLocalization(loc);
     showDialog(
@@ -93,6 +91,10 @@ class _SettingState extends State<Settings> {
     }
   }
 
+  // Page
+  String dropdownValueLocale = getTextFromKey("Settings.locale.choose");
+  String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
+  String dropdownValueTime = getTextFromKey("Settings.time.choose");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +103,7 @@ class _SettingState extends State<Settings> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
+              // LANGUAGE DROPDOWN
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -128,6 +131,7 @@ class _SettingState extends State<Settings> {
                 ],
               ),
               const Divider(thickness: 1.5),
+              // THEME DROPDOWN
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -162,6 +166,7 @@ class _SettingState extends State<Settings> {
                 ],
               ),
               const Divider(thickness: 1.5),
+              // NOTIFICATIONS SWITCH
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -179,6 +184,7 @@ class _SettingState extends State<Settings> {
                 ],
               ),
               const Divider(thickness: 1.5),
+              // NOTIFICATIONS TIME DROPDOWN
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
