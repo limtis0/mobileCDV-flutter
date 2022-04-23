@@ -45,6 +45,20 @@ final Map<String, String> lessonNames = {
   'TODO_DYZUR':getTextFromKey('Static.Dyzur'),
 };
 
+const Map<String, String> locales = {
+  'English': 'en',
+  'Polski': 'pl',
+  'Русский': 'ru',
+  'Türkçe': 'tr',
+};
+
+const Map<String, int> themes = {
+  'Light': 0,
+  'Dark': 1,
+  'Amoled': 2,
+  'Pink': 3,
+};
+
 // Prefs
 bool isLoggedIn = false;
 

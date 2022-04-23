@@ -66,20 +66,19 @@ class _SettingState extends State<Settings> {
     showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext dialogContext) {
-          return const LocaleDialog();
-        }
+        builder: (BuildContext dialogContext) { return const LocaleDialog(); }
     );
   }
 
-  Future<void> switchNotificationState(bool value) async {
+  Future<void> switchNotificationState(bool toggle) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(!value){
-      await NotificationService().cancelAllNotifications();
-    }else {
+    if (toggle) {
       await NotificationService().setNotificationQueue(globals.notificationsTime, 32);
+    }else {
+      await NotificationService().cancelAllNotifications();
     }
-    await prefs.setBool("notificationsToggle", value);
+    await prefs.setBool("notificationsToggle", toggle);
+    globals.notificationsToggle = toggle;
   }
 
   @override
@@ -93,11 +92,16 @@ class _SettingState extends State<Settings> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    getTextFromKey("Settings.c.lang")
-                  ),
+                  Text(getTextFromKey("Settings.c.lang")),
                   DropdownButton<String>(
-                    items: <String>[getTextFromKey("Settings.locale.choose"), "English", "Polski", "Русский", "Türkçe"].map<DropdownMenuItem<String>>((String value) {
+                    items:
+                    <String>[
+                      getTextFromKey("Settings.locale.choose"),
+                      "English",
+                      "Polski",
+                      "Русский",
+                      "Türkçe"
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -106,39 +110,25 @@ class _SettingState extends State<Settings> {
                     value: dropdownValue,
                     onChanged: (String? newValue) {
                       dropdownValue = newValue!;
-                      switch(newValue){
-                        case "English":
-                          changeLocale("en");
-                          break;
-                        case "Polski":
-                          changeLocale("pl");
-                          break;
-                        case "Русский":
-                          changeLocale("ru");
-                          break;
-                        case "Türkçe":
-                          changeLocale("tr");
-                          break;
-                        default:
-                          initLocalization("en");
-                          break;
-                      }
+                      changeLocale(globals.locales[newValue] ?? 'en');
                     },
                   ),
                 ],
               ),
-              const Divider(
-                thickness: 1.5,
-              ),
+              const Divider(thickness: 1.5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    getTextFromKey("Settings.theme")
-                  ),
+                  Text(getTextFromKey("Settings.theme")),
                   Consumer<ThemeModel>(
                     builder: (context, notifier, child) => DropdownButton<String>(
-                      items: <String>[getTextFromKey("Settings.theme.choose"), "Light", "Dark", "Amoled", "Pink"].map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[
+                        getTextFromKey("Settings.theme.choose"),
+                        "Light",
+                        "Dark",
+                        "Amoled",
+                        "Pink"
+                      ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -148,51 +138,26 @@ class _SettingState extends State<Settings> {
                       onChanged: (String? newValue) async {
                         final SharedPreferences prefs = await SharedPreferences.getInstance();
                         dropdownValueTheme = newValue!;
-                        switch(newValue){
-                          case "Light":
-                            globals.theme = 0;
-                            await prefs.setInt('themeId', 0);
-                            notifier.toggleTheme(0);
-                            break;
-                          case "Dark":
-                            globals.theme = 1;
-                            await prefs.setInt('themeId', 1);
-                            notifier.toggleTheme(1);
-                            break;
-                          case "Amoled":
-                            globals.theme = 2;
-                            await prefs.setInt('themeId', 2);
-                            notifier.toggleTheme(2);
-                            break;
-                          case "Pink":
-                            globals.theme = 3;
-                            await prefs.setInt('themeId', 3);
-                            notifier.toggleTheme(3);
-                            break;
-                          default:
-                            globals.theme = 0;
-                            await prefs.setInt('themeId', 0);
-                            notifier.toggleTheme(0);
-                            break;
-                        }
+
+                        int themeId = globals.themes[newValue] ?? 0;
+
+                        await prefs.setInt('themeId', themeId);
+                        globals.theme = themeId;
+                        notifier.toggleTheme(themeId);
                       },
                     ),
                   )
                 ],
               ),
-              const Divider(
-                thickness: 1.5,
-              ),
+              const Divider(thickness: 1.5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    getTextFromKey("Settings.notification")
-                  ),
+                  Text(getTextFromKey("Settings.notification")),
                   Switch(
                     activeColor: themeOf(context).functionalObjectsColor,
                     value: globals.notificationsToggle,
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
                         globals.notificationsToggle = value;
                         switchNotificationState(value);
@@ -201,9 +166,7 @@ class _SettingState extends State<Settings> {
                   )
                 ],
               ),
-              const Divider(
-                thickness: 1.5,
-              ),
+              const Divider(thickness: 1.5),
             ],
           ),
         ),
