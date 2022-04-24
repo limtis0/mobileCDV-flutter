@@ -15,7 +15,7 @@ class LocaleDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return WillPopScope(
-      onWillPop: () async { return false; },
+      onWillPop: () async { return false; }, // Prevents dialogue from popping
       child: AlertDialog(
           backgroundColor: themeOf(context).popUpBackgroundColor,
           title: Text(
@@ -164,9 +164,9 @@ class _SettingState extends State<Settings> {
                     activeColor: themeOf(context).functionalObjectsColor,
                     value: globals.notificationsToggle,
                     onChanged: (value) {
+                      switchNotificationState(value);
                       setState(() {
                         globals.notificationsToggle = value;
-                        switchNotificationState(value);
                       });
                     },
                   )
