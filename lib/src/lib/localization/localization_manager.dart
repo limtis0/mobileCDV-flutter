@@ -17,10 +17,10 @@ String? getLocaleType(){
     case 4:
       return "tr";
   }
-  return "pl";
+  return "en";
 }
 
-Future<void> initLocalization([String locale = "pl"]) async
+Future<void> initLocalization([String locale = "en"]) async
 {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 

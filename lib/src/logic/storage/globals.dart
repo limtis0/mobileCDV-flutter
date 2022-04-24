@@ -47,13 +47,7 @@ final Map<String, String> lessonNames = {
   'TODO_DYZUR':getTextFromKey('Static.Dyzur'),
 };
 
-final Map<String, int> timesTillNotification = {
-  getTextFromKey('Settings.time.15mins'): 900,
-  getTextFromKey('Settings.time.30mins'): 1800,
-  getTextFromKey('Settings.time.1hour'): 3600,
-  getTextFromKey('Settings.time.2hours'): 7200,
-};
-
+String locale = 'en';
 const Map<String, String> locales = {
   'English': 'en',
   'Polski': 'pl',
@@ -61,11 +55,21 @@ const Map<String, String> locales = {
   'Türkçe': 'tr',
 };
 
+int theme = 0;
 const Map<String, int> themes = {
   'Light': 0,
   'Dark': 1,
   'Amoled': 2,
   'Pink': 3,
+};
+
+bool notificationsToggle = true;
+int notificationsTime = 3600;
+final Map<String, int> timesTillNotification = {
+  getTextFromKey('Settings.time.15mins'): 900,
+  getTextFromKey('Settings.time.30mins'): 1800,
+  getTextFromKey('Settings.time.1hour'): 3600,
+  getTextFromKey('Settings.time.2hours'): 7200,
 };
 
 // Prefs
@@ -78,19 +82,12 @@ String album = '';
 String email = '';
 String pass = '';
 
-bool notificationsToggle = true;
-int notificationsTime = 3600;
-
 ImageProvider? avatar;
-
-int theme = 0;
 
 Future<void> loadFromPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   isLoggedIn = prefs.getBool('isUserLoggedIn') ?? false;
-
-  theme = prefs.getInt('themeId') ?? 0;
   
   email = prefs.getString('savedEmail') ?? '';
   pass = prefs.getString('savedPassword') ?? '';
@@ -98,7 +95,9 @@ Future<void> loadFromPrefs() async {
   name = prefs.getString('savedUserName') ?? '';
   type = prefs.getString('savedUserType') ?? '';
   album = prefs.getString('savedUserAlbumNumber') ?? '';
-  
+
+  locale = prefs.getString('localization') ?? 'en';
+  theme = prefs.getInt('themeId') ?? 0;
   notificationsToggle = prefs.getBool('notificationsToggle') ?? true;
   notificationsTime = prefs.getInt('notificationsTime') ?? 3600;
 }

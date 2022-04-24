@@ -29,18 +29,16 @@ class LocaleDialog extends StatelessWidget {
               Text(
                 getTextFromKey("Settings.AlertDialog.q"),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => exit(0),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                      themeOf(context).buttonColor!),
+                      themeOf(context).buttonColor!)
                 ),
                 child: Text(
                   getTextFromKey("Setting.AlertDialog.Restart"),
-                  style: const TextStyle(
-                      color: Colors.white
-                  ),
+                  style: const TextStyle(color: Colors.white),
                 ),
               )
             ],
@@ -92,9 +90,9 @@ class _SettingState extends State<Settings> {
   }
 
   // Page
-  String dropdownValueLocale = getTextFromKey("Settings.locale.choose");
-  String dropdownValueTheme = getTextFromKey("Settings.theme.choose");
-  String dropdownValueTime = getTextFromKey("Settings.time.choose");
+  String dropdownValueLocale = globals.locale;
+  int _dropdownValueTheme = globals.theme;
+  int _dropdownValueTime = globals.notificationsTime;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,22 +108,19 @@ class _SettingState extends State<Settings> {
                   Text(getTextFromKey("Settings.c.lang")),
                   DropdownButton<String>(
                     items:
-                    <String>[
-                      getTextFromKey("Settings.locale.choose"),
-                      "English",
-                      "Polski",
-                      "Русский",
-                      "Türkçe"
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                    globals.locales.map((description, value) {
+                      return MapEntry(
+                        description,
+                        DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(description),
+                        ));
+                    })
+                        .values.toList(),
                     value: dropdownValueLocale,
                     onChanged: (String? newValue) {
                       dropdownValueLocale = newValue!;
-                      changeLocale(globals.locales[newValue] ?? "en");
+                      changeLocale(newValue);
                     },
                   ),
                 ],
@@ -137,29 +132,23 @@ class _SettingState extends State<Settings> {
                 children: [
                   Text(getTextFromKey("Settings.theme")),
                   Consumer<ThemeModel>(
-                    builder: (context, notifier, child) => DropdownButton<String>(
-                      items: <String>[
-                        getTextFromKey("Settings.theme.choose"),
-                        "Light",
-                        "Dark",
-                        "Amoled",
-                        "Pink"
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: dropdownValueTheme,
-                      onChanged: (String? newValue) async {
+                    builder: (context, notifier, child) => DropdownButton<int>(
+                      items: globals.themes.map((description, value) {
+                        return MapEntry(
+                          description,
+                          DropdownMenuItem<int>(
+                            value: value,
+                            child: Text(description),
+                          ));
+                        })
+                          .values.toList(),
+                      value: _dropdownValueTheme,
+                      onChanged: (int? newValue) async {
+                        _dropdownValueTheme = newValue!;
                         final SharedPreferences prefs = await SharedPreferences.getInstance();
-                        dropdownValueTheme = newValue!;
-
-                        int themeId = globals.themes[newValue] ?? 0;
-
-                        await prefs.setInt("themeId", themeId);
-                        globals.theme = themeId;
-                        notifier.toggleTheme(themeId);
+                        await prefs.setInt("themeId", newValue);
+                        globals.theme = newValue;
+                        notifier.toggleTheme(newValue);
                       },
                     ),
                   )
@@ -189,24 +178,21 @@ class _SettingState extends State<Settings> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(getTextFromKey("Settings.notificationTime")),
-                  DropdownButton<String>(
+                  DropdownButton<int>(
                     items:
-                    <String>[
-                      getTextFromKey("Settings.time.choose"),
-                      getTextFromKey("Settings.time.15mins"),
-                      getTextFromKey("Settings.time.30mins"),
-                      getTextFromKey("Settings.time.1hour"),
-                      getTextFromKey("Settings.time.2hours"),
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    value: dropdownValueTime,
-                    onChanged: (String? newValue) {
-                      dropdownValueTime = newValue!;
-                      changeNotificationTime(globals.timesTillNotification[newValue] ?? 3600);
+                    globals.timesTillNotification.map((description, value) {
+                      return MapEntry(
+                        description,
+                        DropdownMenuItem<int>(
+                          value: value,
+                          child: Text(description),
+                        ));
+                    })
+                        .values.toList(),
+                    value: _dropdownValueTime,
+                    onChanged: (int? newValue) {
+                      _dropdownValueTime = newValue!;
+                      changeNotificationTime(newValue);
                       setState(() {});
                     },
                   ),
