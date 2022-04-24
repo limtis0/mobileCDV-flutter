@@ -198,6 +198,7 @@ class _SettingState extends State<Settings> {
                   ),
                 ],
               ),
+              const Divider(thickness: 1.5)
             ],
           ),
         ),
