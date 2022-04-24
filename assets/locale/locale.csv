@@ -13,10 +13,8 @@ Login.Page.Hint.login,Enter e-mail,Wprowadź e-mail,Введите e-mail,E-Post
 Settings.AlertDialog.q,Restart now?,Ponownie uruchomić teraz?,Перезапустить сейчас?,Yeniden Başlatılsın mı?
 Profile.signOut,Sign out,Wyloguj,Выйти из аккаунта,Cıkış Yap
 Login.Page.btn,Sign in,Zaloguj,Войти,Giriş Yap
-Settings.locale.choose,Select language,Wybierz język,Выбрать язык,Dil Seç
 Settings.c.lang,Language,Język,Язык,Dil 
 Settings.theme,Theme,Motyw,Тема,Tema
-Settings.theme.choose,Select theme,Wybierz motyw,Выбрать тему,Tema Seç
 Login.Page.error,Bad login or password,Błędny login lub hasło,Неправильный логин или пароль,Hatalı şifre veya kullanıcı adı
 noSchedule.page,Log into your account to see Schedule,Zaloguj się na swoje konto aby zobaczyć plan,"Войдите в аккаунт, чтобы увидеть расписание",Planı görmek için lutfen giriş yapın
 Calendar.monday,Monday,Poniedziałek,Понедельник,Pazartesi
@@ -68,7 +66,6 @@ Profile.Confirmation,Confirm,Potwierdź,Подтвердить,Onayla
 Settings.notification,Notifications,Powiadomienia,Уведомления,Bildirimler
 Event.CANCELLED,Canceled,Odwołane,Отменено,
 Settings.notificationTime,Time before notifications,Czas przed powiadomieniem,Время до уведомлений,
-Settings.time.choose,Select time,Wybierz czas,Выбрать время,
 Settings.time.15mins,15 minutes,15 minut,15 минут,
 Settings.time.30mins,30 minutes,30 minut,30 минут,
 Settings.time.1hour,1 hour,1 godzina,1 час,
