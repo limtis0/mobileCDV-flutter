@@ -70,6 +70,7 @@ ThemeExtensionFields themeOf(BuildContext context) => Theme.of(context).own();
 // THEMES
 ThemeData lightTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: Colors.grey[50]!,
+  canvasColor: Colors.white,
 )
   ..addOwn(const ThemeExtensionFields(
     popUpBackgroundColor: Colors.white,
@@ -86,13 +87,14 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 
 ThemeData darkTheme = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: Colors.grey[850]!, // App-Background color
+  canvasColor: const Color(0xFF404040), // Dropdown-menus color
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)), // Top-bar color
   colorScheme: const ColorScheme.dark().copyWith // Scroll overflow color
     (secondary: const Color(0xFF00ADB5)),
 )
   ..addOwn(const ThemeExtensionFields(
-    popUpBackgroundColor: Color(0xFF424242),
-    eventBackgroundColor: Color(0xFF424242),
+    popUpBackgroundColor: Color(0xFF404040),
+    eventBackgroundColor: Color(0xFF383838),
     eventTextColor: Colors.white,
     fieldTextColor: Color(0xFFACACAC),
     calendarWeekdaysColor: Colors.white,
@@ -105,13 +107,14 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 
 ThemeData amoledTheme = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: Colors.black,
+  canvasColor: const Color(0xFF222222),
   appBarTheme: const AppBarTheme(color: Colors.black),
   colorScheme: const ColorScheme.dark().copyWith
     (secondary: Colors.white),
 )
   ..addOwn(const ThemeExtensionFields(
-  popUpBackgroundColor: Color(0xFF262626),
-  eventBackgroundColor: Color(0xFF262626),
+  popUpBackgroundColor: Color(0xFF222222),
+  eventBackgroundColor: Color(0xFF222222),
   eventTextColor: Colors.white,
   fieldTextColor: Colors.white,
   calendarWeekdaysColor: Colors.white,
@@ -124,6 +127,7 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
 
 ThemeData pinkTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: const Color(0xFFFDEBF7),
+  canvasColor: const Color(0xFFFDEBF7),
   appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
   colorScheme: const ColorScheme.light().copyWith
     (secondary: const Color(0xFFE18AAA)),
