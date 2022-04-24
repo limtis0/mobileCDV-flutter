@@ -45,7 +45,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
 
   PageController? _pageController;
   DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
-  CalendarFormat _calendarFormat = CalendarFormat.week;
+  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   int? _lastTime;
@@ -108,7 +108,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
       _focusedDay = focusedDay;
       if(checkDay(selectedDay)){
         listScrollController.scrollToIndex(getIndex(selectedDay), preferPosition: AutoScrollPosition.begin);
-        _calendarFormat = CalendarFormat.week;
         nullIcon = Icons.arrow_drop_down_outlined;
       }
     });
@@ -309,14 +308,14 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             setState(() {
               switch (_calendarFormat) {
                 case CalendarFormat.week:
+                  nullIcon = Icons.arrow_drop_down_outlined;
+                  _calendarFormat = CalendarFormat.twoWeeks;
+                  break;
+                case CalendarFormat.twoWeeks:
                   nullIcon = Icons.arrow_drop_up_outlined;
                   _calendarFormat = CalendarFormat.month;
                   break;
                 case CalendarFormat.month:
-                  nullIcon = Icons.arrow_drop_down_outlined;
-                  _calendarFormat = CalendarFormat.week;
-                  break;
-                default:
                   nullIcon = Icons.arrow_drop_down_outlined;
                   _calendarFormat = CalendarFormat.week;
                   break;
