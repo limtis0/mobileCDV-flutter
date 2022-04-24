@@ -11,7 +11,7 @@ extension StringExtension on String {
 
 Map<DateTime, List<ScheduleTableItem>> setEvents() {
   Map<DateTime, List<ScheduleTableItem>> mapEvents = {};
-  List<ScheduleTableItem> schedule = List.from(Schedule().list());
+  List<ScheduleTableItem> schedule = Schedule().list();
 
   for (int i = 0; i < schedule.length; i++) {
     // Calendar events are stored by days, so this is the only reliable option
