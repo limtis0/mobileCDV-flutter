@@ -1,4 +1,5 @@
 import 'structures/usertoken.dart';
+import 'package:flutter/material.dart';
 import 'structures/login_response.dart';
 import 'package:mobile_cdv/src/logic/requests/decoder.dart';
 import 'package:mobile_cdv/src/logic/requests/request.dart';
@@ -13,7 +14,10 @@ Future<void> activitySignIn(String email, String password, bool imageDecode) asy
 
   UserToken token = decodeToken(loginResponse.token);
 
-  if (imageDecode) { await saveImage(decodeImage(loginResponse.photo), 'avatar.png'); }
+  if (imageDecode) {
+    await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
+    imageCache?.clear();
+  }
   globals.avatar = await imageToWidget('avatar.png');
 
   await setPrefsOnSignIn(email.trim(), password, loginResponse.token, token);
