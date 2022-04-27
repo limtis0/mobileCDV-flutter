@@ -26,7 +26,7 @@ class RoomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      isCancelled ? getTextFromKey("Event.CANCELLED") : event.room,
+      isCancelled ? getTextFromKey('Event.CANCELLED') : event.room,
       textAlign: TextAlign.right,
       style: TextStyle(
         color: isCancelled ? Colors.red : themeOf(context).eventTextColor!,
@@ -112,6 +112,21 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     });
   }
 
+  void _onPageChanged(focusedDay) {
+    _currentPage = DateTime(focusedDay.year, focusedDay.month);
+    setState(() {
+      refreshEvents();
+      _eventDays = _getDateTimes();
+      if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
+        if(_lastTime != focusedDay.month) {
+          _lastTime = focusedDay.month;
+          listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
+        }
+      }
+    });
+    _focusedDay = focusedDay;
+  }
+
   Color markerColor(Object? obj) {
     obj as ScheduleTableItem;
     return globals.lessonColors[obj.form] ?? Colors.grey;
@@ -182,7 +197,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   }
 
   Color _checkButton(ScheduleTableItem _event) {
-    if(_event.meetLink != "") {
+    if(_event.meetLink != '') {
       return globals.lessonColors[_event.form] ?? Colors.grey;
     }else {
       return Colors.grey;
@@ -269,20 +284,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             ),
           ),
           onDaySelected: _onDaySelected,
-          onPageChanged: (focusedDay) {
-            _currentPage = DateTime(focusedDay.year, focusedDay.month);
-            setState(() {
-              refreshEvents();
-              _eventDays = _getDateTimes();
-              if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
-                if(_lastTime != focusedDay.month) {
-                  _lastTime = focusedDay.month;
-                  listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
-                }
-              }
-            });
-            _focusedDay = focusedDay;
-          },
+          onPageChanged: _onPageChanged,
           daysOfWeekStyle: DaysOfWeekStyle(
             weekdayStyle: TextStyle(color: themeOf(context).calendarWeekdaysColor),
             weekendStyle: const TextStyle(color: Colors.red),
@@ -295,7 +297,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             formatButtonVisible: false,
           ),
         ),
-        // CALENDAR CHANGE-STATE BUTTON
         IconButton(
           icon: Icon(nullIcon),
           onPressed: (){
@@ -317,7 +318,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             });
           },
         ),
-        // DAY LIST
         Expanded(
           child: RefreshIndicator(
             color: themeOf(context).functionalObjectsColor,
@@ -332,7 +332,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                   controller: listScrollController,
                   index: index,
                   child:
-                  // DAY
                   Column(
                     children: [
                       const SizedBox(height: 20), // TODO: Maybe move to the bottom if it breaks anything
@@ -342,7 +341,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                           Padding(
                             padding: const EdgeInsets.only(left: 12),
                             child: Text(
-                              "${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}",
+                              '${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}',
                               style: const TextStyle(fontSize: 20),
                             ),
                           ),
@@ -376,7 +375,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                               ),
                               color: themeOf(context).eventBackgroundColor,
                             ),
-                            // POP UP
                             child: ListTile(
                               onTap: (){
                                 showDialog(
@@ -405,21 +403,22 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                           ),
                                           const Divider(thickness: 1.5),
                                           Text(
-                                              '${getTextFromKey("Schedule.date")}: ${_months[_eventDays![index].month-1]},'
+                                              '${getTextFromKey('Schedule.date')}: ${_months[_eventDays![index].month-1]},'
                                                   ' ${_buildEvent!.startDate.day} '
                                                   '(${formatScheduleTime(_buildEvent!.startDate)}-'
                                                   '${formatScheduleTime(_buildEvent!.endDate)})\n'
-                                              '${getTextFromKey("Schedule.room")}: ${_buildEvent!.room}\n'
-                                              '${getTextFromKey("Schedule.group")}: ${_buildEvent!.groupNumber}\n'
-                                              '${getTextFromKey("Schedule.teacher")}: ${_buildEvent!.teacher}',
+                                              '${getTextFromKey('Schedule.room')}: ${_buildEvent!.room}\n'
+                                              '${getTextFromKey('Schedule.group')}: ${_buildEvent!.groupNumber}\n'
+                                              '${getTextFromKey('Schedule.teacher')}: ${_buildEvent!.teacher}',
                                               textAlign: TextAlign.center,
                                             ),
                                             const SizedBox(height: 10),
                                             ElevatedButton(
-                                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(_checkButton(_buildEvent!))),
+                                              style: ButtonStyle(backgroundColor:
+                                              MaterialStateProperty.all<Color>(_checkButton(_buildEvent!))),
                                               onPressed: (){ _launchURL(_buildEvent!.meetLink); },
                                               child: Text(
-                                                getTextFromKey("Schedule.joinMeeting"),
+                                                getTextFromKey('Schedule.joinMeeting'),
                                                 style: const TextStyle(color: Colors.white),
                                               ),
                                             ),
@@ -429,11 +428,9 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                     }
                                 );
                               },
-                              // EVENT
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Event time and room number
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
