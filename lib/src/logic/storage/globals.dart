@@ -47,7 +47,7 @@ final Map<String, String> lessonNames = {
   'TODO_DYZUR':getTextFromKey('Static.Dyzur'),
 };
 
-String locale = 'en';
+String locale = 'pl';
 const Map<String, String> locales = {
   'English': 'en',
   'Polski': 'pl',
@@ -96,7 +96,7 @@ Future<void> loadFromPrefs() async {
   type = prefs.getString('savedUserType') ?? '';
   album = prefs.getString('savedUserAlbumNumber') ?? '';
 
-  locale = prefs.getString('localization') ?? 'en';
+  locale = prefs.getString('localization') ?? 'pl';
   theme = prefs.getInt('themeId') ?? 0;
   notificationsToggle = prefs.getBool('notificationsToggle') ?? true;
   notificationsTime = prefs.getInt('notificationsTime') ?? 3600;

@@ -24,7 +24,7 @@ Future<void> startApp() async
 
   NotificationService().init(); // init notification service
 
-  await initLocalization(prefs.getString('localization') ?? 'en'); // init localization
+  await initLocalization(prefs.getString('localization') ?? 'pl'); // init localization
 
   showTimetable();
 }

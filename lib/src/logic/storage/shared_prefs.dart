@@ -19,7 +19,7 @@ Future<void> setDefaultPreferences() async {
 
   await prefs.setInt('themeId', 0);
   await prefs.setBool('isUserLoggedIn', false);
-  await prefs.setString('localization', 'en');
+  await prefs.setString('localization', 'pl');
   await prefs.setBool('notificationsToggle', true);
   await prefs.setInt('notificationsTime', 3600);
 }
