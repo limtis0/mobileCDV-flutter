@@ -1,14 +1,14 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
-import 'package:mobile_cdv/src/logic/structures/schedule.dart';
-import 'package:mobile_cdv/src/logic/theme_manager.dart';
+import '../logic/time_operations.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../logic/storage/globals.dart' as globals;
+import 'package:table_calendar/table_calendar.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../logic/time_operations.dart';
-import '../logic/storage/globals.dart' as globals;
+import 'package:mobile_cdv/src/logic/theme_manager.dart';
+import 'package:mobile_cdv/src/logic/structures/schedule.dart';
+import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 
 class EventCalendar extends StatefulWidget {
   const EventCalendar({Key? key}) : super(key: key);
@@ -52,12 +52,11 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   List<DateTime>? _eventDays;
   LinkedHashMap<DateTime, List<ScheduleTableItem>>? kEvents;
 
-  void refreshEvents(){
+  void refreshEvents() {
     kEvents = LinkedHashMap<DateTime, List<ScheduleTableItem>>(
       equals: isSameDay,
       hashCode: getHashCode,
     )..addAll(setEvents());
-
   }
 
   @override
@@ -66,7 +65,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     _selectedDay = _focusedDay;
     _eventDays = _getDateTimes();
     refreshEvents();
-    setState((){ });
+    setState((){});
   }
 
   List<DateTime> _getDateTimes() {
@@ -85,7 +84,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     return kEvents![day] ?? [];
   }
 
-  bool checkDay(DateTime day){
+  bool checkDay(DateTime day) {
     for(var item in _eventDays!) {
       if(item.day >= day.day) {
         return true;
@@ -94,7 +93,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     return false;
   }
 
-  int getIndex(DateTime day){
+  int getIndex(DateTime day) {
     int i = 0;
     for(var item in _eventDays!) {
       if(item.day >= day.day) { return i; }
@@ -106,15 +105,14 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     setState(() {
       _focusedDay = focusedDay;
-      if(checkDay(selectedDay)){
+      if(checkDay(selectedDay)) {
         listScrollController.scrollToIndex(getIndex(selectedDay), preferPosition: AutoScrollPosition.begin);
         nullIcon = Icons.arrow_drop_down_outlined;
       }
     });
   }
 
-  Color markerColor(Object? obj)
-  {
+  Color markerColor(Object? obj) {
     obj as ScheduleTableItem;
     return globals.lessonColors[obj.form] ?? Colors.grey;
   }
@@ -125,7 +123,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   final int _initialPage = 12;
   void calendarToToday() async {
     int calcPage = _initialPage;
-    switch(_calendarFormat){
+    switch(_calendarFormat) {
       case CalendarFormat.month:
         break;
       case CalendarFormat.twoWeeks:
@@ -183,8 +181,8 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
-  Color _checkButton(ScheduleTableItem _event){
-    if(_event.meetLink != ""){
+  Color _checkButton(ScheduleTableItem _event) {
+    if(_event.meetLink != "") {
       return globals.lessonColors[_event.form] ?? Colors.grey;
     }else {
       return Colors.grey;
@@ -194,6 +192,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   @override
   bool get wantKeepAlive => true;
 
+  ScheduleTableItem? _buildEvent;
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -201,25 +200,23 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     return Column(
       children: [
         TableCalendar(
-          onCalendarCreated: (controller){
+          onCalendarCreated: (controller) {
             _pageController = controller;
             _eventDays = _getDateTimes();
-            for(int i = 0; i != _eventDays?.length; i++){
-              if(!checkDay(DateTime.now())){
-                if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0){
+            for(int i = 0; i != _eventDays?.length; i++) {
+              if(!checkDay(DateTime.now())) {
+                if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0) {
                   listScrollController.scrollToIndex(
-                      getIndex(
-                          DateTime(
+                      getIndex(DateTime(
                               DateTime.now().year,
                               DateTime.now().month,
                               DateTime.now().day + i)
-                      ), preferPosition: AutoScrollPosition.begin);
+                      ));
                   break;
                 }
               }else {
                 listScrollController.scrollToIndex(
-                    getIndex(
-                        DateTime(
+                    getIndex(DateTime(
                             DateTime.now().year,
                             DateTime.now().month,
                             DateTime.now().day)
@@ -234,9 +231,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
           focusedDay: _focusedDay,
           selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
           calendarFormat: _calendarFormat,
-          eventLoader: (day) {
-            return _getEventsForDay(day);
-          },
+          eventLoader: (day){ return _getEventsForDay(day); },
           calendarBuilders: CalendarBuilders(
             markerBuilder: (context, day, events) {
               if (events.isEmpty) return const SizedBox();
@@ -244,7 +239,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: events.length,
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.only(top: 30),
                     padding: const EdgeInsets.all(1),
@@ -300,10 +295,9 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             formatButtonVisible: false,
           ),
         ),
+        // CALENDAR CHANGE-STATE BUTTON
         IconButton(
-          icon: Icon(
-              nullIcon
-          ),
+          icon: Icon(nullIcon),
           onPressed: (){
             setState(() {
               switch (_calendarFormat) {
@@ -323,13 +317,12 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             });
           },
         ),
+        // DAY LIST
         Expanded(
           child: RefreshIndicator(
             color: themeOf(context).functionalObjectsColor,
             backgroundColor: themeOf(context).eventBackgroundColor,
-            onRefresh: () async {
-              await calendarToNextMonth();
-            },
+            onRefresh: () async { await calendarToNextMonth(); }, // TODO: Create a dedicated RefreshSchedule() function
             child: ListView.builder(
               controller: listScrollController,
               itemCount: _getDateTimes().length,
@@ -338,193 +331,137 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                   key: ValueKey(index),
                   controller: listScrollController,
                   index: index,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12),
-                              child: Text(
-                                "${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  //fontWeight: FontWeight.bold
-                                ),
-                              ),
+                  child:
+                  // DAY
+                  Column(
+                    children: [
+                      const SizedBox(height: 20), // TODO: Maybe move to the bottom if it breaks anything
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: Text(
+                              "${_months[_eventDays![index].month-1]}, ${_eventDays![index].day.toString()}",
+                              style: const TextStyle(fontSize: 20),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 12),
-                              child: Text(
-                                _weekdays[_eventDays![index].weekday-1],
-                                style: const TextStyle(
-                                  fontSize: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: Text(
+                              _weekdays[_eventDays![index].weekday-1],
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(thickness: 1.5, indent: 8, endIndent: 8),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _getEventsForDay(_eventDays![index]).length,
+                        itemBuilder: (context, evIndex) {
+                          _buildEvent = _getEventsForDay(_eventDays![index])[evIndex];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                left: BorderSide(
+                                  color: globals.lessonColors[_buildEvent!.form] ?? Colors.grey,
+                                  width: 5,
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                        const Divider(
-                          thickness: 1.5,
-                        ),
-                        ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: _getEventsForDay(_eventDays![index]).length,
-                          itemBuilder: (context, evIndex) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    color: globals.lessonColors[_getEventsForDay(_eventDays![index])[evIndex].form] ?? Colors.grey,
-                                    width: 5,
-                                  ),
-                                ),
-                                color: themeOf(context).eventBackgroundColor,
-                              ),
-                              child: ListTile(
-                                  onTap: (){
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext dialogContext) {
-                                          return AlertDialog(
-                                            backgroundColor: themeOf(context).popUpBackgroundColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(30),
-                                                side: BorderSide(
-                                                    color: globals.lessonColors[_getEventsForDay(_eventDays![index])[evIndex].form] ?? Colors.grey,
-                                                    width: 3
-                                                )
+                              color: themeOf(context).eventBackgroundColor,
+                            ),
+                            // POP UP
+                            child: ListTile(
+                              onTap: (){
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext dialogContext) {
+                                    return AlertDialog(
+                                      backgroundColor: themeOf(context).popUpBackgroundColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        side: BorderSide(
+                                            color: globals.lessonColors[_buildEvent!.form] ?? Colors.grey,
+                                            width: 3
+                                        )
+                                      ),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            _buildEvent!.subjectName,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            _buildEvent!.subject,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const Divider(thickness: 1.5),
+                                          Text(
+                                              '${getTextFromKey("Schedule.date")}: ${_months[_eventDays![index].month-1]},'
+                                                  ' ${_buildEvent!.startDate.day} '
+                                                  '(${formatScheduleTime(_buildEvent!.startDate)}-'
+                                                  '${formatScheduleTime(_buildEvent!.endDate)})\n'
+                                              '${getTextFromKey("Schedule.room")}: ${_buildEvent!.room}\n'
+                                              '${getTextFromKey("Schedule.group")}: ${_buildEvent!.groupNumber}\n'
+                                              '${getTextFromKey("Schedule.teacher")}: ${_buildEvent!.teacher}',
+                                              textAlign: TextAlign.center,
                                             ),
-                                            content: Container(
-                                              color: themeOf(context).popUpBackgroundColor,
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(
-                                                    _getEventsForDay(_eventDays![index])[evIndex].subjectName,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                        fontWeight: FontWeight.bold
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    _getEventsForDay(_eventDays![index])[evIndex].subject,
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  const Divider(
-                                                    thickness: 1.5,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(top: 16),
-                                                    child: Column(
-                                                      children: [
-                                                        Text(
-                                                          '${getTextFromKey("Schedule.date")}: ${_months[_eventDays![index].month-1]}, ${_getEventsForDay(_eventDays![index])[evIndex].startDate.day} (${formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].startDate)}-${formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].endDate)})',
-                                                          textAlign: TextAlign.center,
-                                                        ),
-                                                        Text(
-                                                          '${getTextFromKey("Schedule.room")}: ${_getEventsForDay(_eventDays![index])[evIndex].room}',
-                                                          textAlign: TextAlign.center,
-                                                        ),
-                                                        Text(
-                                                          '${getTextFromKey("Schedule.group")}: ${_getEventsForDay(_eventDays![index])[evIndex].groupNumber}',
-                                                          textAlign: TextAlign.center,
-                                                        ),
-                                                        Text(
-                                                          '${getTextFromKey("Schedule.teacher")}: ${_getEventsForDay(_eventDays![index])[evIndex].teacher}',
-                                                          textAlign: TextAlign.center,
-                                                        ),
-                                                        Padding(
-                                                          padding: const EdgeInsets.only(top: 10),
-                                                          child: ElevatedButton(
-                                                            style: ButtonStyle(
-                                                                backgroundColor: MaterialStateProperty.all<Color>(
-                                                                    _checkButton(_getEventsForDay(_eventDays![index])[evIndex])
-                                                                )
-                                                            ),
-                                                            onPressed: (){
-                                                              _launchURL(_getEventsForDay(_eventDays![index])[evIndex].meetLink);
-                                                            },
-                                                            child: Text(
-                                                              getTextFromKey("Schedule.joinMeeting"),
-                                                              style: const TextStyle(
-                                                                  color: Colors.white
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
+                                            const SizedBox(height: 10),
+                                            ElevatedButton(
+                                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(_checkButton(_buildEvent!))),
+                                              onPressed: (){ _launchURL(_buildEvent!.meetLink); },
+                                              child: Text(
+                                                getTextFromKey("Schedule.joinMeeting"),
+                                                style: const TextStyle(color: Colors.white),
                                               ),
                                             ),
-                                          );
-                                        }
-                                    );
-                                  },
-                                  title: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(bottom: 4),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].startDate),
-                                                  style: TextStyle(
-                                                    color: themeOf(context).eventTextColor,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  " - ",
-                                                  style: TextStyle(
-                                                    color: themeOf(context).eventTextColor,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  formatScheduleTime(_getEventsForDay(_eventDays![index])[evIndex].endDate),
-                                                  style: TextStyle(
-                                                    color: themeOf(context).eventTextColor,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          RoomText(
-                                            event: _getEventsForDay(_eventDays![index])[evIndex],
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 110),
-                                        child: Text(
-                                          _getEventsForDay(_eventDays![index])[evIndex].subjectName,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            color: themeOf(context).eventTextColor,
-                                          ),
+                                          ],
                                         ),
-                                      )
+                                      );
+                                    }
+                                );
+                              },
+                              // EVENT
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Event time and room number
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          '${formatScheduleTime(_buildEvent!.startDate)}'
+                                          ' - '
+                                          '${formatScheduleTime(_buildEvent!.endDate)}',
+                                        style: TextStyle(color: themeOf(context).eventTextColor),
+                                      ),
+                                      RoomText(event: _buildEvent!),
                                     ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 110),
+                                    child: Text(
+                                      _getEventsForDay(_eventDays![index])[evIndex].subjectName,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(color: themeOf(context).eventTextColor),
+                                    ),
                                   )
-                              ),
-                            );
-                          },
-                        )
-                      ],
-                    ),
+                                ],
+                              )
+                            ),
+                          );
+                        },
+                      )
+                    ],
                   ),
                 );
               },
