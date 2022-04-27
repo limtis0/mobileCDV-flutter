@@ -292,6 +292,7 @@ class _ProfileState extends State<ProfileLogin> {
                                       )
                                     ),
                                   ),
+                                  const SizedBox(width: 1), // Backup spacing
                                   ElevatedButton(
                                       child: Text(
                                         getTextFromKey("Profile.Cancel"),
