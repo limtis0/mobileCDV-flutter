@@ -1,18 +1,18 @@
 import 'structures/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'structures/login_response.dart';
+import 'package:mobile_cdv/src/logic/storage/files.dart';
 import 'package:mobile_cdv/src/logic/requests/decoder.dart';
 import 'package:mobile_cdv/src/logic/requests/request.dart';
-import 'package:mobile_cdv/src/logic/storage/files.dart';
-import 'package:mobile_cdv/src/logic/time_operations.dart';
-import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/storage/shared_prefs.dart';
 import 'package:mobile_cdv/src/logic/structures/exceptions.dart';
+import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
-Future<void> activitySignIn(String email, String password, bool imageDecode) async {
-  final LoginResponse loginResponse = await fetchLogin(email.trim(), password);
+Future<void> activitySignIn(String email, String password, [bool imageDecode = true]) async {
+  email = email.trim(); // Removes spaces after email
 
-  UserToken token = decodeToken(loginResponse.token);
+  final LoginResponse loginResponse = await fetchLogin(email, password);
+  final UserToken token = decodeToken(loginResponse.token);
 
   if (imageDecode) {
     await saveImage(decodeImage(loginResponse.photo), 'avatar.png');
@@ -20,16 +20,15 @@ Future<void> activitySignIn(String email, String password, bool imageDecode) asy
   }
   globals.avatar = await imageToWidget('avatar.png');
 
-  await setPrefsOnSignIn(email.trim(), password, loginResponse.token, token);
+  await setPrefsOnSignIn(email, password, loginResponse.token, token);
   await globals.loadFromPrefs();
 
+  await activityLoadSchedule(token);
+}
+
+Future<void> activityLoadSchedule(UserToken token) async {
   try {
-    await fetchSchedule(
-        token.userType, token.userId.toString(),
-        getMonthsFromNowFirstDayAPI(-globals.calendarPastMonths),
-        getMonthsFromNowLastDayAPI(globals.calendarFutureMonths),
-        loginResponse.token
-    );
+    await fetchSchedule(token.userType, token.userId.toString());
   }
   on RequestErrorException { rethrow; }
 }

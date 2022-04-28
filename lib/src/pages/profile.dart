@@ -203,7 +203,7 @@ class _ProfileState extends State<ProfileLogin> {
             return const LoadingIndicator();
           }
       );
-      await activitySignIn(log, pass, true);
+      await activitySignIn(log, pass);
       globals.isLoggedIn = true;
       Navigator.pop(context);
       setState(() {

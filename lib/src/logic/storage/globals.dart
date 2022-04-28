@@ -75,12 +75,13 @@ final Map<String, int> timesTillNotification = {
 // Prefs
 bool isLoggedIn = false;
 
+String email = '';
+String pass = '';
+String tokenEncoded = '';
+
 String name = '';
 String type = '';
 String album = '';
-
-String email = '';
-String pass = '';
 
 ImageProvider? avatar;
 
@@ -91,6 +92,7 @@ Future<void> loadFromPrefs() async {
   
   email = prefs.getString('savedEmail') ?? '';
   pass = prefs.getString('savedPassword') ?? '';
+  tokenEncoded = prefs.getString('savedTokenEncoded') ?? '';
   
   name = prefs.getString('savedUserName') ?? '';
   type = prefs.getString('savedUserType') ?? '';

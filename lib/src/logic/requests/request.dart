@@ -5,6 +5,7 @@ import '../structures/exceptions.dart';
 import '../structures/login_response.dart';
 import 'package:http/http.dart' as http;
 import '../notifications.dart';
+import '../time_operations.dart';
 
 // LOGIN
 Future<LoginResponse> fetchLogin(String login, String password) async {
@@ -26,13 +27,16 @@ Future<LoginResponse> fetchLogin(String login, String password) async {
 }
 
 // SCHEDULE
-Future<void> fetchSchedule(String userType, String userId, String dateFrom, String dateTo, String token) async {
+Future<void> fetchSchedule(String userType, String userId) async {
+  String dateFrom = getMonthsFromNowFirstDayAPI(-globals.calendarPastMonths);
+  String dateTo = getMonthsFromNowLastDayAPI(globals.calendarFutureMonths);
   String url = 'https://api.cdv.pl/mobilnecdv-api/schedule/$userType/$userId/1/$dateFrom/$dateTo';
+
   final response = await http.get(
     Uri.parse(url),
     headers: <String, String>
     {
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer ${globals.tokenEncoded}',
     }
   );
 
