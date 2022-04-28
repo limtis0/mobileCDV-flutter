@@ -43,20 +43,53 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   }
   EventCalendarState._internal();
 
-  PageController? _pageController;
-  DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
   CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
-  DateTime _focusedDay = DateTime.now();
+
   DateTime? _selectedDay;
+  DateTime _focusedDay = DateTime.now();
+  DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
+
+  PageController? _pageController;
+  AutoScrollController listScrollController = AutoScrollController();
+
+  IconData nullIcon = Icons.arrow_drop_down_outlined;
+
   int? _lastTime;
   List<DateTime>? _eventDays;
+  ScheduleTableItem? _buildEvent;
   LinkedHashMap<DateTime, List<ScheduleTableItem>>? kEvents;
 
-  void refreshEvents() {
+  void _updateEvents() {
     kEvents = LinkedHashMap<DateTime, List<ScheduleTableItem>>(
       equals: isSameDay,
       hashCode: getHashCode,
     )..addAll(setEvents());
+  }
+
+  void _updateDateTimes() {
+    _eventDays = [];
+    kEvents?.forEach((key, value) {
+      if(DateTime(key.year, key.month) == _currentPage){
+        _eventDays!.add(key);
+      }
+    });
+  }
+
+  void refreshCalendar() {
+    _updateEvents();
+    _updateDateTimes();
+    setState(() {});
+  }
+
+  List<ScheduleTableItem> _getEventsForDay(DateTime day) {
+    return kEvents![day] ?? [];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = _focusedDay;
+    refreshCalendar();
   }
 
   int getIndex(DateTime day) {
@@ -66,31 +99,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
       i++;
     }
     return 0;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDay = _focusedDay;
-    _eventDays = _getDateTimes();
-    refreshEvents();
-    setState((){});
-  }
-
-  List<DateTime> _getDateTimes() {
-    List<DateTime> list = [];
-    kEvents?.forEach((key, value) {
-      if(DateTime(key.year, key.month) == _currentPage){
-        list.add(key);
-      }
-    });
-
-    return list;
-  }
-
-  List<ScheduleTableItem> _getEventsForDay(DateTime day) {
-    refreshEvents();
-    return kEvents![day] ?? [];
   }
 
   bool _checkDay(DateTime day) {
@@ -115,8 +123,8 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   void _onPageChanged(focusedDay) {
     _currentPage = DateTime(focusedDay.year, focusedDay.month);
     setState(() {
-      refreshEvents();
-      _eventDays = _getDateTimes();
+      _updateEvents();
+      _updateDateTimes();
       if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
         if(_lastTime != focusedDay.month) {
           _lastTime = focusedDay.month;
@@ -131,7 +139,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     obj as ScheduleTableItem;
     return globals.lessonColors[obj.form] ?? Colors.grey;
   }
-
 
   // Hence we are initializing calendar with -12 months from now as starting point
   // Current month will be on 12th page
@@ -162,8 +169,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     await listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
   }
 
-  IconData nullIcon = Icons.arrow_drop_down_outlined;
-
   final List<String> _weekdays = [
     getTextFromKey('Calendar.monday'),
     getTextFromKey('Calendar.tuesday'),
@@ -189,9 +194,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     getTextFromKey('Calendar.december'),
   ];
 
-  AutoScrollController listScrollController = AutoScrollController();
-  PageController controller = PageController();
-
   void _launchURL(String _url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
@@ -207,17 +209,15 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   @override
   bool get wantKeepAlive => true;
 
-  ScheduleTableItem? _buildEvent;
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return Column(
       children: [
         TableCalendar(
           onCalendarCreated: (controller) {
             _pageController = controller;
-            _eventDays = _getDateTimes();
+            _updateDateTimes();
             for(int i = 0; i != _eventDays?.length; i++) {
               if(!_checkDay(DateTime.now())) {
                 if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0) {
@@ -325,7 +325,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             onRefresh: () async { await calendarToNextMonth(); }, // TODO: Create a dedicated RefreshSchedule() function
             child: ListView.builder(
               controller: listScrollController,
-              itemCount: _getDateTimes().length,
+              itemCount: _eventDays!.length,
               itemBuilder: (context, index) {
                 return AutoScrollTag(
                   key: ValueKey(index),

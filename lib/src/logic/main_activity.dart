@@ -1,3 +1,5 @@
+import 'package:mobile_cdv/src/widgets/event_calendar.dart';
+
 import 'structures/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'structures/login_response.dart';
@@ -29,6 +31,7 @@ Future<void> activitySignIn(String email, String password, [bool imageDecode = t
 Future<void> activityLoadSchedule() async {
   try {
     await fetchSchedule();
+    EventCalendarState().refreshCalendar();
   }
   on RequestErrorException { rethrow; }
 }
