@@ -31,7 +31,7 @@ Future<void> activitySignIn(String email, String password, [bool imageDecode = t
 Future<void> activityLoadSchedule() async {
   try {
     await fetchSchedule();
-    EventCalendarState().refreshCalendar();
+    // EventCalendarState().refreshCalendar(); // TODO FIX
   }
   on RequestErrorException { rethrow; }
 }
