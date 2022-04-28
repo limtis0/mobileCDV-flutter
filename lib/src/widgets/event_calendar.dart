@@ -59,6 +59,15 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     )..addAll(setEvents());
   }
 
+  int getIndex(DateTime day) {
+    int i = 0;
+    for(var item in _eventDays!) {
+      if(item.day >= day.day) { return i; }
+      i++;
+    }
+    return 0;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -84,7 +93,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     return kEvents![day] ?? [];
   }
 
-  bool checkDay(DateTime day) {
+  bool _checkDay(DateTime day) {
     for(var item in _eventDays!) {
       if(item.day >= day.day) {
         return true;
@@ -93,19 +102,10 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     return false;
   }
 
-  int getIndex(DateTime day) {
-    int i = 0;
-    for(var item in _eventDays!) {
-      if(item.day >= day.day) { return i; }
-      i++;
-    }
-    return 0;
-  }
-
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     setState(() {
       _focusedDay = focusedDay;
-      if(checkDay(selectedDay)) {
+      if(_checkDay(selectedDay)) {
         listScrollController.scrollToIndex(getIndex(selectedDay), preferPosition: AutoScrollPosition.begin);
         nullIcon = Icons.arrow_drop_down_outlined;
       }
@@ -219,7 +219,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
             _pageController = controller;
             _eventDays = _getDateTimes();
             for(int i = 0; i != _eventDays?.length; i++) {
-              if(!checkDay(DateTime.now())) {
+              if(!_checkDay(DateTime.now())) {
                 if(getIndex(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + i)) != 0) {
                   listScrollController.scrollToIndex(
                       getIndex(DateTime(
