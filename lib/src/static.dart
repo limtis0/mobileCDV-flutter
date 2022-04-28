@@ -135,21 +135,17 @@ Widget helpDialog(BuildContext context) {
             ],
           ),
           const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Wrap(
-                direction: Axis.vertical,
-                spacing: 5,
-                children: const [
-                  HelpItem(type: "TODO_SEMINARIUM"),
-                  HelpItem(type: "TODO_KONWERSATORIUM"),
-                  HelpItem(type: "TODO_SPOTKANIE"),
-                  HelpItem(type: "EGSAM"),
-                  HelpItem(type: "TODO_REZERWACJA"),
-                  HelpItem(type: "TODO_DYZUR"),
-                ],
-              ),
+          Wrap(
+            direction: Axis.vertical,
+            alignment: WrapAlignment.center,
+            spacing: 5,
+            children: const [
+              HelpItem(type: "TODO_SEMINARIUM"),
+              HelpItem(type: "TODO_KONWERSATORIUM"),
+              HelpItem(type: "TODO_SPOTKANIE"),
+              HelpItem(type: "EGSAM"),
+              HelpItem(type: "TODO_REZERWACJA"),
+              HelpItem(type: "TODO_DYZUR"),
             ],
           ),
           const Padding(padding: EdgeInsets.all(10), child: Divider(thickness: 1.5)),
