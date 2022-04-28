@@ -1,14 +1,13 @@
-import 'package:mobile_cdv/src/widgets/event_calendar.dart';
-
 import 'structures/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'structures/login_response.dart';
 import 'package:mobile_cdv/src/logic/storage/files.dart';
 import 'package:mobile_cdv/src/logic/requests/decoder.dart';
 import 'package:mobile_cdv/src/logic/requests/request.dart';
+import 'package:mobile_cdv/src/widgets/event_calendar.dart';
 import 'package:mobile_cdv/src/logic/storage/shared_prefs.dart';
-import 'package:mobile_cdv/src/logic/structures/exceptions.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
+
 
 Future<void> activitySignIn(String email, String password, [bool imageDecode = true]) async {
   email = email.trim(); // Removes spaces after email
@@ -29,12 +28,14 @@ Future<void> activitySignIn(String email, String password, [bool imageDecode = t
 }
 
 Future<void> activityLoadSchedule() async {
+  bool error = false;
   if (!globals.isLoggedIn) { return; }
   try {
     await fetchSchedule();
-    if (globals.calendarBuilt) { EventCalendarState().refreshCalendar(); }
+  } catch(e) {
+    error = true;
   }
-  on RequestErrorException { rethrow; }
+  if (globals.calendarBuilt) { EventCalendarState().refreshCalendar(error); }
 }
 
 Future<void> activitySignOut() async {
