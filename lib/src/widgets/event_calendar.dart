@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:mobile_cdv/src/logic/main_activity.dart';
 import '../logic/time_operations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../logic/storage/globals.dart' as globals;
@@ -88,6 +89,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   @override
   void initState() {
     super.initState();
+    globals.calendarBuilt = true;
     _selectedDay = _focusedDay;
     refreshCalendar();
   }
@@ -322,7 +324,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
           child: RefreshIndicator(
             color: themeOf(context).functionalObjectsColor,
             backgroundColor: themeOf(context).eventBackgroundColor,
-            onRefresh: () async { await calendarToNextMonth(); }, // TODO: Create a dedicated RefreshSchedule() function
+            onRefresh: () async { await activityLoadSchedule(); },
             child: ListView.builder(
               controller: listScrollController,
               itemCount: _eventDays!.length,

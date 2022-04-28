@@ -84,6 +84,8 @@ String type = '';
 String album = '';
 String id = '';
 
+// Widgets
+bool calendarBuilt = false;
 ImageProvider? avatar;
 
 Future<void> loadFromPrefs() async {

@@ -52,8 +52,6 @@ class ReqLoginPage extends StatelessWidget{
 
 class Canvas extends StatelessWidget {
   final int pageId;
-  final bool isLogged = false;
-
   const Canvas({Key? key, required this.pageId}) : super(key: key);
 
   @override
@@ -217,7 +215,7 @@ class _ControlsState extends State<Controls> {
 
   final PageController controller = PageController(initialPage: 1);
   void goTo(int index){
-    if (globals.isLoggedIn && _selectedIndex == 1 && index == 1) {
+    if (globals.calendarBuilt && _selectedIndex == 1 && index == 1) {
       return EventCalendarState().calendarToToday();
     }
     controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
