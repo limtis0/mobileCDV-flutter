@@ -29,6 +29,7 @@ Future<void> activitySignIn(String email, String password, [bool imageDecode = t
 }
 
 Future<void> activityLoadSchedule() async {
+  if (!globals.isLoggedIn) { return; }
   try {
     await fetchSchedule();
     if (globals.calendarBuilt) { EventCalendarState().refreshCalendar(); }
