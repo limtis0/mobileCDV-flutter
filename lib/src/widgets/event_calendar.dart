@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:mobile_cdv/src/logic/main_activity.dart';
 import '../logic/time_operations.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -51,11 +52,12 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
   DateTime _currentPage = DateTime(DateTime.now().year, DateTime.now().month);
 
   PageController? _pageController;
-  AutoScrollController listScrollController = AutoScrollController();
+  final AutoScrollController listScrollController = AutoScrollController();
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;
 
-  int? _lastTime;
+  int? _curMonth;
   List<DateTime>? _eventDays;
   ScheduleTableItem? _buildEvent;
   LinkedHashMap<DateTime, List<ScheduleTableItem>>? kEvents;
@@ -76,7 +78,9 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     });
   }
 
-  void refreshCalendar() {
+  void refreshCalendar([bool error=false]) {
+    error ? _refreshController.refreshFailed()
+        :_refreshController.refreshCompleted();
     _updateEvents();
     _updateDateTimes();
     setState(() {});
@@ -127,11 +131,10 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     setState(() {
       _updateEvents();
       _updateDateTimes();
-      if(_calendarFormat == CalendarFormat.month || focusedDay.month != DateTime.now().month) {
-        if(_lastTime != focusedDay.month) {
-          _lastTime = focusedDay.month;
+      // Scrolls to the top if month has changed
+      if(_curMonth != focusedDay.month) {
+          _curMonth = focusedDay.month;
           listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
-        }
       }
     });
     _focusedDay = focusedDay;
@@ -161,14 +164,19 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     await listScrollController.scrollToIndex(getIndex(DateTime.now()), preferPosition: AutoScrollPosition.begin);
   }
 
-  Future<void> calendarToNextMonth() async {
+  void _calendarToNextMonth() async {
     final int selMonth = _focusedDay.month;
+
+    int count = 0;
     int curMonth = selMonth;
     while (curMonth == selMonth) {
       await _pageController!.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.ease);
       curMonth = _focusedDay.month;
+      count++; // Doesn't lets this stuck in an infinite loop
+      if (count > 5) { break; }
     }
     await listScrollController.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
+    _refreshController.loadComplete();
   }
 
   final List<String> _weekdays = [
@@ -321,10 +329,33 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
           },
         ),
         Expanded(
-          child: RefreshIndicator(
-            color: themeOf(context).functionalObjectsColor,
-            backgroundColor: themeOf(context).eventBackgroundColor,
-            onRefresh: () async { await activityLoadSchedule(); },
+          child: SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: true,
+            // TODO Add translations and find theme field for updating wheel
+            header: ClassicHeader(
+              idleText: 'Pull down to refresh',
+              idleIcon: Icon(Icons.arrow_downward, color: themeOf(context).eventTextColor),
+              releaseText: 'Release to refresh',
+              releaseIcon: Icon(Icons.refresh, color: themeOf(context).eventTextColor),
+              refreshingText: 'Refreshing...',
+              completeText: 'Successfully refreshed',
+              completeIcon: Icon(Icons.done, color: themeOf(context).eventTextColor),
+              failedText: 'Something went wrong',
+              failedIcon: Icon(Icons.error, color: themeOf(context).eventTextColor),
+              textStyle: TextStyle(color: themeOf(context).eventTextColor),
+            ),
+            footer: ClassicFooter(
+              idleText: 'Pull up to load the next page',
+              idleIcon: Icon(Icons.arrow_upward, color: themeOf(context).eventTextColor),
+              canLoadingText: 'Release to load the next page',
+              canLoadingIcon: Icon(Icons.autorenew, color: themeOf(context).eventTextColor),
+              loadingText: 'Loading...',
+              textStyle: TextStyle(color: themeOf(context).eventTextColor),
+            ),
+            controller: _refreshController,
+            onRefresh: activityLoadSchedule,
+            onLoading: _calendarToNextMonth,
             child: ListView.builder(
               controller: listScrollController,
               itemCount: _eventDays!.length,
@@ -336,7 +367,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                   child:
                   Column(
                     children: [
-                      const SizedBox(height: 20), // TODO: Maybe move to the bottom if it breaks anything
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
