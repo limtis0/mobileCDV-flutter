@@ -82,6 +82,7 @@ String tokenEncoded = '';
 String name = '';
 String type = '';
 String album = '';
+String id = '';
 
 ImageProvider? avatar;
 
@@ -97,6 +98,7 @@ Future<void> loadFromPrefs() async {
   name = prefs.getString('savedUserName') ?? '';
   type = prefs.getString('savedUserType') ?? '';
   album = prefs.getString('savedUserAlbumNumber') ?? '';
+  id = prefs.getString('savedUserId') ?? '';
 
   locale = prefs.getString('localization') ?? 'pl';
   theme = prefs.getInt('themeId') ?? 0;
@@ -111,4 +113,5 @@ void clear() {
   name = '';
   type = '';
   album = '';
+  id = '';
 }

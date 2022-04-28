@@ -23,12 +23,12 @@ Future<void> activitySignIn(String email, String password, [bool imageDecode = t
   await setPrefsOnSignIn(email, password, loginResponse.token, token);
   await globals.loadFromPrefs();
 
-  await activityLoadSchedule(token);
+  await activityLoadSchedule();
 }
 
-Future<void> activityLoadSchedule(UserToken token) async {
+Future<void> activityLoadSchedule() async {
   try {
-    await fetchSchedule(token.userType, token.userId.toString());
+    await fetchSchedule();
   }
   on RequestErrorException { rethrow; }
 }

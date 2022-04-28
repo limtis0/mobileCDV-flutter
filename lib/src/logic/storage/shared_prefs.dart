@@ -36,6 +36,7 @@ Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded
   await prefs.setString('savedUserName', token.userName);
   await prefs.setString('savedUserType', token.userType);
   await prefs.setString('savedUserAlbumNumber', token.userAlbumNumer);
+  await prefs.setString('savedUserId', token.userId.toString());
 }
 
 Future<void> clearPrefs() async {
@@ -49,4 +50,5 @@ Future<void> clearPrefs() async {
   await prefs.remove('savedUserName');
   await prefs.remove('savedUserType');
   await prefs.remove('savedUserAlbumNumber');
+  await prefs.remove('savedUserId');
 }

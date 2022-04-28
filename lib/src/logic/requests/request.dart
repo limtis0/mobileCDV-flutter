@@ -27,10 +27,10 @@ Future<LoginResponse> fetchLogin(String login, String password) async {
 }
 
 // SCHEDULE
-Future<void> fetchSchedule(String userType, String userId) async {
+Future<void> fetchSchedule() async {
   String dateFrom = getMonthsFromNowFirstDayAPI(-globals.calendarPastMonths);
   String dateTo = getMonthsFromNowLastDayAPI(globals.calendarFutureMonths);
-  String url = 'https://api.cdv.pl/mobilnecdv-api/schedule/$userType/$userId/1/$dateFrom/$dateTo';
+  String url = 'https://api.cdv.pl/mobilnecdv-api/schedule/${globals.type}/${globals.id}/1/$dateFrom/$dateTo';
 
   final response = await http.get(
     Uri.parse(url),
