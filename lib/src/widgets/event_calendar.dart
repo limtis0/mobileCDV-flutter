@@ -19,24 +19,6 @@ class EventCalendar extends StatefulWidget {
   State<EventCalendar> createState() => EventCalendarState();
 }
 
-class RoomText extends StatelessWidget {
-  final ScheduleTableItem event;
-  RoomText({Key? key, required this.event}) : super(key: key);
-
-  late final bool isCancelled = (event.status == globals.lessonCanceledStatus);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      isCancelled ? getTextFromKey('Event.CANCELLED') : event.room,
-      textAlign: TextAlign.right,
-      style: TextStyle(
-        color: isCancelled ? Colors.red : themeOf(context).eventTextColor!,
-      ),
-    );
-  }
-}
-
 class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveClientMixin {
   // Singleton pattern
   static final EventCalendarState _eventCalendarState = EventCalendarState._internal();
@@ -59,7 +41,6 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
 
   int? _curMonth;
   List<DateTime>? _eventDays;
-  ScheduleTableItem? _buildEvent;
   LinkedHashMap<DateTime, List<ScheduleTableItem>>? kEvents;
 
   void _updateEvents() {
@@ -393,7 +374,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                         shrinkWrap: true,
                         itemCount: _getEventsForDay(_eventDays![index]).length,
                         itemBuilder: (context, evIndex) {
-                          _buildEvent = _getEventsForDay(_eventDays![index])[evIndex];
+                          ScheduleTableItem _buildEvent = _getEventsForDay(_eventDays![index])[evIndex];
                           return Container(
                             margin: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -402,7 +383,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                             decoration: BoxDecoration(
                               border: Border(
                                 left: BorderSide(
-                                  color: globals.lessonColors[_buildEvent!.form] ?? Colors.grey,
+                                  color: globals.lessonColors[_buildEvent.form] ?? Colors.grey,
                                   width: 5,
                                 ),
                               ),
@@ -418,7 +399,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                         side: BorderSide(
-                                            color: globals.lessonColors[_buildEvent!.form] ?? Colors.grey,
+                                            color: globals.lessonColors[_buildEvent.form] ?? Colors.grey,
                                             width: 3
                                         )
                                       ),
@@ -426,30 +407,30 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            _buildEvent!.subjectName,
+                                            _buildEvent.subjectName,
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            _buildEvent!.subject,
+                                            _buildEvent.subject,
                                             textAlign: TextAlign.center,
                                           ),
                                           const Divider(thickness: 1.5),
                                           Text(
                                               '${getTextFromKey('Schedule.date')}: ${_months[_eventDays![index].month-1]},'
-                                                  ' ${_buildEvent!.startDate.day} '
-                                                  '(${formatScheduleTime(_buildEvent!.startDate)}-'
-                                                  '${formatScheduleTime(_buildEvent!.endDate)})\n'
-                                              '${getTextFromKey('Schedule.room')}: ${_buildEvent!.room}\n'
-                                              '${getTextFromKey('Schedule.group')}: ${_buildEvent!.groupNumber}\n'
-                                              '${getTextFromKey('Schedule.teacher')}: ${_buildEvent!.teacher}',
+                                                  ' ${_buildEvent.startDate.day} '
+                                                  '(${formatScheduleTime(_buildEvent.startDate)}-'
+                                                  '${formatScheduleTime(_buildEvent.endDate)})\n'
+                                              '${getTextFromKey('Schedule.room')}: ${_buildEvent.room}\n'
+                                              '${getTextFromKey('Schedule.group')}: ${_buildEvent.groupNumber}\n'
+                                              '${getTextFromKey('Schedule.teacher')}: ${_buildEvent.teacher}',
                                               textAlign: TextAlign.center,
                                             ),
                                             const SizedBox(height: 10),
                                             ElevatedButton(
                                               style: ButtonStyle(backgroundColor:
-                                              MaterialStateProperty.all<Color>(_checkButton(_buildEvent!))),
-                                              onPressed: (){ _launchURL(_buildEvent!.meetLink); },
+                                              MaterialStateProperty.all<Color>(_checkButton(_buildEvent))),
+                                              onPressed: (){ _launchURL(_buildEvent.meetLink); },
                                               child: Text(
                                                 getTextFromKey('Schedule.joinMeeting'),
                                                 style: const TextStyle(color: Colors.white),
@@ -468,12 +449,22 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                          '${formatScheduleTime(_buildEvent!.startDate)}'
+                                          '${formatScheduleTime(_buildEvent.startDate)}'
                                           ' - '
-                                          '${formatScheduleTime(_buildEvent!.endDate)}',
+                                          '${formatScheduleTime(_buildEvent.endDate)}',
                                         style: TextStyle(color: themeOf(context).eventTextColor),
                                       ),
-                                      RoomText(event: _buildEvent!),
+                                      Text( // Canceled or room number
+                                        _buildEvent.status == globals.lessonCanceledStatus
+                                            ? getTextFromKey('Event.CANCELLED')
+                                            : _buildEvent.room,
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: _buildEvent.status == globals.lessonCanceledStatus
+                                              ? Colors.red
+                                              : themeOf(context).eventTextColor,
+                                        ),
+                                      )
                                     ],
                                   ),
                                   const SizedBox(height: 4),
