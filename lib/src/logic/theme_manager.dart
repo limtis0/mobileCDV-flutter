@@ -89,8 +89,17 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: Colors.grey[850]!, // App-Background color
   canvasColor: const Color(0xFF404040), // Dropdown-menus color
   appBarTheme: const AppBarTheme(color: Color(0xff00ADB5)), // Top-bar color
-  colorScheme: const ColorScheme.dark().copyWith // Scroll overflow color
+
+  // Scroll overflow color
+  colorScheme: const ColorScheme.dark().copyWith
     (secondary: const Color(0xFF00ADB5)),
+
+  // Text selection
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: const Color(0xff00ADB5).withOpacity(.5),
+    cursorColor: const Color(0xff00ADB5).withOpacity(.6),
+    selectionHandleColor: const Color(0xff00ADB5).withOpacity(1),
+  ),
 )
   ..addOwn(const ThemeExtensionFields(
     popUpBackgroundColor: Color(0xFF404040),
@@ -111,6 +120,11 @@ ThemeData amoledTheme = ThemeData.dark().copyWith(
   appBarTheme: const AppBarTheme(color: Colors.black),
   colorScheme: const ColorScheme.dark().copyWith
     (secondary: Colors.white),
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: Colors.white.withOpacity(.5),
+    cursorColor: Colors.white.withOpacity(.6),
+    selectionHandleColor: Colors.white.withOpacity(1),
+  ),
 )
   ..addOwn(const ThemeExtensionFields(
   popUpBackgroundColor: Color(0xFF222222),
@@ -131,6 +145,11 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
   appBarTheme: const AppBarTheme(color: Color(0xFFE18AAA)),
   colorScheme: const ColorScheme.light().copyWith
     (secondary: const Color(0xFFE18AAA)),
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: const Color(0xFFE18AAA).withOpacity(.5),
+    cursorColor: const Color(0xFFE18AAA).withOpacity(.6),
+    selectionHandleColor: const Color(0xFFE18AAA).withOpacity(1),
+  ),
 )
   ..addOwn(const ThemeExtensionFields(
     popUpBackgroundColor: Color(0xFFFDEBF7),

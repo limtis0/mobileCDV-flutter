@@ -79,6 +79,7 @@ class _ProfileStatePage extends State<Profile> {
   }
 }
 
+// TODO: REDO
 class _LoginWidgetState extends State<LoginWidget> {
 
   double w = 170;
@@ -87,98 +88,91 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Image(
-              image: const AssetImage('./assets/images/logo-text.png'),
-              width: w,
-              height: h,
+      child: Column(
+        children: [
+          const SizedBox(height: 16),
+          Image(
+            image: const AssetImage('./assets/images/logo-text.png'),
+            width: w,
+            height: h,
+          ),
+          Form(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(getTextFromKey("Login.Page.Email")),
+                ),
+                SizedBox(
+                  width: 230,
+                  child:
+                  TextField(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
+                      ),
+                      hintText: getTextFromKey("Login.Page.Hint.login"),
+                    ),
+                    onChanged: (value) { globals.email = value; },
+                    onTap: (){
+                      setState(() {
+                        w = 0;
+                        h = 0;
+                      });
+                    },
+                    onEditingComplete: (){
+                      setState(() {
+                        w = 170;
+                        h = 170;
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                      getTextFromKey("Login.Page.Password")
+                  ),
+                ),
+                SizedBox(
+                  width: 230,
+                  child: TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
+                      ),
+                      hintText: getTextFromKey("Login.Page.Hint.password"),
+                    ),
+                    onChanged: (value){
+                      globals.pass = value;
+                    },
+                    onTap: (){
+                      setState(() {
+                        w = 0;
+                        h = 0;
+                      });
+                    },
+                    onEditingComplete: (){
+                      setState(() {
+                        w = 170;
+                        h = 170;
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
-            Form(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                        getTextFromKey("Login.Page.Email")
-                    ),
-                  ),
-                  SizedBox(
-                    width: 230,
-                    child: TextField(
-                      cursorColor: themeOf(context).functionalObjectsColor,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
-                        ),
-                        hintText: getTextFromKey("Login.Page.Hint.login"),
-                      ),
-                      onChanged: (value){
-                        globals.email = value;
-                      },
-                      onTap: (){
-                        setState(() {
-                          w = 0;
-                          h = 0;
-                        });
-                      },
-                      onEditingComplete: (){
-                        setState(() {
-                          w = 170;
-                          h = 170;
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                        getTextFromKey("Login.Page.Password")
-                    ),
-                  ),
-                  SizedBox(
-                    width: 230,
-                    child: TextField(
-                      obscureText: true,
-                      cursorColor: themeOf(context).functionalObjectsColor,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
-                        ),
-                        hintText: getTextFromKey("Login.Page.Hint.password"),
-                      ),
-                      onChanged: (value){
-                        globals.pass = value;
-                      },
-                      onTap: (){
-                        setState(() {
-                          w = 0;
-                          h = 0;
-                        });
-                      },
-                      onEditingComplete: (){
-                        setState(() {
-                          w = 170;
-                          h = 170;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
