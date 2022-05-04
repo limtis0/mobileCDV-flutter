@@ -24,30 +24,7 @@ List<BottomTabs> _bottomTabs = [
 ];
 
 List<BottomNavigationBarItem> getBottomTabs(List<BottomTabs> items){
-
   return items.map((item) => BottomNavigationBarItem(icon: Icon(item.icon), label: item.title)).toList();
-}
-
-class ReqLoginPage extends StatelessWidget{
-  const ReqLoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            getTextFromKey("noSchedule.page"),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 35,
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }
 
 class Canvas extends StatelessWidget {
@@ -60,8 +37,7 @@ class Canvas extends StatelessWidget {
       case 0:
         return const ProfileLogin();
       case 1:
-        if (globals.isLoggedIn) { return const EventCalendar(); }
-        return const ReqLoginPage();
+        return const EventCalendar();
       case 2:
         return const Settings();
       default:
@@ -200,7 +176,7 @@ class _ControlsState extends State<Controls> {
                     context: context,
                     builder: (BuildContext context){
                       return helpDialog(context);
-                    },
+                    }
                   );
                 },
                 icon: const Icon(Icons.help_outline),

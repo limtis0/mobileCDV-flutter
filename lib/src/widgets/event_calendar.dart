@@ -1,4 +1,6 @@
 import 'dart:collection';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:mobile_cdv/src/logic/main_activity.dart';
@@ -39,6 +41,8 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
 
   IconData nullIcon = Icons.arrow_drop_down_outlined;
 
+  bool toShow = globals.isLoggedIn;
+
   int? _curMonth;
   List<DateTime>? _eventDays;
   LinkedHashMap<DateTime, List<ScheduleTableItem>>? kEvents;
@@ -64,7 +68,7 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
         :_refreshController.refreshCompleted();
     _updateEvents();
     _updateDateTimes();
-    setState(() {});
+    rebuild();
   }
 
   List<ScheduleTableItem> _getEventsForDay(DateTime day) {
@@ -197,12 +201,32 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     }
   }
 
+  void rebuild(){
+    setState(() {});
+  }
+
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    if (!globals.isLoggedIn) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              getTextFromKey("noSchedule.page"),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 35,
+              ),
+            )
+          ],
+        ),
+      );
+    }
     return Column(
       children: [
         TableCalendar(
@@ -320,6 +344,14 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
               releaseText: 'Release to refresh',
               releaseIcon: Icon(Icons.refresh, color: themeOf(context).eventTextColor),
               refreshingText: 'Refreshing...',
+              refreshingIcon:
+                SizedBox(
+                  width: 25.0,
+                  height: 25.0,
+                  child: defaultTargetPlatform == TargetPlatform.iOS
+                      ? CupertinoActivityIndicator(color: themeOf(context).eventTextColor)
+                      : CircularProgressIndicator(strokeWidth: 2.0, color: themeOf(context).eventTextColor)
+                ),
               completeText: 'Successfully refreshed',
               completeIcon: Icon(Icons.done, color: themeOf(context).eventTextColor),
               failedText: 'Something went wrong',
@@ -332,6 +364,14 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
               canLoadingText: 'Release to load the next page',
               canLoadingIcon: Icon(Icons.autorenew, color: themeOf(context).eventTextColor),
               loadingText: 'Loading...',
+              loadingIcon:
+                SizedBox(
+                  width: 25.0,
+                  height: 25.0,
+                  child: defaultTargetPlatform == TargetPlatform.iOS
+                      ? CupertinoActivityIndicator(color: themeOf(context).eventTextColor)
+                      : CircularProgressIndicator(strokeWidth: 2.0, color: themeOf(context).eventTextColor)
+                ),
               textStyle: TextStyle(color: themeOf(context).eventTextColor),
             ),
             controller: _refreshController,

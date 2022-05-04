@@ -43,4 +43,6 @@ Future<void> activitySignOut() async {
   globals.clear();
 
   await removeFile('avatar.png');
+
+  if (globals.calendarBuilt) { EventCalendarState().rebuild(); }
 }
