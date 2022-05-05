@@ -5,49 +5,21 @@ import 'package:mobile_cdv/src/logic/theme_manager.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import '../logic/main_activity.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  final Function callback;
+  const ProfilePage(this.callback, {Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileStatePage();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
-
-  @override
-  State<LoginWidget> createState() => _LoginWidgetState();
-}
-
-class ProfileLogin extends StatefulWidget {
-  const ProfileLogin({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileLogin> createState() => _ProfileState();
-}
-
-class _ProfileStatePage extends State<Profile> {
-
-  void processSignOut() async {
-    showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext dialogContext){
-          return const LoadingIndicator();
-        }
-    );
-    await activitySignOut();
-    globals.isLoggedIn = false;
-    Navigator.pop(context);
-    setState(() {});
-  }
-
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           CircleAvatar(
             backgroundColor: themeOf(context).functionalObjectsColor,
             radius: 72,
@@ -72,35 +44,88 @@ class _ProfileStatePage extends State<Profile> {
             style: const TextStyle(fontSize: 18),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10)
+          const SizedBox(height: 5),
+
+          ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    themeOf(context).buttonColor!
+                )
+            ),
+            child: Text(
+              getTextFromKey("Profile.signOut"),
+              style: const TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) { return LogoutDialogue(widget.callback); }
+              );
+            },
+          ),
         ],
       ),
     );
   }
 }
 
-// TODO: REDO
-class _LoginWidgetState extends State<LoginWidget> {
+class LoginPage extends StatefulWidget {
+  final Function callback;
+  const LoginPage(this.callback, {Key? key}) : super(key: key);
 
-  double w = 170;
-  double h = 170;
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  void _processSignIn() async {
+    try{
+      showDialog(
+          context: context,
+          builder: (BuildContext dialogContext){
+            return const LoadingIndicator();
+          }
+      );
+      await activitySignIn(_loginField, _passwordField);
+      globals.isLoggedIn = true;
+      setState(() { _errorMessage = ''; });
+      widget.callback();
+    } catch(e) {
+      setState(() {
+        _errorMessage = getTextFromKey('');
+      });
+    }
+    Navigator.pop(context);
+  }
+
+  String _errorMessage = '';
+
+  String _loginField = '';
+  String _passwordField = '';
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          const SizedBox(height: 16),
-          Image(
-            image: const AssetImage('./assets/images/logo-text.png'),
-            width: w,
-            height: h,
+          const SizedBox(height: 10),
+          Text(
+            _errorMessage,
+            style: const TextStyle(color: Colors.red)
           ),
+
+          const SizedBox(height: 16),
+          const Image(
+            image: AssetImage('./assets/images/logo-text.png'),
+            width: 170,
+            height: 170,
+          ),
+
           Form(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 5),
                   child: Text(getTextFromKey("Login.Page.Email")),
                 ),
                 SizedBox(
@@ -110,30 +135,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
+                        borderSide: BorderSide(color: themeOf(context).fieldTextColor!)
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
+                        borderSide: BorderSide(color: themeOf(context).functionalObjectsColor!, width: 2)
                       ),
                       hintText: getTextFromKey("Login.Page.Hint.login"),
                     ),
-                    onChanged: (value) { globals.email = value; },
-                    onTap: (){
-                      setState(() {
-                        w = 0;
-                        h = 0;
-                      });
-                    },
-                    onEditingComplete: (){
-                      setState(() {
-                        w = 170;
-                        h = 170;
-                      });
-                    },
+                    onChanged: (value) { _loginField = value; },
                   ),
                 ),
+
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 5),
                   child: Text(
                       getTextFromKey("Login.Page.Password")
                   ),
@@ -152,22 +166,22 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ),
                       hintText: getTextFromKey("Login.Page.Hint.password"),
                     ),
-                    onChanged: (value){
-                      globals.pass = value;
-                    },
-                    onTap: (){
-                      setState(() {
-                        w = 0;
-                        h = 0;
-                      });
-                    },
-                    onEditingComplete: (){
-                      setState(() {
-                        w = 170;
-                        h = 170;
-                      });
-                    },
+                    onChanged: (value) { _passwordField = value; },
                   ),
+                ),
+                const SizedBox(height: 5),
+
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        themeOf(context).buttonColor!
+                    )
+                  ),
+                  child: Text(
+                    getTextFromKey("Login.Page.btn"),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () { _processSignIn(); },
                 ),
               ],
             ),
@@ -178,143 +192,96 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 }
 
-class _ProfileState extends State<ProfileLogin> {
+class ProfileLoginPage extends StatefulWidget {
+  const ProfileLoginPage({Key? key}) : super(key: key);
 
-  Widget? currentScreen;
+  @override
+  _ProfileLoginPageState createState() => _ProfileLoginPageState();
+}
 
-  final List<Widget> _screens = [
-    const Profile(),
-    const LoginWidget()
-  ];
+class _ProfileLoginPageState extends State<ProfileLoginPage> {
+  ProfilePage? profilePage;
+  LoginPage? loginPage;
 
-  String _error = '';
 
-  void processLogin(String log, String pass) async {
-    try{
-      showDialog(
-          context: context,
-          builder: (BuildContext dialogContext){
-            return const LoadingIndicator();
-          }
-      );
-      await activitySignIn(log, pass);
-      globals.isLoggedIn = true;
-      Navigator.pop(context);
-      setState(() {
-        _text = getTextFromKey("Profile.signOut");
-      });
-    } catch(e){
-      setState(() {
-        _error = getTextFromKey("Login.Page.error");
-      });
-      Navigator.pop(context);
-    }
+  Widget? currentPage;
+
+  @override
+  void initState() {
+    super.initState();
+    profilePage = ProfilePage(callback);
+    loginPage = LoginPage(callback);
+
+    currentPage = globals.isLoggedIn ? profilePage : loginPage;
   }
 
-  void processSignOut() async {
-    await activitySignOut();
+  void callback() {
     setState(() {
-      _text = getTextFromKey("Login.Page.btn");
+      currentPage = globals.isLoggedIn ? profilePage : loginPage;
     });
   }
 
-  String _text = _retText();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: currentPage);
+  }
+}
+
+class LogoutDialogue extends StatelessWidget {
+  final Function callback;
+  const LogoutDialogue(this.callback, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Text(
-            _error,
-            style: const TextStyle(
-              color: Colors.red,
-            ),
-          ),
-          _screens[globals.isLoggedIn ? 0 : 1],
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  themeOf(context).buttonColor!
-              )
-            ),
-            child: Text(
-                _text,
-              style: const TextStyle(
-                color: Colors.white
+    return AlertDialog(
+        backgroundColor: themeOf(context).popUpBackgroundColor,
+        title: Text(
+          getTextFromKey("Profile.Confirmation"),
+          textAlign: TextAlign.center,
+        ),
+        content:
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(getTextFromKey("Login.ask")),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  child: Text(
+                    getTextFromKey("Profile.signOut"),
+                    style: const TextStyle(color: Colors.white)
+                  ),
+                  onPressed: () async {
+                    await activitySignOut();
+                    Navigator.pop(context);
+                    callback();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        themeOf(context).buttonColor!
+                    )
+                  ),
+                ),
+                const SizedBox(width: 1), // Backup spacing
+                ElevatedButton(
+                  child: Text(
+                    getTextFromKey("Profile.Cancel"),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  onPressed: (){ Navigator.pop(context); },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        themeOf(context).buttonColor!
+                  )
+                ),
               ),
-            ),
-            onPressed: (){
-              if(!globals.isLoggedIn){
-                processLogin(globals.email, globals.pass);
-                _text = getTextFromKey("Login.Page.btn");
-                setState(() {
-                  _error = "";
-                });
-              }else {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        backgroundColor: themeOf(context).popUpBackgroundColor,
-                        title: Text(
-                          getTextFromKey("Profile.Confirmation"),
-                          textAlign: TextAlign.center,
-                        ),
-                        content:
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(getTextFromKey("Login.ask")),
-                              const SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    child: Text(
-                                      getTextFromKey("Profile.signOut"),
-                                      style: const TextStyle(color: Colors.white)
-                                    ),
-                                    onPressed: (){
-                                      processSignOut();
-                                      Navigator.pop(context);
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all<Color>(
-                                          themeOf(context).buttonColor!
-                                      )
-                                    ),
-                                  ),
-                                  const SizedBox(width: 1), // Backup spacing
-                                  ElevatedButton(
-                                      child: Text(
-                                        getTextFromKey("Profile.Cancel"),
-                                        style: const TextStyle(color: Colors.white),
-                                      ),
-                                      onPressed: (){ Navigator.pop(context); },
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all<Color>(
-                                          themeOf(context).buttonColor!
-                                        )
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                        );
-                      }
-                    );
-                _text = getTextFromKey("Profile.signOut");
-                setState(() {
-                  _error = "";
-                });
-              }
-            },
+            ],
           )
         ],
-      ),
+      )
     );
   }
 }
@@ -335,14 +302,5 @@ class LoadingIndicator extends StatelessWidget{
         ),
       )
     );
-  }
-}
-
-
-String _retText(){
-  if(globals.isLoggedIn) {
-    return getTextFromKey("Profile.signOut");
-  }else {
-    return getTextFromKey("Login.Page.btn");
   }
 }

@@ -35,7 +35,7 @@ class Canvas extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (pageId){
       case 0:
-        return const ProfileLogin();
+        return const ProfileLoginPage();
       case 1:
         return const EventCalendar();
       case 2:
