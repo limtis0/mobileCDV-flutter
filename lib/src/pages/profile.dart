@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
       widget.callback();
     } catch(e) {
       setState(() {
-        _errorMessage = getTextFromKey('');
+        _errorMessage = getTextFromKey('Login.Page.error');
       });
     }
     Navigator.pop(context);

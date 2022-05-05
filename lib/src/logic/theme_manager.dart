@@ -155,7 +155,7 @@ ThemeData pinkTheme = ThemeData.light().copyWith(
     popUpBackgroundColor: Color(0xFFFDEBF7),
     eventBackgroundColor: Color(0xFFFBD3ED),
     eventTextColor: Color(0xFFE18AAA),
-    fieldTextColor: Color(0xFFE4A0B7),
+    fieldTextColor: Color(0xFFE18AAA),
     calendarWeekdaysColor: Color(0xFFE18AAA),
     calendarFocusedDayColor: Color(0xFFFBD3ED),
     bottomBarColor: Color(0xFFE18AAA),
