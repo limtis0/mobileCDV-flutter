@@ -299,6 +299,7 @@ class LoadingIndicator extends StatelessWidget{
         height: 5,
         child: LinearProgressIndicator(
           color: themeOf(context).functionalObjectsColor,
+          backgroundColor: themeOf(context).functionalObjectsColor!.withOpacity(0.5),
         ),
       )
     );
