@@ -189,8 +189,9 @@ class EventCalendarState extends State<EventCalendar> with AutomaticKeepAliveCli
     getTextFromKey('Calendar.december'),
   ];
 
-  void _launchURL(String _url) async {
-    if (!await launch(_url)) throw 'Could not launch $_url';
+  void _launchURL(String url) async {
+    if (url == '') { return; }
+    if (!await launch(url)) throw 'Could not launch $url';
   }
 
   Color _checkButton(ScheduleTableItem _event) {
