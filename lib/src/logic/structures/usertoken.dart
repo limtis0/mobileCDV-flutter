@@ -1,3 +1,4 @@
+/// Structure for decoded JWT Token
 class UserToken {
   // Skipped cbduID, roles and round
   final int userId;

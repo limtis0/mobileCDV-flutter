@@ -1,5 +1,4 @@
 import 'dart:io' show exit;
-
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/lib/localization/localization_manager.dart';
 import 'package:provider/provider.dart';
@@ -8,10 +7,12 @@ import '../logic/theme_manager.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 import 'package:mobile_cdv/src/logic/notifications.dart';
 
+
+/// Dialogue box, called after changing a language
+/// Asks for a restart
 class LocaleDialog extends StatelessWidget {
   const LocaleDialog({Key? key}) : super(key: key);
 
-  // Language-change dialogue
   @override
   Widget build(BuildContext context){
     return WillPopScope(
@@ -48,7 +49,7 @@ class LocaleDialog extends StatelessWidget {
   }
 }
 
-// Settings page
+/// Settings page
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -57,7 +58,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingState extends State<Settings> {
-  // On-settings-changed functions
+  // On-settings-changed functions:
   void changeLocale(String loc){
     initLocalization(loc);
     showDialog(

@@ -88,6 +88,7 @@ String id = '';
 bool calendarBuilt = false;
 ImageProvider? avatar;
 
+/// Loads globals from sharedPreferences for ease of usage
 Future<void> loadFromPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -108,6 +109,7 @@ Future<void> loadFromPrefs() async {
   notificationsTime = prefs.getInt('notificationsTime') ?? 3600;
 }
 
+/// Clears globals after logging out
 void clear() {
   isLoggedIn = false;
   email = '';

@@ -1,7 +1,9 @@
 import '../structures/usertoken.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Initializes sharedPrefs on app start
 Future<void> initPrefs() async {
+  // TODO: Use same prefs instance globally
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   bool? wasOpenedBefore = prefs.getBool('wasOpenedBefore');
@@ -14,6 +16,7 @@ Future<void> initPrefs() async {
   setDefaultPreferences();
 }
 
+/// Sets sharedPrefs to default values
 Future<void> setDefaultPreferences() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +27,7 @@ Future<void> setDefaultPreferences() async {
   await prefs.setInt('notificationsTime', 3600);
 }
 
+/// Sets sharedPrefs after logging in
 Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded, UserToken token) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -39,6 +43,7 @@ Future<void> setPrefsOnSignIn(String email, String password, String tokenEncoded
   await prefs.setString('savedUserId', token.userId.toString());
 }
 
+/// Clears sharedPrefs after logging out
 Future<void> clearPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 

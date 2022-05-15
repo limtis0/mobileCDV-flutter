@@ -1,3 +1,4 @@
+/// Stores API response for logging in
 class LoginResponse {
   final bool result;
   final String token;

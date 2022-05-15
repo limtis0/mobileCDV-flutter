@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../notifications.dart';
 import '../time_operations.dart';
 
-// LOGIN
+/// Sends a request to API and returns LoginResponse from decoded response
 Future<LoginResponse> fetchLogin(String login, String password) async {
   try {
     final response = await http.post(
@@ -30,7 +30,8 @@ Future<LoginResponse> fetchLogin(String login, String password) async {
   }
 }
 
-// SCHEDULE
+/// Sends a request to API, passes it to Schedule singleton
+/// After that creates a notifications queue, if needed
 Future<void> fetchSchedule() async {
   String dateFrom = getMonthsFromNowFirstDayAPI(-globals.calendarPastMonths);
   String dateTo = getMonthsFromNowLastDayAPI(globals.calendarFutureMonths);

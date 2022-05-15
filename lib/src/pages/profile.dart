@@ -5,6 +5,8 @@ import 'package:mobile_cdv/src/logic/theme_manager.dart';
 import 'package:mobile_cdv/src/widgets/utils.dart';
 import '../logic/main_activity.dart';
 
+/// Profile page
+/// Built after logging in
 class ProfilePage extends StatefulWidget {
   final Function callback;
   const ProfilePage(this.callback, {Key? key}) : super(key: key);
@@ -69,6 +71,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
+
+/// Login page
+/// Built before logging in
 class LoginPage extends StatefulWidget {
   final Function callback;
   const LoginPage(this.callback, {Key? key}) : super(key: key);
@@ -78,6 +83,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  /// Called after pressing a log in button
   void _processSignIn() async {
     try{
       showDialog(
@@ -86,14 +92,15 @@ class _LoginPageState extends State<LoginPage> {
             return const LoadingIndicator();
           }
       );
+
       await activitySignIn(_loginField, _passwordField);
       globals.isLoggedIn = true;
       setState(() { _errorMessage = ''; });
+
       widget.callback();
+
     } catch(e) {
-      setState(() {
-        _errorMessage = getTextFromKey('Login.Page.error');
-      });
+      setState(() { _errorMessage = getTextFromKey('Login.Page.error'); });
     }
     Navigator.pop(context);
   }
@@ -192,6 +199,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+
+// TODO: Set page as always alive
+/// Page, that stores both login and profile pages
+/// Switches them after getting a callback function
 class ProfileLoginPage extends StatefulWidget {
   const ProfileLoginPage({Key? key}) : super(key: key);
 

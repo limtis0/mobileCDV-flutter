@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
-
+/// Extension on ThemeData, stores custom variable names
 class ThemeExtensionFields {
   final Color? popUpBackgroundColor;
   final Color? eventBackgroundColor;
@@ -63,7 +63,7 @@ extension ThemeDataExtensions on ThemeData {
     return o!;
   }
 }
-// Helper method. Call themeOf(context) to get the color in widgets
+/// Helper method. Call themeOf(context) to get the color in widgets
 ThemeExtensionFields themeOf(BuildContext context) => Theme.of(context).own();
 
 

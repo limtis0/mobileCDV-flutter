@@ -8,7 +8,8 @@ import 'package:mobile_cdv/src/widgets/event_calendar.dart';
 import 'package:mobile_cdv/src/logic/storage/shared_prefs.dart';
 import 'package:mobile_cdv/src/logic/storage/globals.dart' as globals;
 
-
+/// Logs in, using given email and password
+/// Stores response into sharedPrefs and globals, also saves profile image
 Future<void> activitySignIn(String email, String password, [bool imageDecode = true]) async {
   email = email.trim(); // Removes spaces after email
 
@@ -27,17 +28,24 @@ Future<void> activitySignIn(String email, String password, [bool imageDecode = t
   await activityLoadSchedule();
 }
 
+/// Is used to refresh schedule and pass it into EventCalendar widget
 Future<void> activityLoadSchedule() async {
   bool error = false;
   if (!globals.isLoggedIn) { return; }
-  try {
+
+  try{
     await fetchSchedule();
-  } catch(e) {
+  }
+  catch(e){
     error = true;
   }
+
   if (globals.calendarBuilt) { EventCalendarState().refreshCalendar(error); }
 }
 
+/// Called after logging out
+/// Removes profile saved data
+/// Refreshes EventCalendar widget
 Future<void> activitySignOut() async {
   await clearPrefs();
   globals.clear();

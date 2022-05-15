@@ -11,11 +11,11 @@ Login.Page.Password,Password,Hasło,Пароль,Parola
 Login.Page.Hint.password,Enter password,Wprowadź hasło,Введите пароль,Parolayı girin
 Login.Page.Hint.login,Enter e-mail,Wprowadź e-mail,Введите e-mail,E-Posta
 Settings.AlertDialog.q,Restart now?,Ponownie uruchomić teraz?,Перезапустить сейчас?,Yeniden Başlatılsın mı?
-Profile.signOut,Sign out,Wyloguj,Выйти из аккаунта,Cıkış Yap
+Profile.signOut,Sign out,Wyloguj,Выйти,Cıkış Yap
 Login.Page.btn,Sign in,Zaloguj,Войти,Giriş Yap
 Settings.c.lang,Language,Język,Язык,Dil 
 Settings.theme,Theme,Motyw,Тема,Tema
-Login.Page.error,Bad login or password,Błędny login lub hasło,Неправильный логин или пароль,Hatalı şifre veya kullanıcı adı
+Login.Page.error,Something went wrong,,Что-то пошло не так,
 noSchedule.page,Log into your account to see Schedule,Zaloguj się na swoje konto aby zobaczyć plan,"Войдите в аккаунт, чтобы увидеть расписание",Planı görmek için lutfen giriş yapın
 Calendar.monday,Monday,Poniedziałek,Понедельник,Pazartesi
 Calendar.tuesday,Tuesday,Wtorek,Вторник,Salı
@@ -36,7 +36,7 @@ Calendar.september,September,Wrzesień,Сентябрь,Eylül
 Calendar.october,October,Październik,Октябрь,Ekim 
 Calendar.november,November,Listopad,Ноябрь,Kasım 
 Calendar.december,December,Grudzień,Декабрь,Aralık 
-Profile.Loading,Loading...,Ładowanie...,Загрузка,Yükleniyor
+Profile.Loading,Loading...,Ładowanie...,Загрузка...,Yükleniyor...
 Schedule.date,Date,Data,Время,Tarih
 Schedule.room,Room,Sala,Кабинет,Sınıf
 Schedule.group,Group,Grupa,Группа,Grup
@@ -70,3 +70,11 @@ Settings.time.15mins,15 minutes,15 minut,15 минут,
 Settings.time.30mins,30 minutes,30 minut,30 минут,
 Settings.time.1hour,1 hour,1 godzina,1 час,
 Settings.time.2hours,2 hours,2 godziny,2 часа,
+Calendar.Refresh.Idle,Pull down to refresh,,"Потяните вниз, чтобы обновить",
+Calendar.Refresh.Release,Release to refresh,,"Отпустите, чтобы обновить",
+Calendar.Refresh.Refreshing,Refreshing...,,Обновление...,
+Calendar.Refresh.Complete,Successfully refreshed,,Успешно обновлено,
+Calendar.Refresh.Failed,Something went wrong,,Что-то пошло не так,
+Calendar.Load.Idle,Pull up to load next page,,"Потяните вверх, чтобы загрузить следующую страницу",
+Calendar.Load.CanLoad,Release to load next page,,"Отпустите, чтобы загрузить следующую страницу",
+Calendar.Load.Loading,Loading...,,Загрузка...,

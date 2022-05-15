@@ -1,5 +1,6 @@
 import '../time_operations.dart';
 
+/// Stores single schedule lesson
 class ScheduleTableItem
 {
   // final int id;
@@ -50,6 +51,9 @@ class ScheduleTableItem
   }
 }
 
+/// Stores a list of ScheduleTableItem
+/// Provides basic operations of sorted insertion and clearing a list
+/// Is a singleton
 class Schedule
 {
   // Singleton pattern

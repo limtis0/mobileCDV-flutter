@@ -6,6 +6,9 @@ import 'package:mobile_cdv/src/logic/time_operations.dart';
 import 'package:mobile_cdv/src/logic/structures/schedule.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+/// Notification service
+/// Needed to be called once on start
+/// Is a singleton
 class NotificationService {
   // Singleton pattern
   static final NotificationService _notificationService = NotificationService._internal();
@@ -47,6 +50,7 @@ class NotificationService {
     );
   }
 
+  /// Helper function for setNotificationQueue()
   Future<void> setNotification(int id, String title, String body, int seconds) async {
     tz.TZDateTime time = tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds));
 
@@ -86,6 +90,7 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
+  /// Sets notification queue using Schedule and setting variables from globals
   Future<void> setNotificationQueue() async {
     int secondsOffset = globals.notificationsTime;
     cancelAllNotifications();
