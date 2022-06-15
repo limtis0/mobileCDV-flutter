@@ -1,5 +1,4 @@
 # Mobilne CDV
-CDV mobile schedule application
 <img src="./assets/showcase.gif" width="25%" height="25%"/>
 
 # localization
