@@ -15,7 +15,7 @@ Profile.signOut,Sign out,Wyloguj,Выйти,Cıkış Yap
 Login.Page.btn,Sign in,Zaloguj,Войти,Giriş Yap
 Settings.c.lang,Language,Język,Язык,Dil 
 Settings.theme,Theme,Motyw,Тема,Tema
-Login.Page.error,Something went wrong,,Что-то пошло не так,
+Login.Page.error,Something went wrong,Coś poszło nie tak,Что-то пошло не так,Bir şeyler ters gitti
 noSchedule.page,Log into your account to see Schedule,Zaloguj się na swoje konto aby zobaczyć plan,"Войдите в аккаунт, чтобы увидеть расписание",Planı görmek için lutfen giriş yapın
 Calendar.monday,Monday,Poniedziałek,Понедельник,Pazartesi
 Calendar.tuesday,Tuesday,Wtorek,Вторник,Salı
@@ -48,33 +48,33 @@ Static.Warsztaty,Workshops,Warsztaty,Мастерская,Atölye
 Static.Labaratoria,Labratory,Laboratoria ,Лаборатория ,Laboratuvar
 Static.Elearning,E-Learning ,E-Learning,E-Learning ,E-Learning
 Static.Cwiczenia,Exercises ,Czwiczenia,Упражнения ,Egzersizler
-Static.Lektorat,Readership,Lectorat,Лекторат,
+Static.Lektorat,Readership,Lectorat,Лекторат,Okuyucu kitlesi
 Static.Projekt,Project,Projekt,Проект,Proje
 Static.Praktyki,Practices ,Praktyki,Практика,Uygulamalar
 Static.Seminarium,Seminar,Seminarium,Семинар,Seminer
 Static.Konwersatorium,Conversation ,Konwersatorium ,Обсуждение,Konuşma
 Static.Zaliczenie,Exam,Zaliczenie,Экзамен ,Sınav
 Static.Rezerwacja,Reservation,Rezerwacja ,Резервация,Rezervasyon
-Static.Dyzur,Standby,Dyżur ,Дежурство,
+Static.Dyzur,Standby,Dyżur ,Дежурство,Standby
 Static.Spotkanie,Meeting,Spotkanie,Встреча,Meeting
-Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć.,"Потяните расписание сверху, чтобы обновить его.",
-Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc.,"Потяните расписание снизу, чтобы перейти на следующий месяц.",
+Static.HelpText1,Pull schedule list from the top to refresh.,Pociągnij od góry aby odświeżyć.,"Потяните расписание сверху, чтобы обновить его.",Yenilemek için takvim listesini üstten çekin.
+Static.HelpText2,Pull schedule list from the bottom to get to the next month.,Pociągnij od dołu aby zmienić na następny miesiąc.,"Потяните расписание снизу, чтобы перейти на следующий месяц.",Bir sonraki aya geçmek için takvimi alttan çekin.
 Static.HelpText3,Tap the 'Schedule' button on the bottom-bar to get to today's date.,Wciśnij 'Plan zajęć' aby wyświetlić dzisiejszą datę.,"Нажмите на кнопку 'Расписание', чтобы перейти к сегодняшней дате.",Bugünün tarihini görmek için alt çubuktaki 'Planla' düğmesine dokunun.
 Login.ask,Do you want to sign out?,Czy chcesz się wylogować?,"Уверены, что хотите выйти?",Çıkış mı yapmak istiyorsunuz?
 Profile.Cancel,Cancel,Anuluj,Отменить,İptal et
 Profile.Confirmation,Confirm,Potwierdź,Подтвердить,Onayla
 Settings.notification,Notifications,Powiadomienia,Уведомления,Bildirimler
-Event.CANCELLED,Canceled,Odwołane,Отменено,
-Settings.notificationTime,Time before notifications,Czas przed powiadomieniem,Время до уведомлений,
-Settings.time.15mins,15 minutes,15 minut,15 минут,
-Settings.time.30mins,30 minutes,30 minut,30 минут,
-Settings.time.1hour,1 hour,1 godzina,1 час,
-Settings.time.2hours,2 hours,2 godziny,2 часа,
-Calendar.Refresh.Idle,Pull down to refresh,,"Потяните вниз, чтобы обновить",
-Calendar.Refresh.Release,Release to refresh,,"Отпустите, чтобы обновить",
-Calendar.Refresh.Refreshing,Refreshing...,,Обновление...,
-Calendar.Refresh.Complete,Successfully refreshed,,Успешно обновлено,
-Calendar.Refresh.Failed,Something went wrong,,Что-то пошло не так,
-Calendar.Load.Idle,Pull up to load next page,,"Потяните вверх, чтобы загрузить следующую страницу",
-Calendar.Load.CanLoad,Release to load next page,,"Отпустите, чтобы загрузить следующую страницу",
-Calendar.Load.Loading,Loading...,,Загрузка...,
+Event.CANCELLED,Canceled,Odwołane,Отменено,İptal Edildi
+Settings.notificationTime,Time before notifications,Czas przed powiadomieniem,Время до уведомлений,Bildirimlerden önceki zaman
+Settings.time.15mins,15 minutes,15 minut,15 минут,15 dakika
+Settings.time.30mins,30 minutes,30 minut,30 минут,30 dakika
+Settings.time.1hour,1 hour,1 godzina,1 час,1 saat
+Settings.time.2hours,2 hours,2 godziny,2 часа,2 saat
+Calendar.Refresh.Idle,Pull down to refresh,"Pociągnij w dół, aby odświeżyć","Потяните вниз, чтобы обновить",Güncellemek için aşağı çekin
+Calendar.Refresh.Release,Release to refresh,"Zwolnij, aby odświeżyć","Отпустите, чтобы обновить",Güncellemek için bırakın
+Calendar.Refresh.Refreshing,Refreshing...,Odświeżanie...,Обновление...,Güncelleniyor...
+Calendar.Refresh.Complete,Successfully refreshed,Skuteczne odświeżanie,Успешно обновлено,Başarıyla güncellendi
+Calendar.Refresh.Failed,Something went wrong,Coś poszło nie tak,Что-то пошло не так,Bir şeyler ters gitti
+Calendar.Load.Idle,Pull up to load the next page,"Pociągnij w górę, aby załadować następną stronę","Потяните вверх, чтобы загрузить следующую страницу",Sonraki sayfayı yüklemek için yukarı çekin
+Calendar.Load.CanLoad,Release to load the next page,"Zwolnij, aby załadować następną stronę","Отпустите, чтобы загрузить следующую страницу",Sonraki sayfayı yüklemek için bırakın
+Calendar.Load.Loading,Loading...,Ładowanie...,Загрузка...,Yükleniyor...
