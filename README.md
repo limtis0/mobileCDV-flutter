@@ -1,7 +1,7 @@
 # Mobilne CDV
 
 # About
-This is a Schedule App me and [@juzikaster](https://github.com/juzikaster) did for our (University)[https://cdv.pl/].
+This is a Schedule App me and [@juzikaster](https://github.com/juzikaster) did for our [University](https://cdv.pl/).
 
 We have managed to cut the app's weight in 4 times (in comparison to the official app), while presenting more features and a better look.
 
